@@ -78,5 +78,5 @@ describe 'RadioGroup class' do
       @page.meals_to_go.set :yes
     end
   end
-  
+
 end
