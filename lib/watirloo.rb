@@ -1,5 +1,5 @@
 $:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+$:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 require 'watirloo/watir_ducktape'
 require 'watirloo/reflector'
@@ -49,9 +49,24 @@ module Watirloo
   class Page
     
     include TestObject
-    attr_accessor :b
-    attr_reader :faces
+    attr_accessor :b #browser
+    attr_reader :interfaces
 
+    class << self
+      def interfaces
+        @interfaces ||= {} #hash key value pairs, key is facename you refer to value is suitcase you carry to open later
+      end
+      # declare interface to things on the page
+      # each thing is an object of interest that we want to access by its interface name
+      # each thing is a package of block of code as a suitcase and a label 
+      # pointing to the block in suitcase
+      # this is nice code pattern borrowed from taza
+      # at first I thought of doing just simply interfaces.update key => value
+      # but making a mehtod is nicer plus all interfaces will need blocks.
+      def interface(label, &suitcase)
+        self.interfaces[label] = suitcase #make hash
+      end
+    end
     # by convention the Page just attaches to the first available browser.
     # the smart thing to do is to manage browsers existence on the desktop separately
     # and supply Page class with the instance of browser you want for your tests.
@@ -62,12 +77,22 @@ module Watirloo
     #   page = Page.new # just let the page do lazy thing and attach itself to browser.
     # part of this page initialization is to provide a convenience while developing tests where
     # we may have only one browser open and that's the one browser were we want to talk to.
+    # this provides simplicity for those who are just starting with Watirloo
     def initialize(browser = Watirloo::BrowserHerd.browser , &blk)
       @b = browser
-      @faces = {}
-      instance_eval(&blk) if block_given? # allows the shortcut to do some work at page creation
+      create_interfaces
+      instance_eval(blk) if block_given? # allows the shortcut to do some work at page creation
     end
-  
+    
+    def create_interfaces
+      self.class.interfaces.each do |label, suitcase|
+        #self.class.send(:define_method, label, suitcase)
+        define_method label do 
+          @b.suitcase
+        end
+      end
+    end
+    
     # enter values on controls idenfied by keys on the page.
     # data map is a hash, key represents the page object,
     # value represents its value to be set, either text, array or boolean
