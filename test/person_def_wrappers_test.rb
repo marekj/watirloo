@@ -1,5 +1,8 @@
 require File.dirname(__FILE__) + '/test_helper'
 
+class Person < Watirloo::Page
+  interface :bla, [:text_field, 'name', 'last_nm']
+end
 # def wrappers with suggested semantic names for elements
 class Person < Watirloo::Page
   
