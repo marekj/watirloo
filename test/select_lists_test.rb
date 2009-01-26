@@ -6,7 +6,7 @@ describe "SelectList selections" do
   before do
     @page = Watirloo::Page.new
     @page.b.goto testfile('select_lists.html')
-    @page.add_face(
+    @page.face(
       :pets => [:select_list, :name, 'animals'],
       :gender => [:select_list, :name, 'sex_cd'])
   end

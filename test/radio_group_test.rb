@@ -1,17 +1,32 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class RadioGroupPage < Watirloo::Page
-  # RadioGroup Class refers to collection of radios sharing the same name
-  def meals_to_go
-    @b.radio_group('food')
+describe 'RadioGroup class access in watir browser' do
+  before :each do
+    @browser = Watirloo::Page.new.browser
+    @browser.goto testfile('radio_group.html')
+  end
+  
+  it 'browser responds to radio_group' do
+    @browser.respond_to?(:radio_group).should == true
+  end
+  
+  it 'finds radio group on the page' do
+    rg = @browser.radio_group('food')
+    rg.size.should == 3
+    rg.values.should == %w[hotdog burger tofu]
   end
 end
 
-describe 'RadioGroup class' do
+
+describe 'RadioGroup class interface in watirloo' do
+  
+  class RadioGroupPage < Watirloo::Page
+    face :meals_to_go => [:radio_group, 'food']
+  end
 
   before do
     @page = RadioGroupPage.new
-    @page.b.goto testfile('radio_group.html')
+    @page.browser.goto testfile('radio_group.html')
   end
   
   it 'container radio_group method returns RadioGroup class' do
@@ -78,5 +93,5 @@ describe 'RadioGroup class' do
       @page.meals_to_go.set :yes
     end
   end
-  
+
 end

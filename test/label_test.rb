@@ -3,8 +3,8 @@ describe 'label wrapping text field' do
   
   before do
     @page = Watirloo::Page.new
-    @page.goto testfile('labels.html')
-    @page.add_face(
+    @page.browser.goto testfile('labels.html')
+    @page.face(
       :first => [:text_field, :name, 'fn'],
       :last => [:text_field, :name, 'ln']
     )
@@ -47,7 +47,7 @@ describe 'label for text field' do
   before do
     @page = Watirloo::Page.new
     @page.goto testfile('labels.html')
-    @page.add_face(
+    @page.face(
       :first => [:text_field, :id, 'first_nm'],
       :last => [:text_field, :id, 'last_nm'],
       :first_label => [:label, :for, 'first_nm'],

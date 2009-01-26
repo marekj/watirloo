@@ -1,10 +1,17 @@
-== 0.0.2 2009-02-03
+== 0.0.3 25jan2009
+
+* implement inheritable class interfaces
+  * subclasses inherit class level interfaces from superclasses
+  * initialize makes a set of interfaces to that instance only but inherits class interfaces from entire tree
+  * adding interfaces to the instance does not leak into classes
+
+== 0.0.2 03jan2009
 
 * implement radio_group and checkbox_group for IE and Firefox
   * Create RadioGroup and CheckboxGroup class for Watir::IE and FireWatir::Firefox
   * update tests to run for both browsers unchanged.
   
-== 0.0.1 2008-12-22
+== 0.0.1 22dec2008
 
 * initial merge with newgem generated structure to make it a gem
   * Patches to Watir and Firewatir
