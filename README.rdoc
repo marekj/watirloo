@@ -27,7 +27,7 @@ You can define hash with key as semantic name and value as watir implementation
 
   page = Watirloo::Page.new
   page.face :last => [:text_field, :name, 'l_nm'],
-  	page.face :first => [:text_field, :name, 'f_nm']
+  page.face :first => [:text_field, :name, 'f_nm']
   page.last.set "Vonnegut"
   page.first.set "Kurt"
   
@@ -35,7 +35,7 @@ Or you can define a specialized page
 
   class AuthorSearchPage < Watirloo::Page
     face :last => [:text_field, :name, 'l_nm']
-  	  face :first => [:text_field, :name, 'f_nm']
+    face :first => [:text_field, :name, 'f_nm']
   end
   
 and  run tests with few lines of code
