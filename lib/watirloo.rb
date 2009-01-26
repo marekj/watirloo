@@ -47,10 +47,13 @@ module Watirloo
   end
   
   # Semantic Page Objects Container
-  # Page containes interfaces to Objects of Interest. Objects we care about
-  # page objects are defined as faces of a Page.
-  # Each face (aka Interface of a page) is accessed by 
-  # page.facename or page.interface(:facename) methodsf
+  # Page containes interfaces to Objects of Interest on the Web Page
+  # Each object defined by key, value pair, 
+  # Keys is a friendly name, recognizable name given by the domain object model.
+  # Some name that is meaningful to the customer.
+  # The value of the interface definiton is a Watir object address in the dom container.
+  # The Page class acts as an Adapter between the Business Domain naming of things and Document Object Model naming of elments.
+  # It strives to adapt Human Readable tests to Machine Executable code
   class Page
     
     ## Page Eigenclass
@@ -73,14 +76,15 @@ module Watirloo
       #  end
       # each face is a key declared by a semantic symbol that has human meaning in the context of a usecase
       # each value is an array defining access to Watir [:elementType, how, what]
-      def face(definition)
+      def interface(definition)
         if definition.kind_of? Hash
           self.interfaces.update definition
         else
           raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
         end
       end
-  
+      alias face interface
+      
       def inherited(subpage)
         #puts "#{subpage} inherited #{interfaces.inspect} from #{self}"
         subpage.interfaces.update self.interfaces #supply parent's interfaces to subclasses in eigenclass
@@ -138,13 +142,14 @@ module Watirloo
     end
     
     # add face definition to page
-    def face(definitions)
+    def interface(definitions)
       if definitions.kind_of?(Hash)
         interfaces.update definitions
       else
         raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
       end
     end
+    alias face interface
     
     # Delegate execution to browser if no method or face defined on page class
     def method_missing method, *args

@@ -70,11 +70,19 @@ Or pass page cofiguration in the block at page creation
 
 === ROADMAP
 
+Towards version 0.0.3
+
+* DONE: make class level interfaces as base for the class and subclass. remove it from initilize method
+* UseCase class, scenario based runner
+* clean up reflector method to reflect according to new interface structures
+* move RadioGroup and CheckboxGroup to Watir gem (work with Bret)
+* make RadioGroups and CheckboxGroups classes for both IE and Firefox
+
 Towards version 0.0.2
 
-* make Watirloo agnostic to browser IE or Firefox or Safari
-* make tests run on IE, Firefox, Safari with the same interface
-* create radio_group to behave like select list and checkbox_group like multi select list
+* DONE: make Watirloo agnostic to browser IE or Firefox or Safari
+* DONE: make tests run on IE, Firefox, Safari with the same interface
+* DONE: create radio_group to behave like select list and checkbox_group like multi select list
 * build UseCase class as template for scenario based execution of tests for exploratory testing
 
 == LICENSE:
