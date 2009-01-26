@@ -4,13 +4,10 @@
 
 == DESCRIPTION:
 
-Watir Framework and Helper based on Semantic Page Objects Modeling. 
-Helps you design tests expressing DOM elements and groups of elements 
-on the page as Semantic Page Objects rather than their DOM implementations.
-It is not a DSL but it helps you write human readable tests and hooks them up 
-to Watir browsers for implementation
-
-Give it a try. You will like it.
+Watir Framework and Helper based on Semantic Page Objects Modeling.
+It is not a DSL but it helps you write human readable and machine executable tests
+The Human Readable part is it helps you create interfaces to elements on the page and tags them with friendly names based on vocabulary of Business Domain. The Machine Executable part is that interfaces talk to Watir API hooking in to DOM elements. This arrangement we call scientifically Semantic Page Objects.
+it helps you concentrate in your acceptance tests on the intention and the customer's language and no on implementation of DOM. 
 
 == FEATURES/PROBLEMS:
 
@@ -18,7 +15,7 @@ Give it a try. You will like it.
 * Page creates an abstraction adapter: Human Readable and Machine Executable.
 * Pages contain faces; page objects that are named with semantic intent
 * Best to work with one browser instance on the desktop.
-* Patches Watir and Firewatir to ease testing
+* Ducktapes Watir and Firewatir gems to ease testing
 * groups radios in radio_group and checkboxes in checkbox_group and acts each group as page object
 
 == SYNOPSIS:
@@ -29,12 +26,24 @@ Example: Given a page with text fields for last name and first name we want to e
 You can define hash with key as semantic name and value as watir implementation
 
   page = Watirloo::Page.new
-  page.add_face :last => [:text_field, :name, 'l_nm'],
-  	:first => [:text_field, :name, 'f_nm']
+  page.face :last => [:text_field, :name, 'l_nm'],
+  	page.face :first => [:text_field, :name, 'f_nm']
   page.last.set "Vonnegut"
   page.first.set "Kurt"
+  
+Or you can define a specialized page
 
-Or you can create a wrapper method that delegates to the browser
+  class AuthorSearchPage < Watirloo::Page
+    face :last => [:text_field, :name, 'l_nm']
+  	  face :first => [:text_field, :name, 'f_nm']
+  end
+  
+and  run tests with few lines of code
+
+  page = AuthorSearchPage.new
+  page.spray {:first => 'Kurt', :last => 'Vonnegut'}
+
+Or you can create a wrapper method that delegates to the browser for special situations
   
   class Person < Watirloo::Page
     def last
@@ -44,25 +53,13 @@ Or you can create a wrapper method that delegates to the browser
       @b.text_field(:name, 'fnm')
     end
   end
-  
-Or define a hash where key will match the defined faces to be set
-  params = {:first => 'Kurt', :last => 'Vonnegut'}
-  page = Watirloo::Page.new.spray params
-  
-Or pass page cofiguration in the block at page creation
-  
-  page = Person.new do
-    last.set 'Vonnegut'
-    first.set 'Kurt'
-  end
- 
+
   
 == REQUIREMENTS:
 
 * watir >= 1.6.2 runs on IE by default
 * firewatir >= 1.6.2 if you want to use Firefox
-* test/spec gem if you want to run tests
-* newgem and hoe for dev
+* test/spec gem if you want to run watirloo examples included
 
 == INSTALL:
 
