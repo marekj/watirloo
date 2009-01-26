@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/test_helper'
 describe "SuperPage" do
 
   class SuperPage < Watirloo::Page
-    face 'name' => 'vname'
+    interface 'name' => 'vname'
   end
   
   it 'class interface' do
@@ -44,14 +44,15 @@ end
 describe "SuperPage and SubPage" do
   
   class Page0 < Watirloo::Page
-    face 'higher' => 'vhigher'
+    interface 'higher' => 'vhigher'
   end
   class Page1 < Page0
-    face 'lower' => 'vlower'
+    interface 'lower' => 'vlower'
   end
   class Page2 < Page1
     face 'lowest' => 'vlowest'
   end
+  
   
   it 'Subpage inherits from Super its interfaces' do
     p1 = Page1.new
@@ -74,6 +75,15 @@ describe "SuperPage and SubPage" do
     Page0.interfaces.keys.sort.should == ['higher'] #not affected by P1.instance face
     Page2.interfaces.keys.sort.should == %w[higher lower lowest]
   end
+
   
+  class Page3 < Watirloo::Page
+    interface Page0.interfaces # pull interfaces into this class from other class
+    interface 'include' => 'vinclude'
+  end
+  
+  it 'Page3 gets interfaces include from Page0' do
+    Page3.interfaces.keys.sort.should == %w[higher include]
+  end
   
 end
