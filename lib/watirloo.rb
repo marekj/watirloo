@@ -6,67 +6,98 @@ require 'watirloo/reflector'
 
 module Watirloo
 
-  VERSION = '0.0.2' # Jan2009
+  VERSION = '0.0.3' # Jan2009
   
-  # Generic Semantic Test Object
-  module TestObject
-    attr_accessor :id, :desc
-  
-  end
-
   # browser. we return IE or Firefox. Safari? Other Browser?
-  class BrowserHerd 
-    include TestObject
+  class BrowserHerd
     
-    @@target = :ie #default target
-
-    def self.target=(indicator)
-      @@target = indicator
-    end
+    @@target = :ie
+    #targets = [:ie, :firefox]
     
-    def self.target
-      @@target
-    end
+    class << self
+      
+      def target=(indicator)
+        @@target = indicator
+      end
     
-    #provide browser
-    def self.browser
-      case @@target
-      when :ie 
-        Watir::IE.attach :url, // #this attach is a crutch
-      when :firefox
-        require 'watirloo/firewatir_ducktape'
-        # this is a cruch for quick work with pages.
-        # in reality you want to create a browser and pass it as argument to initialize Page class
-        FireWatir::Firefox.attach #this attach is a crutch
+      def target
+        @@target
+      end
+    
+      # provides browser instance to client.
+      # attaches to the existing browser on the desktop
+      # By convention the mental model here is that we are working 
+      # with one browser on the desktop. This is how a person would typically work
+      # We are not doing any fancy 
+      # 
+      def browser
+        case @@target
+        when :ie 
+          Watir::IE.attach :url, // #this attach is a crutch
+        when :firefox
+          require 'watirloo/firewatir_ducktape'
+          # this is a cruch for quick work with pages.
+          # in reality you want to create a browser and pass it as argument to initialize Page class
+          FireWatir::Firefox.attach #this attach is a crutch
+        else
+          raise ::Watir::Exception::WatirException, "Browser target not supported"
+        end
       end
     end
   end
   
-  # Semantic Page Objects Container.
+  # Semantic Page Objects Container
+  # Page containes interfaces to Objects of Interest. Objects we care about
   # page objects are defined as faces of a Page.
-  # Each face (aka Interface of a page) is accessed by page.facename or page.face(:facename) methods
-  # Pages make Watir fun
+  # Each face (aka Interface of a page) is accessed by 
+  # page.facename or page.interface(:facename) methodsf
   class Page
     
-    include TestObject
-    attr_accessor :b #browser
-    attr_reader :interfaces
-
+    ## Page Eigenclass
     class << self
+      
+      # hash key value pairs, 
+      # each interface definition is a key as symbol pointing to some code to
+      # exeucte later.
       def interfaces
-        @interfaces ||= {} #hash key value pairs, key is facename you refer to value is suitcase you carry to open later
+        @interfaces ||= {} 
       end
-      # declare interface to things on the page
-      # each thing is an object of interest that we want to access by its interface name
-      # each thing is a package of block of code as a suitcase and a label 
-      # pointing to the block in suitcase
-      # this is nice code pattern borrowed from taza
-      # at first I thought of doing just simply interfaces.update key => value
-      # but making a mehtod is nicer plus all interfaces will need blocks.
-      def interface(label, &suitcase)
-        self.interfaces[label] = suitcase #make hash
+      
+      # Declares Semantic Interface to the DOM elements on the Page 
+      #   face :friendlyname => [watirelement, how, what]
+      # Each interface or face is an object of interest that we want to access by its interface name
+      # example:
+      #   class GoogleSearch < Watirloo::Page
+      #     face :query => [:text_field, :name, 'q]
+      #     face :search => [:button, :name, 'btnG']
+      #  end
+      # each face is a key declared by a semantic symbol that has human meaning in the context of a usecase
+      # each value is an array defining access to Watir [:elementType, how, what]
+      def face(definition)
+        if definition.kind_of? Hash
+          self.interfaces.update definition
+        else
+          raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
+        end
+      end
+  
+      def inherited(subpage)
+        #puts "#{subpage} inherited #{interfaces.inspect} from #{self}"
+        subpage.interfaces.update self.interfaces #supply parent's interfaces to subclasses in eigenclass
       end
     end
+    
+    attr_accessor :b, :interfaces
+    
+    def browser
+      @b
+    end
+    
+    
+    def create_interfaces
+      @interfaces = self.class.interfaces.dup # do not pass reference, only values
+    end
+    
     # by convention the Page just attaches to the first available browser.
     # the smart thing to do is to manage browsers existence on the desktop separately
     # and supply Page class with the instance of browser you want for your tests.
@@ -84,51 +115,43 @@ module Watirloo
       instance_eval(blk) if block_given? # allows the shortcut to do some work at page creation
     end
     
-    def create_interfaces
-      self.class.interfaces.each do |label, suitcase|
-        #self.class.send(:define_method, label, suitcase)
-        define_method label do 
-          @b.suitcase
-        end
-      end
-    end
     
     # enter values on controls idenfied by keys on the page.
     # data map is a hash, key represents the page object,
     # value represents its value to be set, either text, array or boolean
     def spray(dataMap)
-      dataMap.each_pair do |face_symbol, value|
-        get_face(face_symbol).set value #make every element in the dom respond to set to set its value
+      dataMap.each_pair do |facename, value|
+        get_face(facename).set value #make every element in the dom respond to set to set its value
       end
     end
   
     # return Watir object given by its semantic face symbol name
-    def get_face(face_symbol)
-      if self.respond_to? face_symbol # if there is a defined wrapper method for page element provided
-        return self.send(face_symbol) 
-      elsif @faces.member?(face_symbol) # pull element from @faces and send to browser
-        method, *args = @faces[face_symbol] # return definition for face consumable by browser
-        return @b.send(method, *args)
+    def get_face(facename) 
+      if self.respond_to? facename # if there is a defined wrapper method for page element provided
+        return self.send(facename) 
+      elsif interfaces.member?(facename) # pull element from @interfaces and send to browser
+        method, *args = self.interfaces[facename] # return definition for face consumable by browser
+        return browser.send(method, *args) #returns Watir Element class
       else
-        #??? I ran out of ideas
-        raise ::Watir::Exception::WatirException, 'I ran out of ideas in Watirloo'
+        raise ::Watir::Exception::WatirException, 'Unknown Semantic Facename'
       end
     end
-    alias face get_face
-  
+    
     # add face definition to page
-    def add_face(definitions)
+    def face(definitions)
       if definitions.kind_of?(Hash)
-        @faces.update definitions  
+        interfaces.update definitions
+      else
+        raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
       end
     end
-  
+    
     # Delegate execution to browser if no method or face defined on page class
     def method_missing method, *args
-      if @b.respond_to? method
-        @b.send method, *args
-      elsif  @faces.member?(method.to_sym)
-        get_face(method.to_sym)
+      if browser.respond_to?(method.to_sym)
+        return browser.send(method.to_sym, *args)
+      elsif  interfaces.member?(method.to_sym)
+        return get_face(method.to_sym)
       else
         raise ::Watir::Exception::WatirException, 'I ran out of ideas in Watirloo'
       end

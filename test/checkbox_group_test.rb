@@ -1,14 +1,29 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class CheckboxGroupPage < Watirloo::Page
-  # semantic wrapper for the radio group object
-  def pets
-    @b.checkbox_group('pets')
+describe 'checkbox_group access for browser' do
+  before :each do
+    page = Watirloo::Page.new
+    @browser = page.browser
+    @browser.goto testfile('checkbox_group1.html')
+  end
+  
+  it 'browser responds to checkbox_group' do
+    @browser.respond_to?(:checkbox_group).should == true
+  end
+  
+  it 'returns group object and its values from the page' do
+    cbg = @browser.checkbox_group('pets')
+    cbg.size.should == 5
+    cbg.values.should == %w[cat dog zook zebra wumpa]
   end
 end
 
+describe 'CheckboxGroup class access with page interface' do 
 
-describe 'CheckboxGroup class' do 
+  class CheckboxGroupPage < Watirloo::Page
+    # semantic wrapper for the radio group object
+    face :pets => [:checkbox_group, 'pets']
+  end
   
   before do
     @page = CheckboxGroupPage.new
