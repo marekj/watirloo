@@ -1,13 +1,14 @@
 require File.dirname(__FILE__) + '/test_helper'
 describe 'label wrapping text field' do
   
+  class Labels < Watirloo::Page
+    face :first => [:text_field, :name, 'fn']
+    face :last => [:text_field, :name, 'ln']
+  end
+  
   before do
-    @page = Watirloo::Page.new
+    @page = Labels.new
     @page.browser.goto testfile('labels.html')
-    @page.face(
-      :first => [:text_field, :name, 'fn'],
-      :last => [:text_field, :name, 'ln']
-    )
   end
   
   it 'accessed by parent should be Watir Element' do
@@ -44,15 +45,16 @@ describe 'label wrapping text field' do
 end
 
 describe 'label for text field' do
+
+  # reopen the class and add more interfaces
+  class Labels < Watirloo::Page
+    face :first_label => [:label, :for, 'first_nm']
+    face :last_label => [:label, :for, 'last_nm']
+  end
+  
   before do
-    @page = Watirloo::Page.new
+    @page = Labels.new
     @page.goto testfile('labels.html')
-    @page.face(
-      :first => [:text_field, :id, 'first_nm'],
-      :last => [:text_field, :id, 'last_nm'],
-      :first_label => [:label, :for, 'first_nm'],
-      :last_label => [:label, :for, 'last_nm']
-    )
   end
   
   it 'value of label' do

@@ -46,6 +46,21 @@ module Watirloo
     end
   end
   
+  class WatirlooLogger
+    
+    @@logfile = File.join(File.dirname(__FILE__), 'watirloologger.log')
+    
+    def self.create
+      @logger = Logger.new(@@logfile,'daily')
+      @logger.level = Logger::DEBUG
+      @logger.datetime_format = "%H:%M:%S"
+      @logger.info("WatirlooLogger Started")
+      print "WatirlooLogger Started... \n"
+      STDOUT.flush # START LOGGER. Let user know in command line
+      return @logger
+    end
+  end
+  
   # Semantic Page Objects Container
   # Page containes interfaces to Objects of Interest on the Web Page
   # Each object defined by key, value pair, 
@@ -58,14 +73,47 @@ module Watirloo
     
     ## Page Eigenclass
     class << self
-      
+
+      # logger access for the whole project
+      def log
+        @@logger ||=Watirloo::WatirlooLogger.create
+      end
+
       # hash key value pairs, 
       # each interface definition is a key as symbol pointing to some code to
       # exeucte later.
       def interfaces
         @interfaces ||= {} 
       end
+
+      # watir methods are container.method(how, what, value)
+      # if how is optional then value can not be there: 
+      # for example radio_group('nameofradio') # => implicitly this is a :name, 'nameofradio'
+      def make_watir_method(facename, definition) # :nodoc:
+        watirmethod, how, what, value = *definition
+        log.debug "make_watir_method: #{facename}, watir: #{watirmethod.inspect} how: #{how.inspect}, what: #{what.inspect}, value: #{value.inspect}"
+        if what == nil #if what is nil pass how as what
+          log.debug "making interface: #{facename} => #{watirmethod}('#{how}')"
+          class_eval "def #{facename}
+                        dombase.#{watirmethod}('#{how}')
+                      end"
+        else
+          extra = value ? ", '#{value}'" : nil # does watir api require a value parameter
+          log.debug "making interface: #{facename} => #{watirmethod}(:#{how}, '#{what}'#{extra})"
+          class_eval "def #{facename}
+                        dombase.#{watirmethod}(:#{how}, '#{what}'#{extra})
+                      end"
+        end
+      end
       
+      def make_watir_methods(definitions) # :nodoc:
+        self.interfaces.update definitions
+        definitions.each_pair do |facename, definition|
+          make_watir_method(facename, definition)
+        end
+      end
+        
+    
       # Declares Semantic Interface to the DOM elements on the Page 
       #   face :friendlyname => [watirelement, how, what]
       # Each interface or face is an object of interest that we want to access by its interface name
@@ -76,9 +124,9 @@ module Watirloo
       #  end
       # each face is a key declared by a semantic symbol that has human meaning in the context of a usecase
       # each value is an array defining access to Watir [:elementType, how, what]
-      def interface(definition)
-        if definition.kind_of? Hash
-          self.interfaces.update definition
+      def interface(definitions)
+        if definitions.kind_of? Hash
+          make_watir_methods(definitions)
         else
           raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
         end
@@ -86,21 +134,13 @@ module Watirloo
       alias face interface
       
       def inherited(subpage)
-        #puts "#{subpage} inherited #{interfaces.inspect} from #{self}"
+        log.debug "#{subpage} inherited #{interfaces.inspect} from #{self}"
         subpage.interfaces.update self.interfaces #supply parent's interfaces to subclasses in eigenclass
       end
-    end
+      
+    end #end eigenclass
     
-    attr_accessor :b, :interfaces
-    
-    def browser
-      @b
-    end
-    
-    
-    def create_interfaces
-      @interfaces = self.class.interfaces.dup # do not pass reference, only values
-    end
+    attr_accessor :b, :interfaces, :dombase
     
     # by convention the Page just attaches to the first available browser.
     # the smart thing to do is to manage browsers existence on the desktop separately
@@ -119,6 +159,22 @@ module Watirloo
       instance_eval(blk) if block_given? # allows the shortcut to do some work at page creation
     end
     
+    # hold reference to the Watir::Browser
+    def browser
+      @b
+    end
+    
+    # hold reference to the Container used as DOM base for our elements.
+    # for example when you work fith frames and the dom you want to act on is in 
+    # browser.frame(framename)
+    # by default domabase it the current browser assuming it does not have any frames
+    def dombase
+      @dombase ||= browser #browser by default
+    end
+          
+    def create_interfaces
+      @interfaces = self.class.interfaces.dup # do not pass reference, only values
+    end
     
     # enter values on controls idenfied by keys on the page.
     # data map is a hash, key represents the page object,
@@ -136,32 +192,17 @@ module Watirloo
     def get_face(facename) 
       if self.respond_to? facename # if there is a defined wrapper method for page element provided
         return self.send(facename) 
-      elsif interfaces.member?(facename) # pull element from @interfaces and send to browser
-        method, *args = self.interfaces[facename] # return definition for face consumable by browser
-        return browser.send(method, *args) #returns Watir Element class
       else
         raise ::Watir::Exception::WatirException, 'Unknown Semantic Facename'
       end
     end
     
-    # add face definition to page
-    def interface(definitions)
-      if definitions.kind_of?(Hash)
-        interfaces.update definitions
-      else
-        raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
-      end
-    end
-    alias face interface
-    
     # Delegate execution to browser if no method or face defined on page class
     def method_missing method, *args
-      if browser.respond_to?(method.to_sym)
-        return browser.send(method.to_sym, *args)
-      elsif  interfaces.member?(method.to_sym)
-        return get_face(method.to_sym)
+      if dombase.respond_to?(method.to_sym)
+        return dombase.send(method.to_sym, *args)
       else
-        raise ::Watir::Exception::WatirException, 'I ran out of ideas in Watirloo'
+        raise ::Watir::Exception::WatirException, "Browser does not respond to method: #{method.inspect}"
       end
     end
   end

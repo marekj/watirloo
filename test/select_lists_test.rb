@@ -2,13 +2,15 @@ require File.dirname(__FILE__) + '/test_helper'
 
 # testing single select and multiselect controls
 describe "SelectList selections" do
-  
+
+  class SelectListTestPage2 < Watirloo::Page
+    face :pets => [:select_list, :name, 'animals']
+    face :gender => [:select_list, :name, 'sex_cd']
+  end
+
   before do
-    @page = Watirloo::Page.new
-    @page.b.goto testfile('select_lists.html')
-    @page.face(
-      :pets => [:select_list, :name, 'animals'],
-      :gender => [:select_list, :name, 'sex_cd'])
+    @page = SelectListTestPage2.new
+    @page.browser.goto testfile('select_lists.html')
   end
 
   it 'selected returns preselected item in single select' do

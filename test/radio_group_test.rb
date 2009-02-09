@@ -2,16 +2,16 @@ require File.dirname(__FILE__) + '/test_helper'
 
 describe 'RadioGroup class access in watir browser' do
   before :each do
-    @browser = Watirloo::Page.new.browser
-    @browser.goto testfile('radio_group.html')
+    @page = Watirloo::Page.new
+    @page.browser.goto testfile('radio_group.html')
   end
   
   it 'browser responds to radio_group' do
-    @browser.respond_to?(:radio_group).should == true
+    @page.browser.respond_to?(:radio_group).should == true
   end
   
   it 'finds radio group on the page' do
-    rg = @browser.radio_group('food')
+    rg = @page.browser.radio_group('food')
     rg.size.should == 3
     rg.values.should == %w[hotdog burger tofu]
   end

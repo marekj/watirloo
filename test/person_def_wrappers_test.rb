@@ -13,11 +13,11 @@ class Person < Watirloo::Page
   # def wrapper with suggested semantic name returns dom element
   # these wrappers can provide specialized behavior on the page
   def last
-    @b.text_field(:name, 'last_nm')
+    dombase.text_field(:name, 'last_nm')
   end
 
   def dob
-    @b.text_field(:name, 'dob')
+    dombase.text_field(:name, 'dob')
   end
 
 end

@@ -4,11 +4,11 @@ describe "select lists defining in class, instance and subclass" do
   
   class SelectListPage < Watirloo::Page
     face :pets => [:select_list, :name, 'animals']
+    face :gender => [:select_list, :name, 'sex_cd']
   end
   
   before do
     @page = SelectListPage.new
-    @page.face :gender => [:select_list, :name, 'sex_cd']
     @page.browser.goto testfile('select_lists.html')
   end
   
@@ -32,8 +32,10 @@ describe "select lists defining in class, instance and subclass" do
     class SelectListSub < SelectListPage
       face :toys => [:select_list, :name, 'bubel']
     end
+    
     page = SelectListSub.new
-    page.interfaces.keys.should == [:toys, :pets]
+    page.interfaces.keys.map{|k| k.to_s}.sort.should == %w[gender pets toys]
+    page.respond_to?(:toys).should == true
   end
 
 end

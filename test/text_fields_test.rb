@@ -2,19 +2,17 @@ require File.dirname(__FILE__) + '/test_helper'
 
 describe "add faces text fields page objects" do
   
-  before do
-    @page = Watirloo::Page.new
-    @page.b.goto testfile('person.html')
+  class TextFieldFaces < Watirloo::Page
+    interface :last => [:text_field, :name, 'last_nm']
+    face :first => [:text_field, :name, 'first_nm'] #alias for interface
   end
-
-  it 'interfaces initially is an empty Hash' do
-    @page.interfaces.should == {}
+  
+  before do
+    @page = TextFieldFaces.new
+    @page.browser.goto testfile('person.html')
   end
   
   it 'instance method face accepts keys as semantic faces and values as definitions to construct Watir Elements' do
-    @page.face(
-      :last => [:text_field, :name, 'last_nm'],
-      :first => [:text_field, :name, 'first_nm'])
     @page.interfaces.size.should == 2
     
     if @page.browser.kind_of? FireWatir::Firefox
@@ -25,18 +23,6 @@ describe "add faces text fields page objects" do
       @page.first.kind_of?(Watir::TextField).should == true
       @page.last.kind_of?(Watir::TextField).should == true
     end
-  end
-end
-
-describe "text fields page objects setting and getting values" do
-
-  before do
-    @page = Watirloo::Page.new
-    @page.goto testfile('person.html')
-    @page.face(
-      :last => [:text_field, :name, 'last_nm'],
-      :first => [:text_field, :name, 'first_nm']
-    )
   end
   
   it 'face name method and value returns current text' do

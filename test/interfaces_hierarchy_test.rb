@@ -15,11 +15,6 @@ describe "PersonalInfo Page interfaces defined in other classes" do
     interface :street => [:text_field, :name, 'addr1']
   end
 
-  # and this one Pets list on the page
-  class Pets < Watirloo::Page
-    interface :pets => [:select_list, :name, 'animals']  
-  end
-
   # this page is a composition of interfaces that may appear by themselves
   # as pages in an application. 
   # think of a Page as some container. It can be entire page or part of Page
@@ -27,9 +22,9 @@ describe "PersonalInfo Page interfaces defined in other classes" do
   # but become interface to PersonalInfo
   # method face is shortcut for interface
   class PersonalInfo < Watirloo::Page
-    interface Address.interfaces
-    interface FullName.interfaces
-    interface :dob => [:text_field, :name, 'dob']
+    face Address.interfaces
+    face FullName.interfaces
+    face :dob => [:text_field, :name, 'dob']
     face :gender => [:select_list, :name, 'sex_cd']
   end
   
@@ -44,7 +39,8 @@ describe "PersonalInfo Page interfaces defined in other classes" do
       :first => [:text_field, :name, 'first_nm'],
       :last => [:text_field, :name, 'last_nm'],
       :street => [:text_field, :name, 'addr1'],
-      :dob => [:text_field, :name, 'dob']
+      :dob => [:text_field, :name, 'dob'],
+      :gender => [:select_list, :name, 'sex_cd']
     }
     @page.interfaces.should == all_interfaces
   end
@@ -55,8 +51,7 @@ describe "PersonalInfo Page interfaces defined in other classes" do
       :last => 'Maliniak', 
       :gender => 'M',
       :dob => '03/25/1956', 
-      :street => '1313 Lucky Ave',
-      :pets => 'zook'
+      :street => '1313 Lucky Ave'
     }
     @page.spray params # send params to the page to enter the data
   end

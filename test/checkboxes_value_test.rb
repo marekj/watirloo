@@ -1,21 +1,21 @@
 require File.dirname(__FILE__) + '/test_helper'
 
 describe 'setting and getting values for individual checkboxes with value attributes in face definitions' do
+
+  # in watir you have to access each checkbox, we now have checkbox_group for this
+  # in Watirloo you can access CheckboxGroup as shortcut using
+  # :pets => [:checkbox_group, 'pets']
+  class PetsCheckboxes < Watirloo::Page
+    face :pets_cat => [:checkbox, :name, 'pets', 'cat'],
+        :pets_dog => [:checkbox, :name, 'pets', 'dog'],
+        :pets_zook => [:checkbox, :name, 'pets', 'zook'],
+        :pets_zebra => [:checkbox, :name, 'pets', 'zebra'],
+        :pets_wumpa => [:checkbox, :name, 'pets', 'wumpa']
+  end
   
   before do
-    @page = Watirloo::Page.new
+    @page = PetsCheckboxes.new
     @page.browser.goto testfile('checkbox_group1.html')
-    
-    # instance method page.face adds defintion but only to the current instance of the page
-    # in watir you have to access each checkbox. 
-    # in Watirloo you can access CheckboxGroup as shortcut using
-    # :pets => [:checkbox_group, 'pets']
-    @page.face(
-      :pets_cat => [:checkbox, :name, 'pets', 'cat'],
-      :pets_dog => [:checkbox, :name, 'pets', 'dog'],
-      :pets_zook => [:checkbox, :name, 'pets', 'zook'],
-      :pets_zebra => [:checkbox, :name, 'pets', 'zebra'],
-      :pets_wumpa => [:checkbox, :name, 'pets', 'wumpa'])
   end
   
   it 'semantic name accesses individual CheckBox' do
