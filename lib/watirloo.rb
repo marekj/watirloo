@@ -6,7 +6,7 @@ require 'watirloo/reflector'
 
 module Watirloo
 
-  VERSION = '0.0.3' # Jan2009
+  VERSION = '0.0.4' # Feb2009
   
   # browser. we return IE or Firefox. Safari? Other Browser?
   class BrowserHerd
@@ -45,22 +45,7 @@ module Watirloo
       end
     end
   end
-  
-  class WatirlooLogger
-    
-    @@logfile = File.join(File.dirname(__FILE__), 'watirloologger.log')
-    
-    def self.create
-      @logger = Logger.new(@@logfile,'daily')
-      @logger.level = Logger::DEBUG
-      @logger.datetime_format = "%H:%M:%S"
-      @logger.info("WatirlooLogger Started")
-      print "WatirlooLogger Started... \n"
-      STDOUT.flush # START LOGGER. Let user know in command line
-      return @logger
-    end
-  end
-  
+
   # Semantic Page Objects Container
   # Page containes interfaces to Objects of Interest on the Web Page
   # Each object defined by key, value pair, 
@@ -73,10 +58,10 @@ module Watirloo
     
     ## Page Eigenclass
     class << self
-
-      # logger access for the whole project
+      
+      # dev logger
       def log
-        @@logger ||=Watirloo::WatirlooLogger.create
+        @@logger ||= Watir::DefaultLogger.new
       end
 
       # hash key value pairs, 
@@ -128,6 +113,7 @@ module Watirloo
         if definitions.kind_of? Hash
           make_watir_methods(definitions)
         else
+          log.error "Ooops: interface defintion expected to be a Hash, example: face :key => [:text_field, :name, 'name']"
           raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
         end
       end
@@ -172,7 +158,7 @@ module Watirloo
       @dombase ||= browser #browser by default
     end
           
-    def create_interfaces
+    def create_interfaces # :nodoc:
       @interfaces = self.class.interfaces.dup # do not pass reference, only values
     end
     
@@ -193,6 +179,7 @@ module Watirloo
       if self.respond_to? facename # if there is a defined wrapper method for page element provided
         return self.send(facename) 
       else
+        log.error "Ooops: facename is not known to this Page. Remember to set facename as sybmol."
         raise ::Watir::Exception::WatirException, 'Unknown Semantic Facename'
       end
     end
