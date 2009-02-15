@@ -1,16 +1,5 @@
 module Watirloo
 
-  module TestObject
-    
-    # dev logger uses Watir::DefaultLogger. Why depend on it? why not, we depend on Watir anyway
-    # the implementaiton can change in the future. We may introduce a special Watirlooger of some sort
-    # to output events from Pages and UseCases
-    def self.log
-      @@logger ||= Watir::DefaultLogger.new
-    end
-      
-  end
-  
   # browser. we return IE or Firefox. Safari? Other Browser?
   class BrowserHerd
     
@@ -58,11 +47,8 @@ module Watirloo
   # It strives to adapt Human Readable tests to Machine Executable code
   class Page
     
-    include TestObject
-    
-   
     class << self # eigenclass
-      
+
       # hash key value pairs, 
       # each interface definition is a key as symbol pointing to some code to
       # exeucte later.
@@ -75,15 +61,15 @@ module Watirloo
       # for example radio_group('nameofradio') # => implicitly this is a :name, 'nameofradio'
       def make_watir_method(facename, definition) # :nodoc:
         watirmethod, how, what, value = *definition
-        log.debug "make_watir_method: #{facename}, watir: #{watirmethod.inspect} how: #{how.inspect}, what: #{what.inspect}, value: #{value.inspect}"
+        #log.debug "make_watir_method: #{facename}, watir: #{watirmethod.inspect} how: #{how.inspect}, what: #{what.inspect}, value: #{value.inspect}"
         if what == nil #if what is nil pass how as what
-          log.debug "making interface: #{facename} => #{watirmethod}('#{how}')"
+          #log.debug "making interface: #{facename} => #{watirmethod}('#{how}')"
           class_eval "def #{facename}
                         dombase.#{watirmethod}('#{how}')
                       end"
         else
           extra = value ? ", '#{value}'" : nil # does watir api require a value parameter
-          log.debug "making interface: #{facename} => #{watirmethod}(:#{how}, '#{what}'#{extra})"
+          #log.debug "making interface: #{facename} => #{watirmethod}(:#{how}, '#{what}'#{extra})"
           class_eval "def #{facename}
                         dombase.#{watirmethod}(:#{how}, '#{what}'#{extra})
                       end"
@@ -112,14 +98,13 @@ module Watirloo
         if definitions.kind_of? Hash
           make_watir_methods(definitions)
         else
-          log.error "Ooops: interface defintion expected to be a Hash, example: face :key => [:text_field, :name, 'name']"
+          #log.error "Ooops: interface defintion expected to be a Hash, example: face :key => [:text_field, :name, 'name']"
           raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
         end
       end
       alias face interface
       
       def inherited(subpage)
-        log.debug "#{subpage} inherited #{interfaces.inspect} from #{self}"
         subpage.interfaces.update self.interfaces #supply parent's interfaces to subclasses in eigenclass
       end
       
@@ -178,7 +163,7 @@ module Watirloo
       if self.respond_to? facename # if there is a defined wrapper method for page element provided
         return self.send(facename) 
       else
-        log.error "Ooops: facename is not known to this Page. Remember to set facename as sybmol."
+        #log.error "Ooops: facename is not known to this Page. Remember to set facename as sybmol."
         raise ::Watir::Exception::WatirException, 'Unknown Semantic Facename'
       end
     end

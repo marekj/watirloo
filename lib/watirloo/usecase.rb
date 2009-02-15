@@ -11,12 +11,11 @@ module Watirloo
   # In this main scenario we create a dataset of entity objects.
   # UseCase glues domain objects, events to pages. UseCase in a way is a model ? expand.... 
   class UseCase
-
-    include TestObject
+    
     attr_accessor :scenario, :dataset
     
     class << self #eigenclass
-
+      
       # from http://dictionary.reference.com/search?q=scenario
       # <tt>sce.nar.i.o</tt>
       # <td>an imagined or projected sequence of events, esp. any of several detailed plans or possibilities</td>
@@ -45,9 +44,9 @@ module Watirloo
     # usecase scenario runner. takes each task in scenario and runs it.
     # you can implement pre and post hooks here
     def run
-      log.info "UseCase:#{self.class.name} has #{scenario.size} tasks to run: #{scenario.inspect}"
+      #log.info "UseCase:#{self.class.name} has #{scenario.size} tasks to run: #{scenario.inspect}"
       scenario.each do |task|
-        log.info "UseCase:#{self.class.name} task: #{task.inspect}"
+        #log.info "UseCase:#{self.class.name} task: #{task.inspect}"
         method, *args = task #if array pull first element as method and pass the rest
         self.send method, *args
       end
