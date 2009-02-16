@@ -4,8 +4,10 @@ README.rdoc
 Rakefile.rb
 lib/watirloo.rb
 lib/watirloo/firewatir_ducktape.rb
-lib/watirloo/reflector.rb
+lib/watirloo/page.rb
+lib/watirloo/usecase.rb
 lib/watirloo/watir_ducktape.rb
+lib/watirloo/watir_reflector.rb
 script/console
 script/console.cmd
 script/destroy
@@ -14,6 +16,7 @@ script/generate
 script/generate.cmd
 script/reflect.rb
 test/checkbox_group_test.rb
+test/checkbox_groups_test.rb
 test/checkboxes_value_test.rb
 test/firewatir/attach_instance_test.rb
 test/html/census.html
@@ -22,13 +25,17 @@ test/html/labels.html
 test/html/person.html
 test/html/radio_group.html
 test/html/select_lists.html
+test/interfaces_hierarchy_test.rb
 test/interfaces_test.rb
 test/label_test.rb
 test/person_def_wrappers_test.rb
 test/radio_group_test.rb
+test/radio_groups_test.rb
+test/reflector_test.rb
 test/select_list_in_class_test.rb
 test/select_list_options_test.rb
 test/select_lists_test.rb
 test/test_helper.rb
 test/text_fields_test.rb
+test/use_case_test.rb
 watirloo.gemspec

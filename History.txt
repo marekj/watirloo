@@ -1,3 +1,9 @@
+== 0.0.4 16feb2009
+* Radio and Checkbox Groups, UseCase class and reflector
+  * RadioGroups class and enhance radio_group(how, what) method
+  * CheckboxGroups class and enhance checkbox_group(how, what) method
+  * ElementCollections.reflect and Container.reflect method redesign
+  
 == 0.0.3 25jan2009
 
 * implement inheritable class interfaces

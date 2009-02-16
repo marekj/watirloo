@@ -1,13 +1,17 @@
 = Watirloo
 
-* http://watirloo.testr.us
+* http://watir.testr.us
 
 == DESCRIPTION:
 
-Watir Framework and Helper based on Semantic Page Objects Modeling.
-It is not a DSL but it helps you write human readable and machine executable tests
-The Human Readable part is it helps you create interfaces to elements on the page and tags them with friendly names based on vocabulary of Business Domain. The Machine Executable part is that interfaces talk to Watir API hooking in to DOM elements. This arrangement we call scientifically Semantic Page Objects.
-it helps you concentrate in your acceptance tests on the intention and the customer's language and no on implementation of DOM. 
+Custom Extensions for Watir, Firewatir and Acceptance Test Framework based on semantic objects modeling customer's domain language
+It helps you write human readable and machine executable browser tests based on Page Adapters and UseCase scenarios.
+
+The Human Readable part helps you create interfaces to elements on the page and tags them with friendly names 
+based on vocabulary of Business Domain. The Machine Executable parts talk to Watir API hooking into DOM elements. 
+This arrangement we call scientifically Semantic Page Objects or Page Adapters.
+it helps you concentrate in your acceptance tests on the intention and the customer's language and not on implementation of DOM.
+The tests you write are customer facing tests hence faces metaphor for Page Objects of Significance to the Customer.
 
 == FEATURES/PROBLEMS:
 
@@ -25,14 +29,6 @@ By convention Watirloo::Page.new attaches itself to the existing IE browser inst
 Example: Given a page with text fields for last name and first name we want to enter name 'Kurt Vonnegut'
 You can define hash with key as semantic name and value as watir implementation
 
-  page = Watirloo::Page.new
-  page.face :last => [:text_field, :name, 'l_nm'],
-  page.face :first => [:text_field, :name, 'f_nm']
-  page.last.set "Vonnegut"
-  page.first.set "Kurt"
-  
-Or you can define a specialized page
-
   class AuthorSearchPage < Watirloo::Page
     face :last => [:text_field, :name, 'l_nm']
     face :first => [:text_field, :name, 'f_nm']
@@ -47,33 +43,46 @@ Or you can create a wrapper method that delegates to the browser for special sit
   
   class Person < Watirloo::Page
     def last
-      @b.text_field(:name, 'lnm')
+      dombase.text_field(:name, 'lnm')
     end
     def first
-      @b.text_field(:name, 'fnm')
+      dombase.text_field(:name, 'fnm')
     end
   end
 
   
 == REQUIREMENTS:
 
-* watir >= 1.6.2 runs on IE by default
-* firewatir >= 1.6.2 if you want to use Firefox
-* test/spec gem if you want to run watirloo examples included
+* watir = 1.6.2 runs on IE by default
+* firewatir = 1.6.2 if you want to use Firefox
+* test/spec gem if you want to run watirloo tests and examples
 
 == INSTALL:
 
-* gem install watirloo
+* Run the following if you haven't already:
+    gem sources -a http://gems.github.com
+
+* Install the gem(s):
+  gem install marekj-watirloo
+
+* or download from : http://github.com/marekj/watirloo/downloads
 
 === ROADMAP
+
+Towards version 0.0.5
+* UseCase examples and tests showing the intent of scenario based testing
+
+Towards version 0.0.4
+
+* DONE make RadioGroups and CheckboxGroups classes for both IE and Firefox
+* STARTED: design reflector methods to reflect Watirloo boilerplate code from the page. A PageRecord type recording tool.
 
 Towards version 0.0.3
 
 * DONE: make class level interfaces as base for the class and subclass. remove it from initilize method
-* UseCase class, scenario based runner
-* clean up reflector method to reflect according to new interface structures
-* move RadioGroup and CheckboxGroup to Watir gem (work with Bret)
-* make RadioGroups and CheckboxGroups classes for both IE and Firefox
+* STARTED: UseCase class, scenario based runner
+* STARTED: clean up reflector method to reflect according to new interface structures
+* ???NOT SURE if this should go to Watir gem. Maybe remain an extenstion: move RadioGroup and CheckboxGroup to Watir gem (work with Bret)
 
 Towards version 0.0.2
 
@@ -85,25 +94,5 @@ Towards version 0.0.2
 == LICENSE:
 
 (The MIT License)
-
 Copyright (c) 2008 marekj
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+http://www.opensource.org/licenses/mit-license.php
