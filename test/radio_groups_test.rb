@@ -52,5 +52,4 @@ describe 'RadioGroup class access in watir browser' do
     end 
     names.should == ['food']
   end
-
 end

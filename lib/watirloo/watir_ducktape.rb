@@ -4,6 +4,10 @@ require 'watir/ie'
 
 module Watir
   
+  class ElementCollections
+    include ::Watir::Reflector # add reflector to collections
+    
+  end
   # for firefox and ie
   module RadioCheckGroupCommonWatir
     
@@ -157,7 +161,23 @@ module Watir
 
   end
   
+  class TextFields < ElementCollections
+    
+    def reflect
+      ret = []
+      self.each do |item|
+        how, what = get_how_what get_attribs(item)
+        facename = suggest_def_name what
+        ret << "face :#{facename} => [:text_field, :#{how}, #{what.inspect}]"
+        ret << "#{facename}.value.should == #{item.value.inspect}"
+      end
+      ret
+    end
+    
+  end
+  
   class RadioGroups < ElementCollections
+    
     def element_class; RadioGroup; end
     def length
       names = []
@@ -166,6 +186,21 @@ module Watir
       end
       names.uniq.size #non repeating names
     end
+    
+    def reflect
+      ret = []
+      self.each do |item|
+        name = item.name
+        facename = suggest_def_name name
+        values = item.values
+        selected = item.selected
+        ret << "face :#{facename} => [:radio_group, '#{name}']"
+        ret << "#{facename}.values.should == #{values.inspect}"
+        ret << "#{facename}.selected.should == #{selected.inspect}"
+      end
+      ret
+    end
+    
     
     private
     def iterator_object(i)
@@ -257,6 +292,20 @@ module Watir
         names << cb.name
       end
       names.uniq.size #non repeating names
+    end
+    
+    def reflect
+      ret = []
+      self.each do |item|
+        name = item.name
+        facename = suggest_def_name(name)
+        values = item.values
+        selected = item.selected
+        ret << "face :#{facename} => [:checkbox_group, '#{name}']"
+        ret << "#{facename}.values.should == #{values.inspect}"
+        ret << "#{facename}.selected.should == #{selected.inspect}"
+      end
+      ret
     end
     
     private

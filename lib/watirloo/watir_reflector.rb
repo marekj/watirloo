@@ -2,24 +2,16 @@
 Look Ma!, I can Has Reflect The Browser
 
 Watir::Reflector module added to watir. 
-Run the script to reflect watir elements. reflections create wrapper methods 
+reflect watir element collections. reflections create wrapper methods 
 with suggested semantic naming based on id, name, value or combination. 
 the intention is to create a scaffolding for Watirloo::Page elements.
-author: marekj
-works with IE class and DOM elements.
 =end
+
 module Watir
   
   # Watirloo::Page objects scaffold creation. Talks to the current page and reflects
   # the watir elements to be used for semantic test objects tests.
   module Reflector
-    
-    @@reflectable_list = [
-      :text_fields, 
-      :radios, 
-      :checkboxes, 
-      :select_lists
-    ]
     
     #cleanup the def name for some kind of semantic name
     def suggest_def_name(how)
@@ -29,32 +21,39 @@ module Watir
       how = how[0,1].downcase << how[1,how.size] #downcase firs char
     end
 
-    #   glean(:text_fields, [:id, :name, :value]
-    #   glean(:radios, [:id, :name, :value])
+    # glean(:text_fields, [:id, :name, :value]
+    # glean(:radios, [:id, :name, :value])
     # glean and make a map of types and attributes needed for reflection
     # this should be private I think
-    def glean(types, attribs)
-      result = []
-      send(types).each do |el|
-        subresult = {}
-        attribs.each do |key|
-          v = el.attribute_value key.to_s
-          subresult.update key => v
-        end
-        result << subresult
+    def get_attribs(item)
+      attribs = [:id, :name, :value]
+      h = {}
+      attribs.each do |k|
+        v = item.attribute_value k.to_s
+        h[k] = v
       end
-      return result
+      h
     end
+    
+    def get_how_what h
+      how, what = '', ''
+      if h[:id] != ''
+        how, what = :id, h[:id]
+      elsif h[:name] != ''
+        how, what = :name, h[:name]
+      elsif h[:value] != ''
+        how, what = :value, h[:value]
+      end
+      [how, what]
+    end
+  
     
     # example make_reflection(:checkboxes) # => [ defs, setters, faces]
     # returns array of def wrappers, setters for elements and face definitions configs.
     def make_reflection(types)
-      attribs = [:id, :name, :value]
-      faces = glean(types, attribs)
+      
       watir_method = types.id2name.chop
-      if watir_method == 'checkboxe'
-        watir_method = 'checkbox' #ooopps ... irregular plural
-      end
+      watir_method = 'checkbox' if watir_method == 'checkboxe'#ooopps ... irregular plural
       def_results = "# #{types.id2name.upcase}: def wrappers with suggested semantic names for elements\n" #holds definition wrappers 
       set_results = "# #{types.id2name.upcase}: setters calling def wrappers with captured values\n" #holds setters with gleaned values
       face_results = "# #{types.id2name.upcase}: face definitions\n" #holds faces 
@@ -75,11 +74,17 @@ module Watir
         case types
         when :checkboxes, :radios
           extra_value = ", '#{value}'" #for checkboxes and radios
+
           def_value = "_#{value}" #for checkboxes and radios
-          def_results << "\ndef #{def_name}#{def_value}\n\s\s@b.#{watir_method}(:#{how_s}, '#{how}'#{extra_value})\nend\n"
+          def_results << "def #{def_name}#{def_value}\n\s\s@b.#{watir_method}(:#{how_s}, '#{how}'#{extra_value})\nend\n"
           set_results << "#{def_name}#{def_value}.set\n"
           face_results << ":#{def_name}#{def_value} => [:#{watir_method}, :#{how_s}, '#{how}'#{extra_value}]\n"
-
+          #GROUP
+          watir_method = "checkbox_group" if types == :checkboxes 
+          watir_method = "radio_group" if types == :radios 
+          def_results << "def #{def_name}\n\t\@b.#{watir_method}('#{name}')\n"
+          face_results << "face :#{def_name} => [:#{watir_method}, :#{name}]\n"
+          
         when :select_lists
           # round trip back to browser for items and contents
           value = eval("select_list(:#{how_s}, '#{how}').getSelectedItems")
@@ -101,37 +106,29 @@ module Watir
       
       return [def_results, set_results, face_results]
     end
-    private :suggest_def_name, :glean, :make_reflection
 
-    # public interface for Reflector. 
-    # ie.reflect(:all) # => returns object definitions for entire dom using ie as container
-    # ie.frame('main').reflect(:select_lists) # => returns definitions for select_lists only contained by the frame
-    # ie.div(:id, 'main').div(:id, 'content').reflect(:all) # => definitions for all supported elements contained by a div 'content' inside div 'main'
+
+    # public interface for Reflector.
+    # ie.reflect # => returns object definitions for entire dom using ie as container
+    # ie.frame('main').select_lists.reflect# => returns definitions for select_lists 
+    # only contained by the frame
     # you can be as granular as needed
-    def reflect(watir_types=:all)
-      results = []
-      case watir_types
-      when :all
-        @@reflectable_list.each do |types|
-          results << make_reflection(types)
-        end
-      else
-        unless @@reflectable_list.include?(watir_types)
-          raise ArgumentError, "reflect method does not respond to this argument: #{watir_method}" 
-        end
-        results << make_reflection(watir_types)
-      end
-      return results
+    def reflect
+      puts "I has not exist. Implements me please"
     end
   end
-
-  # ducktape IE container and include the Reflector.
-  class IE
-    include Reflector
-  end
+  
   
   module Container
-    include Reflector
+    # container asks collections to reflect themselves
+    # each collection knows how to reflect itself and what to reflect
+    def reflect
+      ref = []
+      ref  << self.radio_groups.reflect
+      ref << self.checkbox_groups.reflect
+      ref << self.text_fields.reflect
+    end
+    
   end
   
 end
