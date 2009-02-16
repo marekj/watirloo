@@ -59,13 +59,13 @@ module Watir
        
     def values
       opts = []
-      @o.each {|r| opts << r.ole_object.invoke('value')}
+      @o.each {|rc| opts << rc.ole_object.invoke('value')}
       return opts
     end
     
     def get_by_value value
       if values.member? value
-        @o.find {|r| r.ole_object.invoke('value') == value}
+        @o.find {|rc| rc.ole_object.invoke('value') == value}
       else
         raise ::Watir::Exception::WatirException, "value #{value} not found in hidden_values"
       end
@@ -118,11 +118,30 @@ module Watir
     include RadioCheckGroup
     include RadioGroupCommonWatir
     
-    def initialize(container, name)
+    def initialize(container, how, what)
       @container = container
-      @name = name
-      @o = @container.radios.find_all {|r| r.name == @name}
+      @how = how
+      @what = what
+      @o = locate
     end
+    
+    def name
+      @name
+    end
+    
+    def locate
+      @name = case @how
+      when :name then @what
+      when :index then
+        names = []
+        @container.radios.each do |r|
+          names << r.name
+        end
+        names.uniq.at(@what-1) # follow 1-based index addressing for Watir API 
+      end
+      @container.radios.find_all {|r| r.name == @name}
+    end
+    private :locate
     
     # which value is selected?. returns value text as string
     # So per HTML401 spec I am not sure if we should ever have empyt array returned here
@@ -138,6 +157,21 @@ module Watir
 
   end
   
+  class RadioGroups < ElementCollections
+    def element_class; RadioGroup; end
+    def length
+      names = []
+      @container.radios.each do |r|
+        names << r.name
+      end
+      names.uniq.size #non repeating names
+    end
+    
+    private
+    def iterator_object(i)
+      @container.radio_group(:index, i + 1)
+    end
+  end
   
   module CheckboxGroupCommonWatir
 
@@ -179,11 +213,30 @@ module Watir
     include RadioCheckGroup
     include CheckboxGroupCommonWatir
     
-    def initialize(container, name)
+    def initialize(container, how, what)
       @container = container
-      @name = name
-      @o = @container.checkboxes.find_all {|cb| cb.name == @name}
+      @how = how
+      @what = what
+      @o = locate
     end
+    
+    def name
+      @name
+    end
+    
+    def locate
+      @name = case @how
+      when :name then @what
+      when :index then
+        names = []
+        @container.checkboxes.each do |cb|
+          names << cb.name
+        end
+        names.uniq.at(@what-1) # follow 1-based index addressing for Watir API 
+      end
+      @container.checkboxes.find_all {|cb| cb.name == @name}
+    end
+    private :locate
     
     # returns array of value attributes. Each Checkbox in a group 
     # has a value which is invisible to the user
@@ -196,15 +249,43 @@ module Watir
     end
   end
 
+  class CheckboxGroups < ElementCollections
+    def element_class; CheckboxGroup; end
+    def length
+      names = []
+      @container.checkboxes.each do |cb|
+        names << cb.name
+      end
+      names.uniq.size #non repeating names
+    end
+    
+    private
+    def iterator_object(i)
+      @container.checkbox_group(:index, i + 1)
+    end
+  end
+ 
   
   module Container
-    def radio_group(name)
-      RadioGroup.new(self, name)
+      
+    def radio_group(how, what=nil)
+      how, what = process_default :name, how, what
+      RadioGroup.new(self, how, what)
     end
       
-    def checkbox_group(name)
-      CheckboxGroup.new(self, name)
+    def radio_groups
+      RadioGroups.new(self)
     end
+    
+    def checkbox_group(how, what=nil)
+      how, what = process_default :name, how, what
+      CheckboxGroup.new(self, how, what)
+    end
+    
+    def checkbox_groups
+      CheckboxGroups.new(self)
+    end
+    
   end
   
   class RadioCheckCommon

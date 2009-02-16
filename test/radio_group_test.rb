@@ -10,11 +10,32 @@ describe 'RadioGroup class access in watir browser' do
     @page.browser.respond_to?(:radio_group).should == true
   end
   
-  it 'finds radio group on the page' do
+  it 'finds radio group on the page by default param name' do
     rg = @page.browser.radio_group('food')
     rg.size.should == 3
     rg.values.should == %w[hotdog burger tofu]
   end
+  
+  it 'finds radio group on the page by :name, param name explicitly' do
+    rg = @page.browser.radio_group(:name, 'food')
+    rg.size.should == 3
+    rg.values.should == %w[hotdog burger tofu]
+  end
+  
+  it 'finds the first radio group on the page by :index, 1' do
+    rg = @page.browser.radio_group(:index, 1)
+    rg.size.should == 3
+    rg.values.should == %w[hotdog burger tofu]
+    rg.name.should == 'food'
+  end
+  
+  it 'finds the second group on the page by index, 2' do
+    rg = @page.browser.radio_group(:index, 2)
+    rg.size.should == 3
+    rg.values.should == %w[hotdoga burgera tofua]
+    rg.name.should == 'fooda'
+  end
+  
 end
 
 
