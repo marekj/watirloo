@@ -14,12 +14,12 @@ describe "select lists defining in class, instance and subclass" do
   
   it 'face method with key parameter to construct SelectList per browser implementation' do
     if @page.browser.kind_of?(FireWatir::Firefox)
-      @page.pets.kind_of?(FireWatir::SelectList).should == true
-      @page.gender.kind_of?(FireWatir::SelectList).should == true
+      @page.pets.should be_kind_of(FireWatir::SelectList)
+      @page.gender.should be_kind_of(FireWatir::SelectList)
       
     elsif @page.browser.kind_of? Watir::IE
-      @page.pets.kind_of?(Watir::SelectList).should == true
-      @page.gender.kind_of?(Watir::SelectList).should == true
+      @page.pets.should be_kind_of(Watir::SelectList)
+      @page.gender.should be_kind_of(Watir::SelectList)
     end
   end
   
@@ -33,7 +33,7 @@ describe "select lists defining in class, instance and subclass" do
       face :toys => [:select_list, :name, 'bubel']
     end
     page = SelectListSub.new
-    page.interfaces.keys.should == [:toys, :pets]
+    page.interfaces.keys.should == [:pets, :toys]
   end
-
+  
 end

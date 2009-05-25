@@ -7,7 +7,7 @@ describe 'RadioGroup class access in watir browser' do
   end
   
   it 'browser responds to radio_group' do
-    @browser.respond_to?(:radio_group).should == true
+    @browser.should respond_to(:radio_group)
   end
   
   it 'finds radio group on the page' do
@@ -32,10 +32,10 @@ describe 'RadioGroup class interface in watirloo' do
   it 'container radio_group method returns RadioGroup class' do
     # verify browser namespace explicitly
     if @page.b.kind_of?(FireWatir::Firefox)
-      @page.meals_to_go.kind_of?(FireWatir::RadioGroup).should.be true
+      @page.meals_to_go.should be_kind_of(FireWatir::RadioGroup)
       
     elsif @page.b.kind_of?(Watir::IE)
-      @page.meals_to_go.kind_of?(Watir::RadioGroup).should.be true
+      @page.meals_to_go.should be_kind_of(Watir::RadioGroup)
     end
   end
   
@@ -75,23 +75,17 @@ describe 'RadioGroup class interface in watirloo' do
   end
   
   it 'set position throws exception if number not within the range of group size' do
-    assert_raise(Watir::Exception::WatirException) do
-      @page.meals_to_go.set 7
-    end
+    lambda{ @page.meals_to_go.set 7 }.should raise_error(Watir::Exception::WatirException)
   end
   
   it 'set value throws exception if value not found in options' do
-    assert_raise(Watir::Exception::WatirException) do
-      @page.meals_to_go.set 'banannnanna'
-    end
+    lambda{ @page.meals_to_go.set 'banannnanna' }.should raise_error(Watir::Exception::WatirException)
   end
   
   # TODO do I want to provide mapping of human generated semantic values for radios 
   # to actual values here in the radio_group or at the Watirllo level only? 
   it 'set throws exception if other than Fixnum or String element is used' do
-    assert_raise(Watir::Exception::WatirException)do
-      @page.meals_to_go.set :yes
-    end
+    lambda{ @page.meals_to_go.set :yes }.should raise_error(Watir::Exception::WatirException)
   end
 
 end

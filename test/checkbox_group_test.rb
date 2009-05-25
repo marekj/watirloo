@@ -8,7 +8,7 @@ describe 'checkbox_group access for browser' do
   end
   
   it 'browser responds to checkbox_group' do
-    @browser.respond_to?(:checkbox_group).should == true
+    @browser.should respond_to(:checkbox_group)
   end
   
   it 'returns group object and its values from the page' do
@@ -35,10 +35,10 @@ describe 'CheckboxGroup class access with page interface' do
   # if FF then FireWatir::CheckboxGroup
   it 'checkbox_group container method returns CheckboxGroup class' do
     if @page.b.kind_of?(FireWatir::Firefox)
-      @page.pets.kind_of?(FireWatir::CheckboxGroup).should == true
+      @page.pets.should be_kind_of(FireWatir::CheckboxGroup)
       
     elsif  @page.b.kind_of?(Watir::IE)
-      @page.pets.kind_of?(Watir::CheckboxGroup).should == true
+      @page.pets.should be_kind_of(Watir::CheckboxGroup)
     end
   end
   
@@ -51,9 +51,9 @@ describe 'CheckboxGroup class access with page interface' do
   end
   
   it 'selected_values returns array of value attributes of each selected checkbox' do
-    @page.pets.selected.should == nil
-    @page.pets.selected_value.should == nil
-    @page.pets.selected_values.should == []
+    @page.pets.selected.should be_nil
+    @page.pets.selected_value.should be_nil
+    @page.pets.selected_values.should be_empty
   end
   
   it 'set String checks the checkbox in a group where value is String' do

@@ -18,7 +18,7 @@ describe "SuperPage" do
   it 'adding interface to instance adds interface to initialize' do
     page = SuperPage.new
     page.face 'sub' => 'sub' # add new face to instance
-    page.interfaces.keys.sort.should == %w[name sub] # instnace has now two
+    page.interfaces.keys.sort.should == %w[name sub] # instance has now two
   end
   
   it 'but not to class' do

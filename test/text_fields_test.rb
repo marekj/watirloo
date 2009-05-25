@@ -18,12 +18,12 @@ describe "add faces text fields page objects" do
     @page.interfaces.size.should == 2
     
     if @page.browser.kind_of? FireWatir::Firefox
-      @page.first.kind_of?(FireWatir::TextField).should == true
-      @page.last.kind_of?(FireWatir::TextField).should == true
+      @page.first.should be_kind_of(FireWatir::TextField)
+      @page.last.should be_kind_of(FireWatir::TextField)
       
     elsif @page.b.kind_of? Watir::IE
-      @page.first.kind_of?(Watir::TextField).should == true
-      @page.last.kind_of?(Watir::TextField).should == true
+      @page.first.should be_kind_of(Watir::TextField)
+      @page.last.should be_kind_of(Watir::TextField)
     end
   end
 end
