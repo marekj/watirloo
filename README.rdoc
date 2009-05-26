@@ -1,6 +1,6 @@
 = Watirloo
 
-* http://watirloo.testr.us
+* http://github.com/marekj/watirloo
 
 == DESCRIPTION:
 
@@ -59,7 +59,8 @@ Or you can create a wrapper method that delegates to the browser for special sit
 
 * watir >= 1.6.2 runs on IE by default
 * firewatir >= 1.6.2 if you want to use Firefox
-* test/spec gem if you want to run watirloo examples included
+* newgem
+* spec gem if you want to run watirloo examples included
 
 == INSTALL:
 
@@ -67,13 +68,21 @@ Or you can create a wrapper method that delegates to the browser for special sit
 
 === ROADMAP
 
+Towards versioin 0.0.4
+
+* redesign Page class to make faces as closures to be called later with parameters
+* come up with some storage for storing existing browsers on the desktop to reattach later when doing exploratory testing
+* come up with auditing of a desktop for existence of browsers to find out what new browsers exist, were added, and which ones deleted.
+* for exploratory testing make a browser events publisher so listeners can subscribe and we can do some data processing on navigations
+* move all tests to use 'rspec'
+
 Towards version 0.0.3
 
 * DONE: make class level interfaces as base for the class and subclass. remove it from initilize method
-* UseCase class, scenario based runner
-* clean up reflector method to reflect according to new interface structures
-* move RadioGroup and CheckboxGroup to Watir gem (work with Bret)
-* make RadioGroups and CheckboxGroups classes for both IE and Firefox
+* NOTDONE: UseCase class, scenario based runner (implement rspec first)
+* NOTDONE: clean up reflector method to reflect according to new interface structuresm (after new face mechanis works I'll revisit this)
+* NOTDONE: move RadioGroup and CheckboxGroup to Watir gem (work with Bret) (probably keep it as an extension to Watir)
+* DONE: make RadioGroups and CheckboxGroups classes for both IE and Firefox
 
 Towards version 0.0.2
 
