@@ -25,28 +25,11 @@ end
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-desc "run all tests on IE."
-task :test_ie do
-  require 'rubygems' # needed?
-  gem 'ci_reporter'
-  require 'ci/reporter/rake/test_unit'
-  load 'ci/reporter/rake/test_unit_loader.rb'
-
-  # all tests use attach method to a browser that exit on the desktop
-  # open new ie browser
-  Watir::Browser.default = 'ie'
-  Watir::Browser.new
-  Watirloo::BrowserHerd.target = :ie
-  chdir File.dirname(__FILE__) do
-    tests = Dir["test/*_test.rb"]
-    tests.each do |t|
-      require t
-    end
-  end
-
-  # at the end of test you will have one extra browser
+require 'spec/rake/spectask'
+desc "spec ie default"
+Spec::Rake::SpecTask.new do |t|
+  t.spec_files = FileList['test/*_test.rb']
 end
-
 
 desc "run all tests on Firefox (config per FireWatir gem)"
 task :test_ff do
@@ -56,7 +39,7 @@ task :test_ff do
   Watir::Browser.new
   tests = Dir["test/*_test.rb"]
   tests.each do |t|
-    Watirloo::BrowserHerd.target = :firefox
+    Watirloo::Browser.target = :firefox
     require t
   end
   # at the end of test you will have one extra browser
