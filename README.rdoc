@@ -1,6 +1,6 @@
 = Watirloo
 
-* http://watir.testr.us
+* http://github.com/marekj/watirloo
 
 == DESCRIPTION:
 
@@ -29,6 +29,14 @@ By convention Watirloo::Page.new attaches itself to the existing IE browser inst
 Example: Given a page with text fields for last name and first name we want to enter name 'Kurt Vonnegut'
 You can define hash with key as semantic name and value as watir implementation
 
+  page = Watirloo::Page.new
+  page.face :last => [:text_field, :name, 'l_nm'],
+  page.face :first => [:text_field, :name, 'f_nm']
+  page.last.set "Vonnegut"
+  page.first.set "Kurt"
+  
+Or you can define a specialized page
+
   class AuthorSearchPage < Watirloo::Page
     face :last => [:text_field, :name, 'l_nm']
     face :first => [:text_field, :name, 'f_nm']
@@ -55,7 +63,8 @@ Or you can create a wrapper method that delegates to the browser for special sit
 
 * watir = 1.6.2 runs on IE by default
 * firewatir = 1.6.2 if you want to use Firefox
-* test/spec gem if you want to run watirloo tests and examples
+* newgem
+* rspec gem if you want to run watirloo examples included
 
 == INSTALL:
 
@@ -74,15 +83,21 @@ Towards version 0.0.5
 
 Towards version 0.0.4
 
+* redesign Page class to make faces as closures to be called later with parameters
+* come up with some storage for storing existing browsers on the desktop to reattach later when doing exploratory testing
 * DONE make RadioGroups and CheckboxGroups classes for both IE and Firefox
 * STARTED: design reflector methods to reflect Watirloo boilerplate code from the page. A PageRecord type recording tool.
+* come up with auditing of a desktop for existence of browsers to find out what new browsers exist, were added, and which ones deleted.
+* for exploratory testing make a browser events publisher so listeners can subscribe and we can do some data processing on navigations
+* move all tests to use 'rspec'
 
 Towards version 0.0.3
 
 * DONE: make class level interfaces as base for the class and subclass. remove it from initilize method
-* STARTED: UseCase class, scenario based runner
-* STARTED: clean up reflector method to reflect according to new interface structures
-* ???NOT SURE if this should go to Watir gem. Maybe remain an extenstion: move RadioGroup and CheckboxGroup to Watir gem (work with Bret)
+* NOTDONE: UseCase class, scenario based runner (implement rspec first)
+* NOTDONE: clean up reflector method to reflect according to new interface structuresm (after new face mechanis works I'll revisit this)
+* NOTDONE: move RadioGroup and CheckboxGroup to Watir gem (work with Bret) (probably keep it as an extension to Watir)
+* DONE: make RadioGroups and CheckboxGroups classes for both IE and Firefox
 
 Towards version 0.0.2
 
@@ -94,5 +109,6 @@ Towards version 0.0.2
 == LICENSE:
 
 (The MIT License)
+
 Copyright (c) 2008 marekj
 http://www.opensource.org/licenses/mit-license.php

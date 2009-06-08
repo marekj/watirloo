@@ -20,23 +20,23 @@ describe 'setting and getting values for individual checkboxes with value attrib
   
   it 'semantic name accesses individual CheckBox' do
     if @page.b.kind_of?(FireWatir::Firefox)
-      @page.pets_cat.kind_of?(FireWatir::CheckBox).should == true
+      @page.pets_cat.should be_kind_of(FireWatir::CheckBox)
       
     elsif @page.b.kind_of?(Watir::IE)
-      @page.pets_cat.kind_of?(Watir::CheckBox).should == true
+      @page.pets_cat.should be_kind_of(Watir::CheckBox)
     end
   end
   
   it 'set individual checkbox does not set other checkboxes sharing the same name' do
-    @page.pets_dog.checked?.should == false
+    @page.pets_dog.should_not be_checked
     @page.pets_dog.set
-    @page.pets_dog.checked?.should == true
-    @page.pets_cat.checked?.should == false
+    @page.pets_dog.should be_checked
+    @page.pets_cat.should_not be_checked
   end
   
   it 'by default all are false. set each unchecked checkbox should have checked? true' do
     @page.interfaces.keys.each do |key|
-      @page.get_face(key).checked?.should == false
+      @page.get_face(key).checked?.should be_false
     end
 
     @page.interfaces.keys.each do |key|
@@ -44,7 +44,7 @@ describe 'setting and getting values for individual checkboxes with value attrib
     end
     
     @page.interfaces.keys.each do |key|
-      @page.get_face(key).checked?.should.be true
+      @page.get_face(key).checked?.should be_true
     end
   end
 end

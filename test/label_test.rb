@@ -13,13 +13,13 @@ describe 'label wrapping text field' do
   
   it 'accessed by parent should be Watir Element' do
     if @page.b.kind_of?(FireWatir::Firefox)
-      @page.first.parent.kind_of?(String).should == true
-      @page.last.parent.kind_of?(String).should == true
+      @page.first.parent.should be_kind_of(String)
+      @page.last.parent.should be_kind_of?(String)
       flunk('FIXME Firefox returns String for parent and not Element')
       
     elsif @page.b.kind_of?(Watir::IE)
-      @page.first.parent.kind_of?(Watir::Element).should == true
-      @page.last.parent.kind_of?(Watir::Element).should == true
+      @page.first.parent.should be_kind_of(Watir::Element)
+      @page.last.parent.should be_kind_of(Watir::Element)
     end
     
   end

@@ -1,42 +1,5 @@
 module Watirloo
 
-  # browser. we return IE or Firefox. Safari? Other Browser?
-  class BrowserHerd
-    
-    @@target = :ie
-    #targets = [:ie, :firefox]
-    
-    class << self
-      
-      def target=(indicator)
-        @@target = indicator
-      end
-    
-      def target
-        @@target
-      end
-    
-      # provides browser instance to client.
-      # attaches to the existing browser on the desktop
-      # By convention the mental model here is that we are working 
-      # with one browser on the desktop. This is how a person would typically work
-      # We are not doing any fancy 
-      # 
-      def browser
-        case @@target
-        when :ie 
-          Watir::IE.attach :url, // #this attach is a crutch
-        when :firefox
-          # this is a cruch for quick work with pages.
-          # in reality you want to create a browser and pass it as argument to initialize Page class
-          FireWatir::Firefox.attach #this attach is a crutch
-        else
-          raise ::Watir::Exception::WatirException, "Browser target not supported"
-        end
-      end
-    end
-  end
-
   # Semantic Page Objects Container
   # Page containes interfaces to Objects of Interest on the Web Page
   # Each object defined by key, value pair, 
@@ -47,13 +10,14 @@ module Watirloo
   # It strives to adapt Human Readable tests to Machine Executable code
   class Page
     
-    class << self # eigenclass
+    ## Page Eigenclass
+    class << self
 
-      # hash key value pairs, 
+      # hash key value pairs,
       # each interface definition is a key as symbol pointing to some code to
       # exeucte later.
       def interfaces
-        @interfaces ||= {} 
+        @interfaces ||= {}
       end
 
       # watir methods are container.method(how, what, value)
@@ -123,7 +87,7 @@ module Watirloo
     # part of this page initialization is to provide a convenience while developing tests where
     # we may have only one browser open and that's the one browser were we want to talk to.
     # this provides simplicity for those who are just starting with Watirloo
-    def initialize(browser = Watirloo::BrowserHerd.browser , &blk)
+    def initialize(browser = Watirloo.browser , &blk)
       @b = browser
       create_interfaces
       instance_eval(blk) if block_given? # allows the shortcut to do some work at page creation
@@ -142,9 +106,6 @@ module Watirloo
       @dombase ||= browser #browser by default
     end
           
-    def create_interfaces # :nodoc:
-      @interfaces = self.class.interfaces.dup # do not pass reference, only values
-    end
     
     # enter values on controls idenfied by keys on the page.
     # data map is a hash, key represents the page object,

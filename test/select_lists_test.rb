@@ -126,7 +126,7 @@ describe "SelectList selections" do
     @page.gender.set 'F'
     @page.gender.selected.should == 'F'
     @page.gender.clear
-    @page.gender.selected.should.not == 'F' # This fails on IE. it does not remove selected attribute from options
+    @page.gender.selected.should_not == 'F' # This fails on IE. it does not remove selected attribute from options
     # FIXME I think this is bug in Watir clearSelection method but only on ie
   end
   

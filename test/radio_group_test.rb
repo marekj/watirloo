@@ -2,40 +2,19 @@ require File.dirname(__FILE__) + '/test_helper'
 
 describe 'RadioGroup class access in watir browser' do
   before :each do
-    @page = Watirloo::Page.new
-    @page.browser.goto testfile('radio_group.html')
+    @browser = Watirloo::Page.new.browser
+    @browser.goto testfile('radio_group.html')
   end
   
   it 'browser responds to radio_group' do
-    @page.browser.respond_to?(:radio_group).should == true
+    @browser.should respond_to(:radio_group)
   end
   
-  it 'finds radio group on the page by default param name' do
-    rg = @page.browser.radio_group('food')
+  it 'finds radio group on the page' do
+    rg = @browser.radio_group('food')
     rg.size.should == 3
     rg.values.should == %w[hotdog burger tofu]
   end
-  
-  it 'finds radio group on the page by :name, param name explicitly' do
-    rg = @page.browser.radio_group(:name, 'food')
-    rg.size.should == 3
-    rg.values.should == %w[hotdog burger tofu]
-  end
-  
-  it 'finds the first radio group on the page by :index, 1' do
-    rg = @page.browser.radio_group(:index, 1)
-    rg.size.should == 3
-    rg.values.should == %w[hotdog burger tofu]
-    rg.name.should == 'food'
-  end
-  
-  it 'finds the second group on the page by index, 2' do
-    rg = @page.browser.radio_group(:index, 2)
-    rg.size.should == 3
-    rg.values.should == %w[hotdoga burgera tofua]
-    rg.name.should == 'fooda'
-  end
-  
 end
 
 
@@ -53,10 +32,10 @@ describe 'RadioGroup class interface in watirloo' do
   it 'container radio_group method returns RadioGroup class' do
     # verify browser namespace explicitly
     if @page.b.kind_of?(FireWatir::Firefox)
-      @page.meals_to_go.kind_of?(FireWatir::RadioGroup).should.be true
+      @page.meals_to_go.should be_kind_of(FireWatir::RadioGroup)
       
     elsif @page.b.kind_of?(Watir::IE)
-      @page.meals_to_go.kind_of?(Watir::RadioGroup).should.be true
+      @page.meals_to_go.should be_kind_of(Watir::RadioGroup)
     end
   end
   
@@ -96,23 +75,17 @@ describe 'RadioGroup class interface in watirloo' do
   end
   
   it 'set position throws exception if number not within the range of group size' do
-    assert_raise(Watir::Exception::WatirException) do
-      @page.meals_to_go.set 7
-    end
+    lambda{ @page.meals_to_go.set 7 }.should raise_error(Watir::Exception::WatirException)
   end
   
   it 'set value throws exception if value not found in options' do
-    assert_raise(Watir::Exception::WatirException) do
-      @page.meals_to_go.set 'banannnanna'
-    end
+    lambda{ @page.meals_to_go.set 'banannnanna' }.should raise_error(Watir::Exception::WatirException)
   end
   
   # TODO do I want to provide mapping of human generated semantic values for radios 
   # to actual values here in the radio_group or at the Watirllo level only? 
   it 'set throws exception if other than Fixnum or String element is used' do
-    assert_raise(Watir::Exception::WatirException)do
-      @page.meals_to_go.set :yes
-    end
+    lambda{ @page.meals_to_go.set :yes }.should raise_error(Watir::Exception::WatirException)
   end
 
 end
