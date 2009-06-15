@@ -3,7 +3,6 @@ $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname
 
 require 'watirloo/watir_reflector'
 require 'watirloo/watir_ducktape'
-require 'watirloo/reflector'
 require 'watirloo/browsers'
 require 'watirloo/browsers_storage'
 require 'watirloo/browsers_desktop'

@@ -106,6 +106,9 @@ module Watirloo
       @dombase ||= browser #browser by default
     end
           
+    def create_interfaces # :nodoc:
+      @interfaces = self.class.interfaces.dup # do not pass reference, only values
+    end
     
     # enter values on controls idenfied by keys on the page.
     # data map is a hash, key represents the page object,
