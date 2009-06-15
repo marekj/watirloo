@@ -2,6 +2,7 @@ module Watirloo
 
   # Semantic Page Objects Container
   # Page containes interfaces to Objects of Interest on the Web Page
+  # Each object defined by key, value pair,
   # Each object defined by key, value pair, 
   # Keys is a friendly name, recognizable name given by the domain object model.
   # Some name that is meaningful to the customer.
@@ -9,7 +10,7 @@ module Watirloo
   # The Page class acts as an Adapter between the Business Domain naming of things and Document Object Model naming of elments.
   # It strives to adapt Human Readable tests to Machine Executable code
   class Page
-    
+
     ## Page Eigenclass
     class << self
 
@@ -69,6 +70,7 @@ module Watirloo
       alias face interface
       
       def inherited(subpage)
+        #puts "#{subpage} inherited #{interfaces.inspect} from #{self}"
         subpage.interfaces.update self.interfaces #supply parent's interfaces to subclasses in eigenclass
       end
       
@@ -90,7 +92,7 @@ module Watirloo
     def initialize(browser = Watirloo.browser , &blk)
       @b = browser
       create_interfaces
-      instance_eval(blk) if block_given? # allows the shortcut to do some work at page creation
+      yield browser if block_given? # allows the shortcut to do some work at page creation
     end
     
     # hold reference to the Watir::Browser
@@ -127,7 +129,6 @@ module Watirloo
       if self.respond_to? facename # if there is a defined wrapper method for page element provided
         return self.send(facename) 
       else
-        #log.error "Ooops: facename is not known to this Page. Remember to set facename as sybmol."
         raise ::Watir::Exception::WatirException, 'Unknown Semantic Facename'
       end
     end
