@@ -1,0 +1,82 @@
+<!-- 
+    Document   : select_lists
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>select lists</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <form id="selectors" action="none.page" method="post">
+      <h3>multiple select</h3>
+      <select name="animals" multiple size=4>
+        <option value="o1">cat</option>
+        <option value="o2">dog</option>
+        <option value="o3">zook</option>
+        <option value="o4">zebra</option>
+        <option value="o5">wumpa</option>
+      </select>
+      
+      <h3>single select</h3>
+      <select  name="sex_cd">
+        <option value="" selected></option>
+        <option value="m">M</option>
+        <option value="f">F</option>
+      </select> 
+
+      <h3>single select with no hidden values in options</h3>
+      <p>if value attribute is not set <a href="http://www.w3.org/TR/html401/interact/forms.html#edef-OPTGROUP">
+      the initial value is set to the contents of the option element.</a></p>
+      <select name="bubel">
+        <option selected></option>
+        <option>foobel</option>
+        <option>barbel</option>
+        <option>bazbel</option>
+        <option>chuchu</option>
+      </select>
+    </form>    
+    
+    <h3>select with 3 optgroups</h3>
+
+    <form id="optgroups" action="none.page" method="post">
+      <p></p>
+      <select name="cars" multiple size="10">
+        <option selected label="none" value="none">none</option>
+        <OPTGROUP label="economy">
+          <option label="yug" value="yugo">Yugo</option>
+          <option label="tra" value="trabi">Trabant</option>
+        </OPTGROUP>
+        <OPTGROUP label="midsize">
+          <option label="zig" value="ziguli">Ziguli Sport</option>
+          <option label="syr" value="syrenka">Syrenka 4 Door</option>
+        </OPTGROUP>
+        <OPTGROUP label="fullsize">
+          <option label="vol" value="volga">Czarna Volga</option>
+          <option label="lim" value="limo">Limozyna</option>
+        </OPTGROUP>
+      </select>
+      
+      <p></p>
+      <select name="shoes">
+        <option selected label="none" value="none">none</option>
+        <OPTGROUP label="Beachware">
+          <option>YoFeet</option>
+          <option>Plestyk</option>
+        </OPTGROUP>
+        <OPTGROUP label="Runware">
+          <option>Adidasy</option>
+          <option>Najkee</option>
+        </OPTGROUP>
+        <OPTGROUP label="Cubicleware">
+          <option>Zocks</option>
+          <option>Bamboshki</option>
+        </OPTGROUP>
+      </select>
+      
+      
+    </form>
+    
+    
+  </body>
+</html>

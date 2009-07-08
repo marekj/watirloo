@@ -1,0 +1,37 @@
+<!-- 
+    Document   : person
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Person</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div id="personPanel">
+      <h2>Person Info</h2>
+      <p id="tagline">Some info about a person</p>
+      <form id="person" name="person" action="person.fake.page" method="post">
+        <br />Last Name: <input maxLength="45"  size="25" name="last_nm" value="Begoodnuffski" />
+        <br />First Name: <input maxLength="20"  size="10" name="first_nm" value="Joanney" />
+        <br />Gender: <select  name="sex_cd">
+          <option value=" "></option>
+          <option value="M" selected>M</option>
+          <option value="F">F</option>
+        </select> 
+        <br />Date Of Birth: <input maxLength="10"  size="10" name="dob" value="05/09/1964" />
+        <br />Street Address<input maxLength="45"  size="45" name="addr1" value="1600 Transylavnia Ave." />
+        <br />Has the following pets:
+        <SELECT name="pets" MULTIPLE SIZE=4>
+          <OPTION VALUE="o1">cat
+          <OPTION VALUE="o2">dog
+          <OPTION VALUE="o3">zook
+          <OPTION VALUE="o4">zebra
+          <OPTION VALUE="o5">wumpa
+          
+        </SELECT>
+        
+      </form>
+    </div>
+  </body>
+</html>

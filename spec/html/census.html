@@ -1,0 +1,332 @@
+<!-- 
+    Document   : census
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Census</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+      td {font-size: 11px;
+        background-color: #eee;}
+    </style>
+  </head>
+  <body>
+    
+    <table id="census" width="800" cellSpacing="1" cellPadding="2" width="100%" border="0">
+      <tbody>
+        <tr>
+          <td class="head" colSpan="8">
+            Census 
+          </td>
+        </tr>
+        
+        <tr id="header">
+          <td>Emp</td>
+          <td>Last Name</td>
+          <td>First Name</td>
+          <td>DOB (mm/dd/yyyy)</td>
+          <td>Age In Years</td>
+          <td>Gender</td>
+          <td>State</td>
+          <td>Status</td>
+        </tr>
+        
+        <tr id="row0">
+          <td><input type="checkbox" name="census_check0" value="1" />&nbsp;1</td>
+          <td><input maxLength="40"  size="10" name="last_name0" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name0" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob0" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age0" value="" /></td>
+          <td>
+            <select  name="sex_cd0">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd0"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status0">
+              <option selected value="NO"></option><option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        <tr id="row1">
+          <td><input type="checkbox" name="census_check1" value="2" />&nbsp;2</td>
+          <td><input maxLength="40"  size="10" name="last_name1" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name1" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob1" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age1" value="" /></td>
+          <td>
+            <select  name="sex_cd1">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd1"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status1">
+              <option selected value="NO"></option>
+              <option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        <tr id="row2">
+          <td><input type="checkbox" name="census_check2" value="3" />&nbsp;3</td>
+          <td><input maxLength="40"  size="10" name="last_name2" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name2" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob2" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age2" value="" /></td>
+          <td>
+            <select  name="sex_cd2">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd2"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status2">
+              <option value=""></option>
+              <option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        <tr id="row3">
+          <td><input type="checkbox" name="census_check3" value="4" />&nbsp;4</td>
+          <td><input maxLength="40"  size="10" name="last_name3" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name3" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob3" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age3" value="" /></td>
+          <td>
+            <select  name="sex_cd3">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd3"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status3">
+              <option value=""></option><option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        <tr id="row4">
+          <td><input type="checkbox" name="census_check4" value="5" />&nbsp;5</td>
+          <td><input maxLength="40"  size="10" name="last_name4" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name4" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob4" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age4" value="" /></td>
+          <td>
+            <select  name="sex_cd4">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd4"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status4">
+              <option value=""></option><option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        <tr id="row5">
+          <td><input type="checkbox" name="census_check5" value="6" />&nbsp;6</td>
+          <td><input maxLength="40"  size="10" name="last_name5" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name5" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob5" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age5" value="" /></td>
+          <td>
+            <select  name="sex_cd5">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd5"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status5">
+              <option value=""></option><option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        
+        <tr id="row6">
+          <td><input type="checkbox" name="census_check6" value="7" />&nbsp;7</td>
+          <td><input maxLength="40"  size="10" name="last_name6" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name6" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob6" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age6" value="" /></td>
+          <td>
+            <select  name="sex_cd6">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd6"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status6">
+              <option value=""></option><option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        <tr id="row7">
+          <td><input type="checkbox" name="census_check7" value="8" />&nbsp;8</td>
+          <td><input maxLength="40"  size="10" name="last_name7" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name7" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob7" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age7" value="" /></td>
+          <td>
+            <select  name="sex_cd7">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd7"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status7">
+              <option value=""></option><option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        <tr id="row8">
+          <td><input type="checkbox" name="census_check8" value="9" />&nbsp;9</td>
+          <td><input maxLength="40"  size="10" name="last_name8" value="" /></td>
+          <td><input maxLength="20"  size="10" name="first_name8" value="" /></td>
+          <td><input maxLength="10"  size="10" name="dob8" value="" /></td>
+          <td><input maxLength="3"  size="3" name="age8" value="" /></td>
+          <td>
+            <select  name="sex_cd8">
+              <option value=" "></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> 
+          </td>
+          
+          <td>
+            <select  name="state_cd8"> 
+              <option value=""></option> 
+              <option value="TX">Texas</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="OT">Other</option>
+            </select> 
+          </td>
+          <td>
+            <select  name="emp_status8">
+              <option value=""></option><option value="FT">Employed Full Time</option>
+              <option value="UN">Unemployed</option> 
+              <option value="PT">Employed Part Time</option>
+            <option value="RT">Retired</option></select> 
+          </td>
+        </tr>
+        
+        
+      </tbody>
+    </table>
+    
+    
+  </body>
+</html>
