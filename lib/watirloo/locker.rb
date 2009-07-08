@@ -36,7 +36,7 @@ module Watirloo
       # add browser to storage for later reuse. by convention if you don't have any browsers it
       # so you can later restore it and continue working with it.
       # pass either browser referene or the hwnd Fixnum
-      def add(key='default', browser=Watir::IE.start)
+      def add(browser, key='default')
         mapping[key] = browser.kind_of?(Watir::IE) ? browser.hwnd : browser
         save_mapping
       end
@@ -59,9 +59,14 @@ module Watirloo
 
       def read_mapping
         if FileTest.exists?(locker)
-          YAML::load_file(locker)
+          loaded = YAML::load_file(locker)
+          #if file is empty or not well formed yaml
+          #or not a hash then return empty hash
+          loaded.kind_of?(Hash) ? loaded : {}
         else
-          {} #empty hash if stores not created yet
+          #empty hash if locker.yaml not there
+          #or malformed loaded not created yet
+          {} 
         end
       end
 

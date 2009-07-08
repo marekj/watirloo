@@ -1,9 +1,3 @@
-a = {:bla => [:text_field, :name, "bla"]}
-a = {:objectname => :bla, :watir_method => :text_field, :name_base => "last_name", :name_suffix => "0"}
-
-puts a.to_yaml
-exit
-
 # see this;http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html
 if VERSION <= '1.8.6'
   class Object
@@ -54,9 +48,6 @@ end
 
 #
 #
-
-
-
 
 require 'benchmark'
 result = Benchmark.bmbm do |test|

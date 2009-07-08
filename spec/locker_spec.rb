@@ -29,8 +29,8 @@ describe "Storage Locker for browsers so we can reattach to them later for tests
 
     it 'add stores ie.hwnd with friendly name and adds it to mapping accepts either ie or hwnd as value' do
       ie = Watir::IE.new
-      Watirloo::Locker.add('one', ie)
-      Watirloo::Locker.add('two', ie.hwnd)
+      Watirloo::Locker.add(ie, 'one')
+      Watirloo::Locker.add(ie, 'two')
     end
 
     it 'mapping holds what was added' do

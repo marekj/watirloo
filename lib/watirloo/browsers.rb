@@ -50,7 +50,8 @@ module Watirloo
           Locker.browser key
         rescue #XXX it's probably bad practice to use exception for logic control
           ie = Watir::IE.start
-          Locker.add(key, ie)
+          sleep 3
+          Locker.add(ie, key)
           ie #return newly created browser for the test session and store it for laterusage
         end
       end
