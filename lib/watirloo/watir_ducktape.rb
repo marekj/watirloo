@@ -97,6 +97,14 @@ module Watir
     def selected_radio
       @o.find {|r| r.isSet?}
     end
+
+    # if a radio button in a group is set then the group is set
+    # by default it should be set but many HTML implementations provide
+    # the radiogroup to the user with no default one set (Bad practice perhaps)
+    def set?
+      selected_radio ? true : false
+    end
+
   end
 
   # radios that share the same :name attribute form a RadioGroup. 
@@ -210,14 +218,15 @@ module Watir
   
   module CheckboxGroupCommonWatir
 
-    # returns selected checkboxex as array
-    # [] = nothing selected
-    # [checkbox, checkbox] = checkboxes that are selected.
+    # returns selected checkboxes as array
+    # when empty [] then nothing is selected
+    # when [checkbox, checkbox] = array of checkboxes that are selected
+    # that you can iterate over for tests.
     def selected_checkboxes
       @o.select {|cb| cb.isSet?}
     end
     
-    # convinience method as a filter for select_values
+    # convenience method as a filter for selected_values
     # returns: 
     #   nil => when no checkbox is set
     #   'value' => if one checkbox is set
@@ -237,6 +246,14 @@ module Watir
     # compare to SelectList where selected returns selected_item
     alias selected selected_value
 
+
+    # if at least one checkbox is selected then the group is considered set
+    def set?
+      (selected_checkboxes != []) ? true : false
+    end
+
+    alias checked? set?
+    
   end
 
   # Checkbox group semantically behaves like multi select list box.

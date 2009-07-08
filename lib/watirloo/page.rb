@@ -14,13 +14,6 @@ module Watirloo
     ## Page Eigenclass
     class << self
 
-      # hash key value pairs,
-      # each interface definition is a key as symbol pointing to some code to
-      # exeucte later.
-      def interfaces
-        @interfaces ||= {}
-      end
-
       # watir methods are container.method(how, what, value)
       # if how is optional then value can not be there: 
       # for example radio_group('nameofradio') # => implicitly this is a :name, 'nameofradio'
@@ -42,7 +35,7 @@ module Watirloo
       end
       
       def make_watir_methods(definitions) # :nodoc:
-        self.interfaces.update definitions
+        self.faces.update definitions
         definitions.each_pair do |facename, definition|
           make_watir_method(facename, definition)
         end
@@ -59,7 +52,7 @@ module Watirloo
       #  end
       # each face is a key declared by a semantic symbol that has human meaning in the context of a usecase
       # each value is an array defining access to Watir [:elementType, how, what]
-      def interface(definitions)
+      def face(definitions)
         if definitions.kind_of? Hash
           make_watir_methods(definitions)
         else
@@ -67,16 +60,10 @@ module Watirloo
           raise ::Watir::Exception::WatirException, "Wrong arguments for Page Object definition"
         end
       end
-      alias face interface
-      
-      def inherited(subpage)
-        #puts "#{subpage} inherited #{interfaces.inspect} from #{self}"
-        subpage.interfaces.update self.interfaces #supply parent's interfaces to subclasses in eigenclass
-      end
       
     end # eigenclass
     
-    attr_accessor :b, :interfaces, :dombase
+    attr_accessor :interfaces, :dombase
     
     # by convention the Page just attaches to the first available browser.
     # the smart thing to do is to manage browsers existence on the desktop separately
@@ -91,7 +78,6 @@ module Watirloo
     # this provides simplicity for those who are just starting with Watirloo
     def initialize(browser = Watirloo.browser , &blk)
       @b = browser
-      create_interfaces
       yield browser if block_given? # allows the shortcut to do some work at page creation
     end
     
@@ -109,7 +95,7 @@ module Watirloo
     end
           
     def create_interfaces # :nodoc:
-      @interfaces = self.class.interfaces.dup # do not pass reference, only values
+      @faces = self.class.faces.dup # do not pass reference, only values
     end
     
     # enter values on controls idenfied by keys on the page.

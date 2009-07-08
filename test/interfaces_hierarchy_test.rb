@@ -6,13 +6,13 @@ describe "PersonalInfo Page interfaces defined in other classes" do
   # Examples of Interface usage in Watirloo
   # this Page defines interface to first and last name
   class FullName < Watirloo::Page
-    interface :first => [:text_field, :name, 'first_nm']  
-    interface :last => [:text_field, :name, 'last_nm']
+    face :first => [:text_field, :name, 'first_nm']  
+    face :last => [:text_field, :name, 'last_nm']
   end
 
   # this Address Page defines street name
   class Address < Watirloo::Page
-    interface :street => [:text_field, :name, 'addr1']
+    face :street => [:text_field, :name, 'addr1']
   end
 
   # this page is a composition of interfaces that may appear by themselves
@@ -22,8 +22,8 @@ describe "PersonalInfo Page interfaces defined in other classes" do
   # but become interface to PersonalInfo
   # method face is shortcut for interface
   class PersonalInfo < Watirloo::Page
-    face Address.interfaces
-    face FullName.interfaces
+    face Address.faces
+    face FullName.faces
     face :dob => [:text_field, :name, 'dob']
     face :gender => [:select_list, :name, 'sex_cd']
   end
@@ -35,14 +35,14 @@ describe "PersonalInfo Page interfaces defined in other classes" do
 
   
   it 'had address interface from another class' do
-    all_interfaces = {
+    all_faces = {
       :first => [:text_field, :name, 'first_nm'],
       :last => [:text_field, :name, 'last_nm'],
       :street => [:text_field, :name, 'addr1'],
       :dob => [:text_field, :name, 'dob'],
       :gender => [:select_list, :name, 'sex_cd']
     }
-    @page.interfaces.should == all_interfaces
+    @page.faces.should == all_faces
   end
 
   it 'talks to the browser' do

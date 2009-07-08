@@ -47,10 +47,10 @@ module Watirloo
       # with one browser on the desktop. This is how a person would typically work
       def ie(key='default')
         begin
-          Browsers::Storage.browser key
-        rescue
+          Locker.browser key
+        rescue #XXX it's probably bad practice to use exception for logic control
           ie = Watir::IE.start
-          Browsers::Storage.add(key, ie)
+          Locker.add(key, ie)
           ie #return newly created browser for the test session and store it for laterusage
         end
       end

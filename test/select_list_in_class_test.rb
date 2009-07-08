@@ -34,7 +34,7 @@ describe "select lists defining in class, instance and subclass" do
     end
     
     page = SelectListSub.new
-    page.interfaces.keys.map{|k| k.to_s}.sort.should == ['pets', 'toys']
+    page.interfaces.keys.map{|k| k.to_s}.sort.should == ['gender', 'pets', 'toys']
     page.respond_to?(:toys).should == true
   end
   
