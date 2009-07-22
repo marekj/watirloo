@@ -32,6 +32,7 @@ describe "Watirloo browser" do
       b2.title.should == 'Census'
       b1.title.should == 'Person'
     end
+
   end
 
 end

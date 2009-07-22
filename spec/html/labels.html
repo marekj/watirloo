@@ -4,29 +4,50 @@
 -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <title>Labels</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    
-    <h3>Implicit label wraps text_field without for attribute. Click does not transfer focus to control</h3>
-    <form id="wrap_without_for"action="" method="get">
-      <p>
-        <label>First Name<INPUT type="text" name="fn"></label>
-      </p>
-      <p>
-        <label><INPUT type="text" name="ln">Last Name</label>
-      </p>
-    </form>
-    
-    <h3>Explicit Label For Item with Id. Click transfers focus to control associated by id</h3>
-    <form id="label_for_id"action="" method="get">
-      <p>
-        <label for="first_nm">FirstName For</label><INPUT type="text" name="firstname" id="first_nm">
-        <INPUT type="text" name="lastname" id="last_nm"><label for="last_nm">LastName For</label>
-      </p>
-    </form>
-    
-  </body>
+    <head>
+        <title>Labels</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h3> About Labels </h3>
+        <p><a href="http://www.w3.org/TR/html401/interact/forms.html#edef-LABEL">html401 label spec</a> --
+            label atribute :for holds a value of element :id it is bound to. Click on label sets the element with specified :id
+            <br />
+            checkbox, text_field, radiobutton do not have explicit labels like buttons
+        </p>
+
+        <h3>Implicit label wraps text_field without for attribute. Click does not transfer focus to control</h3>
+        <p>not a standard usage for label</p>
+        <form id="wrap_without_for"action="" method="get">
+            <p>
+                <label>First Name<input type="text" name="fn"></label>
+            </p>
+            <p>
+                <label><input type="text" name="ln">Last Name</label>
+            </p>
+        </form>
+
+        <h3>Explicit Label For Item with Id. Click transfers focus to control associated by id</h3>
+        <form id="label_for_id"action="" method="get">
+            <p>
+                <label for="first_nm">FirstName For</label>
+                <input type="text" name="firstname" id="first_nm">
+
+                <label for="last_nm">LastName For</label>
+                <input type="text" name="lastname" id="last_nm">
+
+                <br />
+                
+                <label for="gender_code">Select Gender</label>
+                <select  name="sex_cd" id="gender_code">
+                    <option value="" selected></option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+
+
+            </p>
+        </form>
+
+    </body>
 </html>

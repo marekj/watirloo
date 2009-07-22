@@ -1,3 +1,7 @@
+== 0.0.5 22Jul2009
+* Page module as helper
+* Back to the basics supporing the Watir usage with this library and not obscure it.
+
 == 0.0.4 16feb2009
 * Radio and Checkbox Groups, UseCase class and reflector
   * RadioGroups class and enhance radio_group(how, what) method

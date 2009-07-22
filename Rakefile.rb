@@ -12,10 +12,10 @@ $hoe = Hoe.new('watirloo', Watirloo::VERSION) do |p|
   ]
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"],
-    ['test/spec', '>=0.9.0']
+    ['rspec', '>=1.2.6']
   ]
-  p.test_globs  =['test/*_test.rb']
-  p.testlib = ['test/spec']
+  p.test_globs  =['spec/*_spec.rb']
+  p.testlib = ['rspec']
   p.clean_globs |= %w[**/.DS_Store tmp *.log]
   path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
   p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/, ''), 'rdoc')
@@ -37,14 +37,11 @@ task :test_ff do
   # start browser with jssh option
   Watir::Browser.default='firefox'
   Watir::Browser.new
-  tests = Dir["test/*_test.rb"]
+  tests = Dir["spec/*_spec.rb"]
   tests.each do |t|
     Watirloo::Browser.target = :firefox
     require t
   end
   # at the end of test you will have one extra browser
 end
-
-
-
 

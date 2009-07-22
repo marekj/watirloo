@@ -4,64 +4,68 @@
 
 == DESCRIPTION:
 
-Custom Extensions for Watir, Firewatir and Acceptance Test Framework based on semantic objects modeling customer's domain language
-It helps you write human readable and machine executable browser tests based on Page Adapters and UseCase scenarios.
+Custom Extensions for Watir, Firewatir. Acceptance Test Helper based on semantic page objects modeling customer's domain language
+It helps you write human readable and machine executable browser tests. Isolates GUI from Tests.
 
 The Human Readable part helps you create interfaces to elements on the page and tags them with friendly names 
 based on vocabulary of Business Domain. The Machine Executable parts talk to Watir API hooking into DOM elements. 
-This arrangement we call scientifically Semantic Page Objects or Page Adapters.
 it helps you concentrate in your acceptance tests on the intention and the customer's language and not on implementation of DOM.
-The tests you write are customer facing tests hence faces metaphor for Page Objects of Significance to the Customer.
+Write customer facing tests hence the metaphor of face for Page Objects of Significance to the Customer.
 
 == FEATURES/PROBLEMS:
 
-* Watirloo::Page acts as an adapter with customer facing semantic names for page objects and developer facing implamention talking to the browser.
-* Page creates an abstraction adapter: Human Readable and Machine Executable.
-* Pages contain faces; page objects that are named with semantic intent
-* Best to work with one browser instance on the desktop.
-* Ducktapes Watir and Firewatir gems to ease testing
-* groups radios in radio_group and checkboxes in checkbox_group and acts each group as page object
+* Extensioins to Watir and Firewatir gems to ease testing
+* group radios in #radio_group and checkboxes in #checkbox_group and acts each group as page object
+* Maintains multiple browsers on the desktop and stores window handles so you can reattach to the browser under test later (see Watirloo::Locker)
+* Watches and maintains your desktop for browsers existence. (Watirloo::Desktop)
+* Browser is managed automatically with Watirloo::browser
+* Isolates GUI from tests with face methods that introduce customer facing friendly names for elements
+* add reflect method to generate scaffolding code for your page elements (reflect currently uses browser as container. Alter scaffodling if you use frames)
+* look at spec dir for examples of usage with rspec
+* Locker uses config/locker.yml by default. If you want your own somewhere in your project update the Watirloo::Locker.locker = "path/to/your/config/locker.yml"
 
 == SYNOPSIS:
 
-By convention Watirloo::Page.new attaches itself to the existing IE browser instance on the desktop.
+By convention Watirloo::browser attaches itself to the existing IE browser instance on the desktop and maintains the handles to reattach later
 
-Example: Given a page with text fields for last name and first name we want to enter name 'Kurt Vonnegut'
-You can define hash with key as semantic name and value as watir implementation
+Example:
 
-  page = Watirloo::Page.new
-  page.face :last => [:text_field, :name, 'l_nm'],
-  page.face :first => [:text_field, :name, 'f_nm']
-  page.last.set "Vonnegut"
-  page.first.set "Kurt"
-  
-Or you can define a specialized page
+    Given a page with text fields for last name and first name
+    When I want to enter the name 'Kurt Vonnegut'
+    And I don't want to talk to implementation
+    But I want a friendly name of element on the page
+    Then I use Watirloo shortcuts
+    When I define an interface to watir implementation with a semantic key
+    And I define my data as hash with the same semantic key
+    Then I can automatically let watirloo enter my test data on a page
 
-  class AuthorSearchPage < Watirloo::Page
-    face :last => [:text_field, :name, 'l_nm']
-    face :first => [:text_field, :name, 'f_nm']
-  end
-  
-and  run tests with few lines of code
+    # rspec as container
 
-  page = AuthorSearchPage.new
-  page.spray {:first => 'Kurt', :last => 'Vonnegut'}
+    describe "using watirloo page to isolate and bind gui view to data" do
+      include Watirloo::Page
+      face(:last) {browser.text_field(:name, 'l_nm')}
+      face(:first) {browser.text_field(:name, 'f_nm')}
 
-Or you can create a wrapper method that delegates to the browser for special situations
-  
-  class Person < Watirloo::Page
-    def last
-      dombase.text_field(:name, 'lnm')
+      it "enters data on the page" do
+        last.set "Vonnegut"
+        first.set "Kurt"
+      end
+
+      it "sprays data on elements defined" do
+        spray :last => 'Vonnegut', :first => 'Kurt'
+      end
+
+      it "grabs data from elements and validates" do
+        data = {:first => "Kurt", :last => 'Vonnegut'}
+        spray data
+        scrape(data.keys).should == data
+      end
+
     end
-    def first
-      dombase.text_field(:name, 'fnm')
-    end
-  end
-
   
 == REQUIREMENTS:
 
-* watir = 1.6.2 runs on IE by default
+* watir = 1.6.2 
 * firewatir = 1.6.2 if you want to use Firefox
 * newgem
 * rspec gem if you want to run watirloo examples included
@@ -78,33 +82,9 @@ Or you can create a wrapper method that delegates to the browser for special sit
 
 === ROADMAP
 
-Towards version 0.0.5
-* UseCase examples and tests showing the intent of scenario based testing
-
-Towards version 0.0.4
-
-* redesign Page class to make faces as closures to be called later with parameters
-* come up with some storage for storing existing browsers on the desktop to reattach later when doing exploratory testing
-* DONE make RadioGroups and CheckboxGroups classes for both IE and Firefox
-* STARTED: design reflector methods to reflect Watirloo boilerplate code from the page. A PageRecord type recording tool.
-* come up with auditing of a desktop for existence of browsers to find out what new browsers exist, were added, and which ones deleted.
-* for exploratory testing make a browser events publisher so listeners can subscribe and we can do some data processing on navigations
-* move all tests to use 'rspec'
-
-Towards version 0.0.3
-
-* DONE: make class level interfaces as base for the class and subclass. remove it from initilize method
-* NOTDONE: UseCase class, scenario based runner (implement rspec first)
-* NOTDONE: clean up reflector method to reflect according to new interface structuresm (after new face mechanis works I'll revisit this)
-* NOTDONE: move RadioGroup and CheckboxGroup to Watir gem (work with Bret) (probably keep it as an extension to Watir)
-* DONE: make RadioGroups and CheckboxGroups classes for both IE and Firefox
-
-Towards version 0.0.2
-
-* DONE: make Watirloo agnostic to browser IE or Firefox or Safari
-* DONE: make tests run on IE, Firefox, Safari with the same interface
-* DONE: create radio_group to behave like select list and checkbox_group like multi select list
-* build UseCase class as template for scenario based execution of tests for exploratory testing
+* add Logging gem and log all actions for audit
+* provide UserStory type of container for exploratory testing (UseCase, Feature, TestScenario etc...)
+* provide examples for Cucumber
 
 == LICENSE:
 
