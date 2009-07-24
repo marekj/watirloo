@@ -27,9 +27,9 @@ module Watirloo
       # returns IE reference to a browser with a given key
       def browser(key='default')
         if key == 'default'
-          @browser ||= attach_browser #reuse default wihtout reattaching
+          (@browser && @browser.exists?) ? @browser : @browser = attach_browser
         else
-          attach_browser key
+          attach_browser(key)
         end
       end
 
@@ -74,6 +74,7 @@ module Watirloo
         File.open(locker,'w') {|f| YAML.dump(mapping, f)}
       end
 
+      # throws exception if can't attach to the known handle. 
       def attach_browser(key='default')
         Watir::IE.attach(:hwnd, mapping[key])
       end

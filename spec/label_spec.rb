@@ -63,5 +63,3 @@ describe 'label for text field not wrapped' do
     last_label.text.should == 'LastName For'
   end
 end
-
-

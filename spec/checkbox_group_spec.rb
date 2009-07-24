@@ -27,87 +27,110 @@ describe 'browser checkbox_group accesses a group of checkboxes sharing the same
     @browser.checkbox_group('pets').values.should == ["cat", "dog", "zook", "zebra", "wumpa"]
   end
 
+end
 
-  context "values when no checkbox is checked in a group" do
+describe "checkbox_group values when no checkbox is checked in a group" do
 
-    it 'selected should return nil' do
-      @browser.checkbox_group('pets').selected.should be_nil
-    end
-    it 'selected_value should return nil' do
-      @browser.checkbox_group('pets').selected_value.should be_nil
-    end
-    it 'selected_values should return empty array' do
-      @browser.checkbox_group('pets').selected_values.should be_empty
-    end
+  before :each do
+    @browser = Watirloo::browser
+    @browser.goto testfile('checkbox_group1.html')
+  end
 
-    it "set? should return false when no checkbox is checked in a group" do
-      @browser.checkbox_group("pets").should_not be_set
-    end
+
+  it 'selected should return nil' do
+    @browser.checkbox_group('pets').selected.should be_nil
+  end
+  it 'selected_value should return nil' do
+    @browser.checkbox_group('pets').selected_value.should be_nil
+  end
+  it 'selected_values should return empty array' do
+    @browser.checkbox_group('pets').selected_values.should be_empty
+  end
+
+  it "set? should return false when no checkbox is checked in a group" do
+    @browser.checkbox_group("pets").should_not be_set
+  end
     
+end
+
+describe "checkbox_group values when set string selecs one item only" do
+
+  before :each do
+    @browser = Watirloo::browser
+    @browser.goto testfile('checkbox_group1.html')
   end
 
 
-  context "when set string selecs one item only" do
-
-    it "selected should return the string used to select it" do
-      @browser.checkbox_group('pets').set 'dog'
-      @browser.checkbox_group('pets').selected.should == 'dog'
-    end
-
-    it "selected_value should return the string when one item is selected" do
-      @browser.checkbox_group('pets').set 'dog'
-      @browser.checkbox_group('pets').selected_value.should == 'dog'
-    end
-
-    it 'selected values returns array with one element' do
-      @browser.checkbox_group('pets').set 'dog'
-      @browser.checkbox_group('pets').selected_values.should == ['dog']
-    end
-
-    it "set? should return truee when 1 checkbox is checked in a group" do
-      @browser.checkbox_group('pets').set 'dog'
-      @browser.checkbox_group("pets").should be_set
-    end
-
+  it "selected should return the string used to select it" do
+    @browser.checkbox_group('pets').set 'dog'
+    @browser.checkbox_group('pets').selected.should == 'dog'
   end
 
-  context "when set array of strings selects multiple values in a group" do
-
-    it "selected returns array of strings when multiple values are selected" do
-      @browser.checkbox_group('pets').set ['dog', 'zebra', 'cat'] # not in order
-      @browser.checkbox_group('pets').selected.should == ['cat', 'dog', 'zebra']
-    end
-
-    it 'selected_value returns the same array of strings by position in a group' do
-      @browser.checkbox_group('pets').set ['zebra', 'dog', 'cat'] # not in order
-      @browser.checkbox_group('pets').selected_value.should == ['cat', 'dog', 'zebra'] # bypass filter
-    end
-
-    it "selected_values returns the same array of strings by position in a group" do
-      @browser.checkbox_group('pets').set ['cat', 'zebra', 'dog'] # not in order
-      @browser.checkbox_group('pets').selected_values.should == ['cat', 'dog', 'zebra']
-    end
-
-    it "set? should return truee when more than 1 checkbox is checked in a group" do
-      @browser.checkbox_group('pets').set ['cat', 'zebra', 'dog'] # not in order
-      @browser.checkbox_group("pets").should be_set
-    end
-
+  it "selected_value should return the string when one item is selected" do
+    @browser.checkbox_group('pets').set 'dog'
+    @browser.checkbox_group('pets').selected_value.should == 'dog'
   end
 
-  context "when set by numberical position behaves like select by single value" do
-
-    it 'set Fixnum checks checkbox by position in a group. Position is 1 based' do
-      @browser.checkbox_group('pets').set 3
-      @browser.checkbox_group('pets').selected_value.should == 'zook'
-    end
+  it 'selected values returns array with one element' do
+    @browser.checkbox_group('pets').set 'dog'
+    @browser.checkbox_group('pets').selected_values.should == ['dog']
   end
-  
-  context "when set by array of numberical positions behaves like select multiple strings" do
 
-    it 'set array of Fixnums checks each checkbox by position' do
-      @browser.checkbox_group('pets').set [4,1,2] # not in order
-      @browser.checkbox_group('pets').selected.should == ["cat", "dog", "zebra"]
-    end
+  it "set? should return truee when 1 checkbox is checked in a group" do
+    @browser.checkbox_group('pets').set 'dog'
+    @browser.checkbox_group("pets").should be_set
+  end
+
+end
+
+
+describe "checkbox_group set array of strings selects multiple values in a group" do
+
+  before :each do
+    @browser = Watirloo::browser
+    @browser.goto testfile('checkbox_group1.html')
+  end
+
+
+  it "selected returns array of strings when multiple values are selected" do
+    @browser.checkbox_group('pets').set ['dog', 'zebra', 'cat'] # not in order
+    @browser.checkbox_group('pets').selected.should == ['cat', 'dog', 'zebra']
+  end
+
+  it 'selected_value returns the same array of strings by position in a group' do
+    @browser.checkbox_group('pets').set ['zebra', 'dog', 'cat'] # not in order
+    @browser.checkbox_group('pets').selected_value.should == ['cat', 'dog', 'zebra'] # bypass filter
+  end
+
+  it "selected_values returns the same array of strings by position in a group" do
+    @browser.checkbox_group('pets').set ['cat', 'zebra', 'dog'] # not in order
+    @browser.checkbox_group('pets').selected_values.should == ['cat', 'dog', 'zebra']
+  end
+
+  it "set? should return truee when more than 1 checkbox is checked in a group" do
+    @browser.checkbox_group('pets').set ['cat', 'zebra', 'dog'] # not in order
+    @browser.checkbox_group("pets").should be_set
+  end
+
+end
+
+describe "checkbox_group set by numberical position" do
+
+  before :each do
+    @browser = Watirloo::browser
+    @browser.goto testfile('checkbox_group1.html')
+  end
+
+
+  it 'set Fixnum checks checkbox by position in a group. Position is 1 based.' do
+    #Behaves like select by single value
+    @browser.checkbox_group('pets').set 3
+    @browser.checkbox_group('pets').selected_value.should == 'zook'
+  end
+
+  it 'set array of Fixnums checks each checkbox by position' do
+    #behaves like select multiple strings
+    @browser.checkbox_group('pets').set [4,1,2] # not in order
+    @browser.checkbox_group('pets').selected.should == ["cat", "dog", "zebra"]
   end
 end

@@ -14,7 +14,7 @@ module Watirloo
   def self.browser(key = 'default')
     case Browsers.target
     when :ie then Browsers.ie key
-    when :firefox then Browsers.ff key
+    when :firefox then Browsers.ff
     end
   end
 
@@ -48,7 +48,8 @@ module Watirloo
       def ie(key='default')
         begin
           Locker.browser key
-        rescue #XXX it's probably bad practice to use exception for logic control
+        rescue => e #XXX it's probably a bad practice to use exception for logic control
+          # TODO logger here
           ie = Watir::IE.start
           sleep 3
           Locker.add(ie, key)

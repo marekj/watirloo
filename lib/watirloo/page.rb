@@ -14,7 +14,7 @@ module Watirloo
 
     # provides access to the browser for a client
     def browser
-      @browser ||= Watirloo.browser
+      ::Watirloo.browser
     end
 
     # container that delimits the scope of elements.

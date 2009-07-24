@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 
-describe "PersonalInfo client mixing interfaces from other modules" do
+describe "Class client mixing interfaces from other modules" do
 
   # Examples of Interface usage in Watirloo
   # define interface to first and last name
@@ -39,7 +39,7 @@ describe "PersonalInfo client mixing interfaces from other modules" do
     @page.browser.goto testfile('person.html')
   end
 
-  it 'spray and scrape using faces mixed in from other modules example' do
+  it 'spray and scrape example' do
     data = {
       :first => 'Inzynier',
       :last => 'Maliniak',

@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
+
 # testing single select and multiselect controls
 describe "SelectList selections" do
 
@@ -113,7 +114,7 @@ describe "SelectList selections" do
     gender.selected_value.should == 'm'
   end
   
-  it 'clear removes selected attribuet for all selected items in multiselect' do
+  it 'clear removes selected attribute for all selected items in multiselect' do
     pets.selected.should == nil
     pets.set ['zook', 'cat']
     pets.selected.should == ['cat','zook']
@@ -125,9 +126,12 @@ describe "SelectList selections" do
     gender.selected.should == ''
     gender.set 'F'
     gender.selected.should == 'F'
+
+    # This fails on IE in single select list.
+    # The test passes in Firefox
+    # option item select = false does not set false like it does in multiselect
     gender.clear
-    gender.selected.should_not == 'F' # This fails on IE. it does not remove selected attribute from options
-    # FIXME I think this is bug in Watir clearSelection method but only on ie
+    gender.selected.should_not == 'F'
   end
   
   it 'set_value selects value atribute text' do
