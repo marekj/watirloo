@@ -22,7 +22,7 @@ Write customer facing tests hence the metaphor of face for Page Objects of Signi
 * Isolates GUI from tests with face methods that introduce customer facing friendly names for elements
 * add reflect method to generate scaffolding code for your page elements (reflect currently uses browser as container. Alter scaffodling if you use frames)
 * look at spec dir for examples of usage with rspec
-* Locker uses config/locker.yml by default. If you want your own somewhere in your project update the Watirloo::Locker.locker = "path/to/your/config/locker.yml"
+
 
 == SYNOPSIS:
 
@@ -85,6 +85,7 @@ Example:
 * add Logging gem and log all actions for audit
 * provide UserStory type of container for exploratory testing (UseCase, Feature, TestScenario etc...)
 * provide examples for Cucumber
+* make specs run with firewatir
 
 == LICENSE:
 

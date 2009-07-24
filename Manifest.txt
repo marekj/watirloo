@@ -29,6 +29,9 @@ spec/extra/browser_events_spec.rb
 spec/extra/page_objects_metrics.rb
 spec/face_mixing_spec.rb
 spec/firewatir/attach_instance_test.rb
+spec/firewatir/spec_results.html
+spec/firewatir/spec_results.txt
+spec/firewatir/spec_results_failed.txt
 spec/html/census.html
 spec/html/checkbox_group1.html
 spec/html/labels.html
@@ -39,8 +42,7 @@ spec/html/select_lists.html
 spec/input_element_spec.rb
 spec/label_spec.rb
 spec/locker_spec.rb
-spec/page2_test.rb
-spec/page_test.rb
+spec/page_spec.rb
 spec/person_def_wrappers_spec.rb
 spec/radio_group_spec.rb
 spec/radio_groups_spec.rb
@@ -48,5 +50,10 @@ spec/reflector_spec.rb
 spec/select_list_options_spec.rb
 spec/select_lists_spec.rb
 spec/spec_helper.rb
+spec/spec_helper_ff.rb
+spec/spec_helper_runner.rb
+spec/spec_results.html
+spec/spec_results.txt
+spec/spec_results_failed.txt
 spec/text_fields_spec.rb
 watirloo.gemspec
