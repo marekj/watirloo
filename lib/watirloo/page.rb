@@ -12,15 +12,29 @@ module Watirloo
   # that you can later include into your client
   module Page
 
-    # provides access to the browser for a client
+    # provide browser for a client. If now browser is assigned to a client
+    # Use the default Watirloo.browser if no browser set explicitly
     def browser
-      ::Watirloo.browser
+      @browser ||= ::Watirloo.browser
     end
 
-    # container that delimits the scope of elements.
-    # in a frameless DOM the browser is the doc
+    # set browser instance for a client to use
+    def browser=(browser)
+      @browser = browser
+    end
+
+    # browser document container that delimits the scope of elements.
+    # all faces use doc as a base. In a frameless DOM the browser is the document container.
     # however if page with frames you can setup a doc destination to be a frame as the
-    # base container for face accessors
+    # base container for face accessors.
+    # in most circumstances doc is a passthru to browser
+    # example: if you have a frameset and you want to talk to a frame(:name, 'content') you can redefine
+    # def in your client
+    #    def doc
+    #      browser.frame(:name, 'content')
+    #    end
+    # or
+    #    face(:doc) {browser.frame(:name, 'content')}
     def doc
       browser
     end
