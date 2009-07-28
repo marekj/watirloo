@@ -6,7 +6,7 @@ module Watirloo
   # you put reference to a browser in storage. Next time you run a test you can restore the browser's reference instead fo staring a new one.
   module Locker
 
-    @@locker_file = File.join(File.dirname(__FILE__), "..", "..", "config", "locker.yml")
+    @@locker_file = File.join(File.dirname(__FILE__), "..", "..", "log", "locker.yml")
 
     class << self
 
