@@ -2,7 +2,7 @@ History.txt
 Manifest.txt
 README.rdoc
 Rakefile.rb
-config/locker.yml
+log/locker.yml
 lib/watirloo.rb
 lib/watirloo/browsers.rb
 lib/watirloo/desktop.rb

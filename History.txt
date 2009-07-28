@@ -1,6 +1,6 @@
 == 0.0.5 22Jul2009
 * Page is a module and not a class. include Watirloo::Page in your testcase (rspec group or cucumber feature) to add view methods.
-* Locker uses config/locker.yml by default. If you want your own somewhere in your project update the Watirloo::Locker.locker = "path/to/your/config/locker.yml"
+* Locker uses log/locker.yml by default. If you want your own somewhere in your project update the Watirloo::Locker.locker = "path/to/your/log/locker.yml"
 * multiple browser support with Watirloo::Desktop and Locker
 * 115 examples in rspec
 
