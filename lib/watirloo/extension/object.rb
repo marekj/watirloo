@@ -1,6 +1,12 @@
 
-# see this;http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html
-# instance_exec is used for face methods
+# http://blog.jayfields.com/2006/09/ruby-instanceexec-aka-instanceeval.html # hints on usage
+# http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html # write up on usage
+# http://eigenclass.org/hiki.rb?instance_exec # more study
+# http://eigenclass.org/hiki.rb?bounded+space+instance_exec # fix for mem leak final used here
+# http://eigenclass.org/hiki.rb?Changes+in+Ruby+1.9#l23
+# http://www.jroller.com/abstractScope/entry/passing_parameters_to_an_instance
+# instance_exec is used for face methods it allows you to pass args and block to be evaled.
+# it works like instance eval but instance eval does not accept arguments
 if VERSION <= '1.8.6'
   class Object
     module InstanceExecHelper; end
