@@ -5,11 +5,11 @@ describe "add faces text fields page objects" do
   include Watirloo::Page
 
   face :last do
-    doc.text_field(:name, 'last_nm')
+    text_field(:name, 'last_nm')
   end
 
   face :first do
-    doc.text_field(:name, 'first_nm')
+    text_field(:name, 'first_nm')
   end
     
   before do

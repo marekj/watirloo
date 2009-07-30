@@ -7,15 +7,15 @@ describe "Class client mixing interfaces from other modules" do
   # define interface to first and last name
   module FullName
     include Watirloo::Page
-    face(:first) {doc.text_field(:name, 'first_nm')}
-    face(:last) {doc.text_field(:name, 'last_nm')}
+    face(:first) {text_field(:name, 'first_nm')}
+    face(:last) {text_field(:name, 'last_nm')}
   end
 
   # this Address defines street name
   module Address
     include Watirloo::Page
     face :street do
-      doc.text_field(:name, 'addr1')
+      text_field(:name, 'addr1')
     end
   end
 
@@ -29,8 +29,8 @@ describe "Class client mixing interfaces from other modules" do
     include Address
     include FullName
     include Watirloo::Page
-    face( :dob ) { doc.text_field(:name, 'dob') }
-    face( :gender ) { doc.select_list(:name, 'sex_cd') }
+    face( :dob ) { text_field(:name, 'dob') }
+    face( :gender ) { select_list(:name, 'sex_cd') }
   end
   
 

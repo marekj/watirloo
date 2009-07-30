@@ -19,24 +19,29 @@ module Watirloo
     end
 
     # set browser instance for a client to use
-    def browser=(browser)
+    # --
+    # the method is a bit better than browser= because setting browser in mehtods would probably
+    # require a call to self.browser=
+    def set_browser(browser)
       @browser = browser
     end
 
     # browser document container that delimits the scope of elements.
-    # all faces use doc as a base. In a frameless DOM the browser is the document container.
+    # all faces use page as a base. In a frameless DOM the browser is page, the document container.
     # however if page with frames you can setup a doc destination to be a frame as the
     # base container for face accessors.
-    # in most circumstances doc is a passthru to browser
+    # in most circumstances page is a passthru to browser
     # example: if you have a frameset and you want to talk to a frame(:name, 'content') you can redefine
-    # def in your client
-    #    def doc
-    #      browser.frame(:name, 'content')
-    #    end
-    # or
-    #    face(:doc) {browser.frame(:name, 'content')}
-    def doc
-      browser
+    # set the page
+    # set_page browser.frame(:name, 'content') see set_page
+    #
+    def page
+      @page ||= browser
+    end
+
+    # set the page base element as the receiver of all facename methods
+    def set_page(watir_element)
+      @page = watir_element
     end
 
     module ClassMethods
@@ -64,10 +69,11 @@ module Watirloo
       def face(name, *args, &definition)
         module_eval do
           define_method(name) do |*args|
-            instance_exec(*args, &definition)
+            page.instance_exec(*args, &definition)
           end
         end
       end
+
     end
 
     # metahook by which ClassMethods become singleton methods of an including module
@@ -92,7 +98,7 @@ module Watirloo
     #     face(:last) {doc.text_field(:name, 'fst_nm')}
     def spray(hash)
       hash.each_pair do |facename, value|
-        send(facename).set value #make every control element in watir respond to set
+        self.send(facename).set value #make every control element in watir respond to set
       end
     end
 
@@ -103,7 +109,7 @@ module Watirloo
     def scrape(field_keys)
       data = {}
       field_keys.each do |k|
-        watir_control = send("#{k}")
+        watir_control = self.send("#{k}")
         method_name = case watir_control.class.to_s.split("::").last
         when "SelectList", "CheckboxGroup", "RadioGroup" then :selected
         else  

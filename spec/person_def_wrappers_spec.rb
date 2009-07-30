@@ -4,16 +4,16 @@ describe "Person Page interfaces defined by def wrappers and class definitions" 
 
   include Watirloo::Page
   # declare accessing elements
-  face( :first ) { doc.text_field(:name, 'first_nm') }
-  face( :street) { doc.text_field(:name, 'addr1') }
+  face(:first) { text_field(:name, 'first_nm') }
+  face(:street) { text_field(:name, 'addr1') }
 
   # def wrapper helper with suggested semantic name returns dom element
   def last
-    doc.text_field(:name, 'last_nm')
+    browser.text_field(:name, 'last_nm')
   end
 
   def dob
-    doc.text_field(:name, 'dob')
+    browser.text_field(:name, 'dob')
   end
   
   before :each do

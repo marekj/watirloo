@@ -6,11 +6,11 @@ describe 'setting and getting values for individual checkboxes with value attrib
   # in Watirloo you can access CheckboxGroup as shortcut using
   # :pets => [:checkbox_group, 'pets']
   include Watirloo::Page
-  face(:pets_cat) { doc.checkbox(:name, 'pets', 'cat') }
-  face(:pets_dog) { doc.checkbox(:name, 'pets', 'dog') }
-  face(:pets_zook) { doc.checkbox(:name, 'pets', 'zook') }
-  face(:pets_zebra) { doc.checkbox(:name, 'pets', 'zebra') }
-  face(:pets_wumpa) { doc.checkbox(:name, 'pets', 'wumpa') }
+  face(:pets_cat) { checkbox(:name, 'pets', 'cat') }
+  face(:pets_dog) { checkbox(:name, 'pets', 'dog') }
+  face(:pets_zook) { checkbox(:name, 'pets', 'zook') }
+  face(:pets_zebra) { checkbox(:name, 'pets', 'zebra') }
+  face(:pets_wumpa) { checkbox(:name, 'pets', 'wumpa') }
   
   before do
     browser.goto testfile('checkbox_group1.html')

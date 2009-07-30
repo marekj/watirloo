@@ -31,8 +31,8 @@ end
 describe "Page faces included in rspec" do
 
   include Watirloo::Page
-  face(:last1) {doc.text_field(:name, 'last_name0')}
-  face(:last) {|nbr| doc.text_field(:name, "last_name#{nbr+1}")}
+  face(:last1) { text_field(:name, 'last_name0')}
+  face(:last) {|nbr| text_field(:name, "last_name#{nbr+1}")}
 
   before do
     browser.goto testfile('census.html')
@@ -56,11 +56,12 @@ end
 describe "Page doc provides access to frame in frameset browser" do
 
   include Watirloo::Page
-  face(:last1) {doc.text_field(:name, 'last_name0')}
-  face(:last) {|nbr| doc.text_field(:name, "last_name#{nbr+1}")}
+  face(:last1) {text_field(:name, 'last_name0')}
+  face(:last) {|nbr| text_field(:name, "last_name#{nbr+1}")}
 
   before do
     browser.goto testfile('frameset1.html')
+    set_page browser.frame(:name,'census_frame')
   end
 
 

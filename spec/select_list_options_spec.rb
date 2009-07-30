@@ -4,9 +4,9 @@ describe "SelectList options as visible items and values as hidden to the user a
   
   include Watirloo::Page
 
-  face(:pets) { doc.select_list(:name, 'animals') }
-  face(:gender) { doc.select_list(:name, 'sex_cd') }
-  face(:toys) { doc.select_list(:name, 'bubel') }
+  face(:pets) { select_list(:name, 'animals') }
+  face(:gender) { select_list(:name, 'sex_cd') }
+  face(:toys) { select_list(:name, 'bubel') }
   
   before :each do
     browser.goto testfile('select_lists.html')

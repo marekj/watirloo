@@ -23,7 +23,7 @@ describe 'RadioGroup class interface in watirloo' do
   
   include Watirloo::Page
   face :meals_to_go do
-    doc.radio_group('food')
+    radio_group('food')
   end
 
   before do

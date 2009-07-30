@@ -4,8 +4,8 @@ require File.dirname(__FILE__) + '/spec_helper'
 describe 'text field wrapped in label tag without for attribute defined' do
   
   include Watirloo::Page
-  face(:first) { doc.text_field(:name, 'fn') }
-  face(:last) { doc.text_field(:name, 'ln') }
+  face(:first) { text_field(:name, 'fn') }
+  face(:last) { text_field(:name, 'ln') }
   
   before do
     browser.goto testfile('labels.html')
@@ -51,8 +51,8 @@ describe 'label for text field not wrapped' do
 
   # reopen the class and add more interfaces
   include Watirloo::Page
-  face(:first_label) { doc.label(:for, 'first_nm') }
-  face(:last_label) { doc.label(:for, 'last_nm') }
+  face(:first_label) { label(:for, 'first_nm') }
+  face(:last_label) { label(:for, 'last_nm') }
   
   before do
     browser.goto testfile('labels.html')
