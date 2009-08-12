@@ -14,7 +14,7 @@ Write customer facing tests hence the metaphor of face for Page Objects of Signi
 
 == FEATURES/PROBLEMS:
 
-* Extensioins to Watir and Firewatir gems to ease testing
+* Extensions to Watir and Firewatir gems to ease testing and joy with page objects
 * group radios in #radio_group and checkboxes in #checkbox_group and acts each group as page object
 * Maintains multiple browsers on the desktop and stores window handles so you can reattach to the browser under test later (see Watirloo::Locker)
 * Watches and maintains your desktop for browsers existence. (Watirloo::Desktop)
@@ -39,24 +39,24 @@ Example:
     And I define my data as hash with the same semantic key
     Then I can automatically let watirloo enter my test data on a page
 
-    # rspec as container
+    # rspec as client
 
     describe "using watirloo page to isolate and bind gui view to data" do
       include Watirloo::Page
-      face(:last) {browser.text_field(:name, 'l_nm')}
-      face(:first) {browser.text_field(:name, 'f_nm')}
+      face(:last_name) { text_field(:name, 'l_nm') }
+      face(:first_name) { text_field(:name, 'f_nm') }
 
       it "enters data on the page" do
-        last.set "Vonnegut"
-        first.set "Kurt"
+        first_name.set "Kurt"
+        last_name.set "Vonnegut"
       end
 
       it "sprays data on elements defined" do
-        spray :last => 'Vonnegut', :first => 'Kurt'
+        spray :last_name => 'Vonnegut', :first_name => 'Kurt'
       end
 
       it "grabs data from elements and validates" do
-        data = {:first => "Kurt", :last => 'Vonnegut'}
+        data = {:first_name => "Kurt", :last_name => 'Vonnegut'}
         spray data
         scrape(data.keys).should == data
       end

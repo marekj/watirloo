@@ -1,21 +1,20 @@
 
-Person Page interfaces defined by def wrappers and class definitions
-- calling face when there is wrapper method
-- calling interface when there is definition and no method
-- spray method by convetion has keys correspondig to interface names for watir elements
+add faces text fields page objects
+- face returns a watir element text_field
+- face name method and value returns current text
+- face name method and set enters value into field
+- spray method matches keys as facenames and sets values to fields
+- scrape keys updates keys with values and returns datamap
 
-Page class with face definitions
-- has face method as singleton
-- face class method defines method
-- face accepts args used by method body
+SelectList options as visible items and values as hidden to the user attributes
+- values of options by facename method
+- options with no value attribute
+- items method returns visible contents as array of text items
+- items returns visible text items as array
 
-Page faces included in rspec
-- face defines a watir element access
-- faces with arguments
-
-Page doc provides access to frame in frameset browser
-- face defines a watir element access
-- faces with arguments
+setting and getting values for individual checkboxes with value attributes in face definitions
+- semantic name accesses individual CheckBox
+- set individual checkbox does not set other checkboxes sharing the same name
 
 SelectList selections
 - selected returns preselected item in single select
@@ -38,6 +37,15 @@ SelectList selections
 - set_value selects value atribute text
 - set_value for multiselect returns selected and selected_values
 
+reflext :text_fields
+- text_fields.reflect each :text_field
+
+reflect :radio_groups
+- reflects each radio group
+
+reflect :checkbox_groups
+- reflects each checkbox_group
+
 RadioGroup class access in watir browser
 - browser responds to radio_group
 - radio group needs :what value with implicit :how=name
@@ -53,6 +61,14 @@ RadioGroup class interface in watirloo
 - set value throws exception if value not found in options
 - set throws exception if sybmol is used. it should accept Fixnum or String element only
 
+Class client mixing interfaces from other modules
+- spray and scrape example
+
+Person Page interfaces defined by def wrappers and class definitions
+- calling face when there is wrapper method
+- calling interface when there is definition and no method
+- spray method by convetion has keys correspondig to interface names for watir elements
+
 text field wrapped in label tag without for attribute defined
 - parent of text_field should be Watir Element
 - parent tagName should be a LABEL
@@ -61,34 +77,18 @@ text field wrapped in label tag without for attribute defined
 label for text field not wrapped
 - text value of label
 
-SelectList options as visible items and values as hidden to the user attributes
-- values of options by facename method
-- options with no value attribute
-- items method returns visible contents as array of text items
-- items returns visible text items as array
+Page class with face definitions
+- has face method as singleton
+- face class method defines method
+- face accepts args used by method body
 
-reflext :text_fields
-- text_fields.reflect each :text_field
+Page faces included in rspec
+- face defines a watir element access
+- faces with arguments
 
-reflect :radio_groups
-- reflects each radio group
-
-reflect :checkbox_groups
-- reflects each checkbox_group
-
-setting and getting values for individual checkboxes with value attributes in face definitions
-- semantic name accesses individual CheckBox
-- set individual checkbox does not set other checkboxes sharing the same name
-
-Class client mixing interfaces from other modules
-- spray and scrape example
-
-add faces text fields page objects
-- face returns a watir element text_field
-- face name method and value returns current text
-- face name method and set enters value into field
-- spray method matches keys as facenames and sets values to fields
-- scrape keys updates keys with values and returns datamap
+Page doc provides access to frame in frameset browser
+- face defines a watir element access
+- faces with arguments
 
 Watirloo browser when no browsers on desktop nor in locker
 - should start a default new browser and load a testfile
@@ -172,6 +172,6 @@ Mystery input element
 - the label points to text_field
 - the id should return select_list
 
-Finished in 199.031 seconds
+Finished in 205.094 seconds
 
 117 examples, 0 failures

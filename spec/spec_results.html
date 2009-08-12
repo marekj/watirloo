@@ -181,200 +181,200 @@ a {
 <div class="results">
 <div class="example_group">
   <dl>
-  <dt id="example_group_1">Person Page interfaces defined by def wrappers and class definitions</dt>
+  <dt id="example_group_1">add faces text fields page objects</dt>
     <script type="text/javascript">moveProgressBar('0.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">calling face when there is wrapper method</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">face returns a watir element text_field</span></dd>
     <script type="text/javascript">moveProgressBar('1.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">calling interface when there is definition and no method</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">face name method and value returns current text</span></dd>
     <script type="text/javascript">moveProgressBar('2.5');</script>
-    <dd class="spec passed"><span class="passed_spec_name">spray method by convetion has keys correspondig to interface names for watir elements</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_2">Page class with face definitions</dt>
+    <dd class="spec passed"><span class="passed_spec_name">face name method and set enters value into field</span></dd>
     <script type="text/javascript">moveProgressBar('3.4');</script>
-    <dd class="spec passed"><span class="passed_spec_name">has face method as singleton</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">spray method matches keys as facenames and sets values to fields</span></dd>
     <script type="text/javascript">moveProgressBar('4.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">face class method defines method</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">scrape keys updates keys with values and returns datamap</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_2">SelectList options as visible items and values as hidden to the user attributes</dt>
     <script type="text/javascript">moveProgressBar('5.1');</script>
-    <dd class="spec passed"><span class="passed_spec_name">face accepts args used by method body</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_3">Page faces included in rspec</dt>
-    <script type="text/javascript">moveProgressBar('5.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">face defines a watir element access</span></dd>
-    <script type="text/javascript">moveProgressBar('6.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">faces with arguments</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_4">Page doc provides access to frame in frameset browser</dt>
-    <script type="text/javascript">moveProgressBar('7.6');</script>
-    <dd class="spec passed"><span class="passed_spec_name">face defines a watir element access</span></dd>
-    <script type="text/javascript">moveProgressBar('8.5');</script>
-    <dd class="spec passed"><span class="passed_spec_name">faces with arguments</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_5">SelectList selections</dt>
-    <script type="text/javascript">moveProgressBar('9.4');</script>
-    <dd class="spec passed"><span class="passed_spec_name">selected returns preselected item in single select</span></dd>
-    <script type="text/javascript">moveProgressBar('10.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">selected returns preselected value in single select</span></dd>
-    <script type="text/javascript">moveProgressBar('11.1');</script>
-    <dd class="spec passed"><span class="passed_spec_name">selected returns nil for none selected items in multi select</span></dd>
-    <script type="text/javascript">moveProgressBar('11.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">selected returns nil for none selected values in multi select</span></dd>
-    <script type="text/javascript">moveProgressBar('12.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set item text and find selected item and text for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('13.6');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set value and find selected item and value for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('14.5');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set and query option by text for single select</span></dd>
-    <script type="text/javascript">moveProgressBar('15.3');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set and query option by value for single select</span></dd>
-    <script type="text/javascript">moveProgressBar('16.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set by text multple items for multiselect selects each item</span></dd>
-    <script type="text/javascript">moveProgressBar('17.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set by value multple items for multiselect selects each item</span></dd>
-    <script type="text/javascript">moveProgressBar('17.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set items array for single select selects each in turn. selected is the last item in array</span></dd>
-    <script type="text/javascript">moveProgressBar('18.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set item after multiple items were set returns all values selected for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('19.6');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set using position for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('20.5');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set using position and item for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('21.3');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set using position for single select</span></dd>
-    <script type="text/javascript">moveProgressBar('22.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">clear removes selected attribute for all selected items in multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('23.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">clear removes selected attribute for item in single select list</span></dd>
-    <script type="text/javascript">moveProgressBar('23.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set_value selects value atribute text</span></dd>
-    <script type="text/javascript">moveProgressBar('24.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set_value for multiselect returns selected and selected_values</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_6">RadioGroup class access in watir browser</dt>
-    <script type="text/javascript">moveProgressBar('25.6');</script>
-    <dd class="spec passed"><span class="passed_spec_name">browser responds to radio_group</span></dd>
-    <script type="text/javascript">moveProgressBar('26.4');</script>
-    <dd class="spec passed"><span class="passed_spec_name">radio group needs :what value with implicit :how=name</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_7">RadioGroup class interface in watirloo</dt>
-    <script type="text/javascript">moveProgressBar('27.3');</script>
-    <dd class="spec passed"><span class="passed_spec_name">container radio_group method returns RadioGroup class</span></dd>
-    <script type="text/javascript">moveProgressBar('28.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">size or count returns how many radios in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('29.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">values returns value attributes text items as an array</span></dd>
-    <script type="text/javascript">moveProgressBar('29.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">selected_value returns internal option value for selected radio item in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('30.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set selects radio by position in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('31.6');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set selects radio by value in a group. selected returns value</span></dd>
-    <script type="text/javascript">moveProgressBar('32.4');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set position throws exception if number not within the range of group size</span></dd>
-    <script type="text/javascript">moveProgressBar('33.3');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set value throws exception if value not found in options</span></dd>
-    <script type="text/javascript">moveProgressBar('34.1');</script>
-    <dd class="spec passed"><span class="passed_spec_name">set throws exception if sybmol is used. it should accept Fixnum or String element only</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_8">text field wrapped in label tag without for attribute defined</dt>
-    <script type="text/javascript">moveProgressBar('35.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">parent of text_field should be Watir Element</span></dd>
-    <script type="text/javascript">moveProgressBar('35.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">parent tagName should be a LABEL</span></dd>
-    <script type="text/javascript">moveProgressBar('36.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">parent text returns text of label</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_9">label for text field not wrapped</dt>
-    <script type="text/javascript">moveProgressBar('37.6');</script>
-    <dd class="spec passed"><span class="passed_spec_name">text value of label</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_10">SelectList options as visible items and values as hidden to the user attributes</dt>
-    <script type="text/javascript">moveProgressBar('38.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">values of options by facename method</span></dd>
-    <script type="text/javascript">moveProgressBar('39.3');</script>
+    <script type="text/javascript">moveProgressBar('5.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">options with no value attribute</span></dd>
-    <script type="text/javascript">moveProgressBar('40.1');</script>
+    <script type="text/javascript">moveProgressBar('6.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">items method returns visible contents as array of text items</span></dd>
-    <script type="text/javascript">moveProgressBar('41.0');</script>
+    <script type="text/javascript">moveProgressBar('7.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">items returns visible text items as array</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_11">reflext :text_fields</dt>
-    <script type="text/javascript">moveProgressBar('41.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">text_fields.reflect each :text_field</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_12">reflect :radio_groups</dt>
-    <script type="text/javascript">moveProgressBar('42.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">reflects each radio group</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_13">reflect :checkbox_groups</dt>
-    <script type="text/javascript">moveProgressBar('43.5');</script>
-    <dd class="spec passed"><span class="passed_spec_name">reflects each checkbox_group</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_14">setting and getting values for individual checkboxes with value attributes in face definitions</dt>
-    <script type="text/javascript">moveProgressBar('44.4');</script>
+  <dt id="example_group_3">setting and getting values for individual checkboxes with value attributes in face definitions</dt>
+    <script type="text/javascript">moveProgressBar('8.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">semantic name accesses individual CheckBox</span></dd>
-    <script type="text/javascript">moveProgressBar('45.2');</script>
+    <script type="text/javascript">moveProgressBar('9.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">set individual checkbox does not set other checkboxes sharing the same name</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_15">Class client mixing interfaces from other modules</dt>
-    <script type="text/javascript">moveProgressBar('46.1');</script>
+  <dt id="example_group_4">SelectList selections</dt>
+    <script type="text/javascript">moveProgressBar('10.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">selected returns preselected item in single select</span></dd>
+    <script type="text/javascript">moveProgressBar('11.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">selected returns preselected value in single select</span></dd>
+    <script type="text/javascript">moveProgressBar('11.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">selected returns nil for none selected items in multi select</span></dd>
+    <script type="text/javascript">moveProgressBar('12.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">selected returns nil for none selected values in multi select</span></dd>
+    <script type="text/javascript">moveProgressBar('13.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set item text and find selected item and text for multiselect</span></dd>
+    <script type="text/javascript">moveProgressBar('14.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set value and find selected item and value for multiselect</span></dd>
+    <script type="text/javascript">moveProgressBar('15.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set and query option by text for single select</span></dd>
+    <script type="text/javascript">moveProgressBar('16.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set and query option by value for single select</span></dd>
+    <script type="text/javascript">moveProgressBar('17.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set by text multple items for multiselect selects each item</span></dd>
+    <script type="text/javascript">moveProgressBar('17.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set by value multple items for multiselect selects each item</span></dd>
+    <script type="text/javascript">moveProgressBar('18.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set items array for single select selects each in turn. selected is the last item in array</span></dd>
+    <script type="text/javascript">moveProgressBar('19.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set item after multiple items were set returns all values selected for multiselect</span></dd>
+    <script type="text/javascript">moveProgressBar('20.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set using position for multiselect</span></dd>
+    <script type="text/javascript">moveProgressBar('21.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set using position and item for multiselect</span></dd>
+    <script type="text/javascript">moveProgressBar('22.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set using position for single select</span></dd>
+    <script type="text/javascript">moveProgressBar('23.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">clear removes selected attribute for all selected items in multiselect</span></dd>
+    <script type="text/javascript">moveProgressBar('23.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">clear removes selected attribute for item in single select list</span></dd>
+    <script type="text/javascript">moveProgressBar('24.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set_value selects value atribute text</span></dd>
+    <script type="text/javascript">moveProgressBar('25.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set_value for multiselect returns selected and selected_values</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_5">reflext :text_fields</dt>
+    <script type="text/javascript">moveProgressBar('26.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">text_fields.reflect each :text_field</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_6">reflect :radio_groups</dt>
+    <script type="text/javascript">moveProgressBar('27.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">reflects each radio group</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_7">reflect :checkbox_groups</dt>
+    <script type="text/javascript">moveProgressBar('28.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">reflects each checkbox_group</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_8">RadioGroup class access in watir browser</dt>
+    <script type="text/javascript">moveProgressBar('29.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">browser responds to radio_group</span></dd>
+    <script type="text/javascript">moveProgressBar('29.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">radio group needs :what value with implicit :how=name</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_9">RadioGroup class interface in watirloo</dt>
+    <script type="text/javascript">moveProgressBar('30.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">container radio_group method returns RadioGroup class</span></dd>
+    <script type="text/javascript">moveProgressBar('31.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">size or count returns how many radios in a group</span></dd>
+    <script type="text/javascript">moveProgressBar('32.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">values returns value attributes text items as an array</span></dd>
+    <script type="text/javascript">moveProgressBar('33.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">selected_value returns internal option value for selected radio item in a group</span></dd>
+    <script type="text/javascript">moveProgressBar('34.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set selects radio by position in a group</span></dd>
+    <script type="text/javascript">moveProgressBar('35.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set selects radio by value in a group. selected returns value</span></dd>
+    <script type="text/javascript">moveProgressBar('35.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set position throws exception if number not within the range of group size</span></dd>
+    <script type="text/javascript">moveProgressBar('36.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set value throws exception if value not found in options</span></dd>
+    <script type="text/javascript">moveProgressBar('37.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">set throws exception if sybmol is used. it should accept Fixnum or String element only</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_10">Class client mixing interfaces from other modules</dt>
+    <script type="text/javascript">moveProgressBar('38.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">spray and scrape example</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_16">add faces text fields page objects</dt>
+  <dt id="example_group_11">Person Page interfaces defined by def wrappers and class definitions</dt>
+    <script type="text/javascript">moveProgressBar('39.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">calling face when there is wrapper method</span></dd>
+    <script type="text/javascript">moveProgressBar('40.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">calling interface when there is definition and no method</span></dd>
+    <script type="text/javascript">moveProgressBar('41.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">spray method by convetion has keys correspondig to interface names for watir elements</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_12">text field wrapped in label tag without for attribute defined</dt>
+    <script type="text/javascript">moveProgressBar('41.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">parent of text_field should be Watir Element</span></dd>
+    <script type="text/javascript">moveProgressBar('42.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">parent tagName should be a LABEL</span></dd>
+    <script type="text/javascript">moveProgressBar('43.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">parent text returns text of label</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_13">label for text field not wrapped</dt>
+    <script type="text/javascript">moveProgressBar('44.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">text value of label</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_14">Page class with face definitions</dt>
+    <script type="text/javascript">moveProgressBar('45.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">has face method as singleton</span></dd>
+    <script type="text/javascript">moveProgressBar('46.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">face class method defines method</span></dd>
     <script type="text/javascript">moveProgressBar('47.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">face returns a watir element text_field</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">face accepts args used by method body</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_15">Page faces included in rspec</dt>
     <script type="text/javascript">moveProgressBar('47.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">face name method and value returns current text</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">face defines a watir element access</span></dd>
     <script type="text/javascript">moveProgressBar('48.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">face name method and set enters value into field</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">faces with arguments</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_16">Page doc provides access to frame in frameset browser</dt>
     <script type="text/javascript">moveProgressBar('49.5');</script>
-    <dd class="spec passed"><span class="passed_spec_name">spray method matches keys as facenames and sets values to fields</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">face defines a watir element access</span></dd>
     <script type="text/javascript">moveProgressBar('50.4');</script>
-    <dd class="spec passed"><span class="passed_spec_name">scrape keys updates keys with values and returns datamap</span></dd>
+    <dd class="spec passed"><span class="passed_spec_name">faces with arguments</span></dd>
   </dl>
 </div>
 <div class="example_group">
@@ -553,7 +553,7 @@ a {
     <dd class="spec passed"><span class="passed_spec_name">the id should return select_list</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>199.031 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>205.094 seconds</strong>";</script>
 <script type="text/javascript">document.getElementById('totals').innerHTML = "117 examples, 0 failures";</script>
 </div>
 </div>

@@ -10,7 +10,7 @@ require 'watirloo/locker'
 require 'watirloo/page'
 
 module Watirloo
-  VERSION = '0.0.5' # Jul2009
+  VERSION = '0.0.6' # Jul2009
 
 end
 

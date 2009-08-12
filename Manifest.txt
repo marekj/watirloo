@@ -2,7 +2,6 @@ History.txt
 Manifest.txt
 README.rdoc
 Rakefile.rb
-log/locker.yml
 lib/watirloo.rb
 lib/watirloo/browsers.rb
 lib/watirloo/desktop.rb
@@ -12,6 +11,7 @@ lib/watirloo/extension/watir_ducktape.rb
 lib/watirloo/extension/watir_reflector.rb
 lib/watirloo/locker.rb
 lib/watirloo/page.rb
+log/locker.yml
 script/console
 script/console.cmd
 script/destroy
@@ -34,6 +34,7 @@ spec/firewatir/spec_results.txt
 spec/firewatir/spec_results_failed.txt
 spec/html/census.html
 spec/html/checkbox_group1.html
+spec/html/frameset1.html
 spec/html/labels.html
 spec/html/no_title.html
 spec/html/person.html

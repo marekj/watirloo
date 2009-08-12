@@ -53,23 +53,31 @@ module Watirloo
       # Declares Semantic Interface to the DOM elements on the Page (facade) binds a symbol to a block of code that accesses the DOM.
       # When the user speaks of filling in the last name the are usually entering data in a text_field
       # we can create a semantic accessor interface like this:
-      #   face(:last_name) {doc.text_field(:name, 'last_nm'}
+      #   face(:last_name) { text_field(:name, 'last_nm'}
       # what matters to the user is on the left (:last_name) and what matters to the programmer is on the right
       # The face method provides an adapter and insolates the tests form the changes in GUI.
-      #   face(:friendlyname) { watircode } where watircode is actuall way of accessing the element on the page.
+      # The patterns is: face(:friendlyname) { watir_element(how, whatcode }
+      # where watir_element is actuall way of accessing the element on the page. The page is implicit.
       # Each interface or face is an object of interest that we want to access by its interface name
       #   example:
       #
       #     class GoogleSearch
       #       include Watirloo::Page
-      #       face(:query)   { doc.text_field(:name, 'q') }
-      #       face(:search)  { doc.button(:name, 'btnG') }
+      #       face(:query)   { text_field(:name, 'q') }
+      #       face(:search)  { button(:name, 'btnG') }
       #     end
+      #
+      #     at run time calling
+      #     query.set "Ruby"
+      #     is equivalent to
+      #     page.text_field(:name, 'q').set "Ruby"
+      #     where page is the root of HTML document
       #
       def face(name, *args, &definition)
         module_eval do
           define_method(name) do |*args|
-            page.instance_exec(*args, &definition)
+            wobj = page.instance_exec(*args, &definition)
+            return wobj
           end
         end
       end
