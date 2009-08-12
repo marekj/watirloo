@@ -74,11 +74,8 @@ module Watirloo
       #     where page is the root of HTML document
       #
       def face(name, *args, &definition)
-        module_eval do
-          define_method(name) do |*args|
-            wobj = page.instance_exec(*args, &definition)
-            return wobj
-          end
+        define_method(name) do |*args|
+          page.instance_exec(*args, &definition)
         end
       end
 
@@ -114,16 +111,16 @@ module Watirloo
     alias set spray
 
 
-    def scrape(field_keys)
+    def scrape(facenames)
       data = {}
-      field_keys.each do |k|
-        watir_control = self.send("#{k}")
+      facenames.each do |facename|
+        watir_control = self.send facename
         method_name = case watir_control.class.to_s.split("::").last
         when "SelectList", "CheckboxGroup", "RadioGroup" then :selected
         else  
           :value
         end
-        data.update k => watir_control.send(method_name)
+        data.update facename => watir_control.send(method_name)
       end
       data
     end

@@ -172,6 +172,6 @@ Mystery input element
 - the label points to text_field
 - the id should return select_list
 
-Finished in 205.094 seconds
+Finished in 189.484 seconds
 
 117 examples, 0 failures
