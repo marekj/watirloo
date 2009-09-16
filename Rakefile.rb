@@ -1,4 +1,4 @@
-%w[rubygems rake rake/clean fileutils newgem rubigen spec].each { |f| require f }
+%w[rubygems rake rake/clean fileutils newgem rubigen spec hoe].each { |f| require f }
 require File.dirname(__FILE__) + '/lib/watirloo'
 
 # Generate all the Rake tasks
