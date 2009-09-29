@@ -48,7 +48,7 @@ module Watirloo
       def ie(key='default')
         begin
           Locker.browser key
-        rescue => e #XXX it's probably a bad practice to use exception for logic control
+        rescue #XXX it's probably a bad practice to use exception for logic control
           # TODO logger here
           ie = Watir::IE.start
           sleep 3

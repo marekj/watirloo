@@ -57,6 +57,7 @@ module Watirloo
 
       private
 
+      # TODO Change this all to Yaml::Store transaction mechanism. get rid of hand rolled stuff.
       def read_mapping
         if FileTest.exists?(locker)
           loaded = YAML::load_file(locker)
