@@ -2,6 +2,7 @@
 * make page container the receiver of all face methods implicitly
 * some cleanup
 * 117 examples in rspec
+* locker moved to temp. remove log/locker.yml mechanism
 
 == 0.0.5 22Jul2009
 * Page is a module and not a class. include Watirloo::Page in your testcase (rspec group or cucumber feature) to add view methods.
