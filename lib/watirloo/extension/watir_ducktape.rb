@@ -52,6 +52,17 @@ module Watir
         raise ::Watir::Exception::WatirException, "positon #{position} is out of range of size"
       end 
     end
+
+    # returns radio object in a group by position or by value
+    # in a collection. FIXME this is a hack
+    def [](accessor)
+      if accessor.kind_of? Fixnum
+        get_by_position(accessor+1)
+      elsif accessor.kind_of? String
+        get_by_value accessor
+      end
+    end
+
   end
   
   # for IE only
