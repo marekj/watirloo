@@ -26,6 +26,18 @@ describe "Page class with face definitions" do
     page.foo(2).should == 4
     page.foo("bla").should == "blabla"
   end
+
+  it "when optional args not supplied provide default arg in method" do
+    # this is a strange design decision. I want to provide method arg with default
+    # example def bar(x=0) 
+    Page1.face(:bar) do |*x|
+      x = x[0] || 0
+      x
+    end
+    page = Page1.new
+    page.bar.should == 0
+    page.bar(3).should == 3
+  end
 end
 
 describe "Page faces included in rspec" do
