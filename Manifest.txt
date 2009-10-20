@@ -11,7 +11,6 @@ lib/watirloo/extension/watir_ducktape.rb
 lib/watirloo/extension/watir_reflector.rb
 lib/watirloo/locker.rb
 lib/watirloo/page.rb
-log/locker.yml
 script/console
 script/console.cmd
 script/destroy

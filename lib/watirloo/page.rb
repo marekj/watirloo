@@ -21,8 +21,12 @@ module Watirloo
     # set browser instance for a client to use
     # --
     # the method is a bit better than browser= because setting browser in mehtods would probably
-    # require a call to self.browser=
-    def set_browser(browser)
+    # requires a call to:
+    #   self.browser= ie
+    # else
+    #   browser = ie
+    # may be an assignemnt to local variable
+    def browser=(browser)
       @browser = browser
     end
 
@@ -33,14 +37,20 @@ module Watirloo
     # in most circumstances page is a passthru to browser
     # example: if you have a frameset and you want to talk to a frame(:name, 'content') you can redefine
     # set the page
-    # set_page browser.frame(:name, 'content') see set_page
+    # self.page = browser.frame(:name, 'content') see set_page
     #
     def page
       @page ||= browser
     end
 
     # set the page base element as the receiver of all facename methods
-    def set_page(watir_element)
+    # one would have to make this type of call:
+    #   self.page = watir_element
+    #   else this:
+    #   page = watir_element
+    #   may be treated as assignemnt to local variable
+    #
+    def page=(watir_element)
       @page = watir_element
     end
 

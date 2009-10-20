@@ -73,7 +73,7 @@ describe "Page doc provides access to frame in frameset browser" do
 
   before do
     browser.goto testfile('frameset1.html')
-    set_page browser.frame(:name,'census_frame')
+    self.page = browser.frame(:name,'census_frame')
   end
 
 
