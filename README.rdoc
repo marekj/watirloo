@@ -67,7 +67,6 @@ Example:
 
 * watir = 1.6.2 
 * firewatir = 1.6.2 if you want to use Firefox
-* newgem
 * rspec gem if you want to run watirloo examples included
 
 == INSTALL:
@@ -87,7 +86,7 @@ Example:
 * provide examples for Cucumber
 * make specs run with firewatir
 
-== LICENSE:
+== LICENSE
 
 (The MIT License)
 
