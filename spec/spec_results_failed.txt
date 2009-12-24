@@ -1,0 +1,1 @@
+SelectList selections clear removes selected attribute for item in single select list

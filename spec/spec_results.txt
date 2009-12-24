@@ -1,95 +1,4 @@
 
-add faces text fields page objects
-- face returns a watir element text_field
-- face name method and value returns current text
-- face name method and set enters value into field
-- spray method matches keys as facenames and sets values to fields
-- scrape keys updates keys with values and returns datamap
-
-SelectList options as visible items and values as hidden to the user attributes
-- values of options by facename method
-- options with no value attribute
-- items method returns visible contents as array of text items
-- items returns visible text items as array
-
-setting and getting values for individual checkboxes with value attributes in face definitions
-- semantic name accesses individual CheckBox
-- set individual checkbox does not set other checkboxes sharing the same name
-
-SelectList selections
-- selected returns preselected item in single select
-- selected returns preselected value in single select
-- selected returns nil for none selected items in multi select
-- selected returns nil for none selected values in multi select
-- set item text and find selected item and text for multiselect
-- set value and find selected item and value for multiselect
-- set and query option by text for single select
-- set and query option by value for single select
-- set by text multple items for multiselect selects each item
-- set by value multple items for multiselect selects each item
-- set items array for single select selects each in turn. selected is the last item in array
-- set item after multiple items were set returns all values selected for multiselect
-- set using position for multiselect
-- set using position and item for multiselect
-- set using position for single select
-- clear removes selected attribute for all selected items in multiselect
-- clear removes selected attribute for item in single select list
-- set_value selects value atribute text
-- set_value for multiselect returns selected and selected_values
-
-reflext :text_fields
-- text_fields.reflect each :text_field
-
-reflect :radio_groups
-- reflects each radio group
-
-reflect :checkbox_groups
-- reflects each checkbox_group
-
-RadioGroup class access in watir browser
-- browser responds to radio_group
-- radio group needs :what value with implicit :how=name
-
-RadioGroup class interface in watirloo
-- container radio_group method returns RadioGroup class
-- size or count returns how many radios in a group
-- values returns value attributes text items as an array
-- selected_value returns internal option value for selected radio item in a group
-- set selects radio by position in a group
-- set selects radio by value in a group. selected returns value
-- set position throws exception if number not within the range of group size
-- set value throws exception if value not found in options
-- set throws exception if sybmol is used. it should accept Fixnum or String element only
-
-Class client mixing interfaces from other modules
-- spray and scrape example
-
-Person Page interfaces defined by def wrappers and class definitions
-- calling face when there is wrapper method
-- calling interface when there is definition and no method
-- spray method by convetion has keys correspondig to interface names for watir elements
-
-text field wrapped in label tag without for attribute defined
-- parent of text_field should be Watir Element
-- parent tagName should be a LABEL
-- parent text returns text of label
-
-label for text field not wrapped
-- text value of label
-
-Page class with face definitions
-- has face method as singleton
-- face class method defines method
-- face accepts args used by method body
-
-Page faces included in rspec
-- face defines a watir element access
-- faces with arguments
-
-Page doc provides access to frame in frameset browser
-- face defines a watir element access
-- faces with arguments
-
 Watirloo browser when no browsers on desktop nor in locker
 - should start a default new browser and load a testfile
 - should attach to a default browser with loaded testfile and return its title
@@ -102,14 +11,19 @@ Watirloo multiple browsers and threads
 - use locker to reattach to 5 browsers and load 5 diff pages at once
 - reattach and close all 5 browsers
 
-Locker
-- locker file does not exist. create it. mapping should return empty hash
-- clear should create locker file and save empty mapping
-- add stores ie.hwnd with friendly name and adds it to mapping
-- mapping holds what was added
-- remove deletes a key value record 
-- browser reattaches to named browser based on windows handle
-- browser attach to nonexisting windows behaves like IE.attach, it raises error
+setting and getting values for individual checkboxes with value attributes in face definitions
+- semantic name accesses individual CheckBox
+- set individual checkbox does not set other checkboxes sharing the same name
+
+checkbox_groups access for browser
+- browser responds to checkbox_group
+- returns group object and its values from the page
+- lenght returns integer count of groups
+- each iterator returns CheckboxGroup
+- each accesses the group and returns name
+- bracket access[] returns 1-based indexed group
+- if checkbox group does not exists it returns size 0 or name nil (or should it blow up? or respond to exists? method
+- return checkbox groups contained by the form element
 
 browser checkbox_group accesses a group of checkboxes sharing the same name on a page
 - browser responds to checkbox_group
@@ -147,6 +61,50 @@ Watirloo Desktop
 - close one should report 1 deletion and no additions, attempt to attach to deleted cause exception
 - close one and start new one should report one addition and one deletion
 
+Class client mixing interfaces from other modules
+- spray and scrape example
+
+Mystery input element
+- the id is text_field
+- the label points to text_field
+- the id should return select_list
+
+text field wrapped in label tag without for attribute defined
+- parent of text_field should be Watir Element
+- parent tagName should be a LABEL
+- parent text returns text of label
+
+label for text field not wrapped
+- text value of label
+
+Locker
+- locker file does not exist. create it. mapping should return empty hash
+- clear should create locker file and save empty mapping
+- add stores ie.hwnd with friendly name and adds it to mapping
+- mapping holds what was added
+- remove deletes a key value record 
+- browser reattaches to named browser based on windows handle
+- browser attach to nonexisting windows behaves like IE.attach, it raises error
+
+Page class with face definitions
+- has face method as singleton
+- face class method defines method
+- face accepts args used by method body
+- when optional args not supplied provide default arg in method
+
+Page faces included in rspec
+- face defines a watir element access
+- faces with arguments
+
+Page doc provides access to frame in frameset browser
+- face defines a watir element access
+- faces with arguments
+
+Person Page interfaces defined by def wrappers and class definitions
+- calling face when there is wrapper method
+- calling interface when there is definition and no method
+- spray method by convetion has keys correspondig to interface names for watir elements
+
 RadioGroup class access in watir browser
 - browser responds to radio_group
 - returns RadioGroups class
@@ -157,21 +115,61 @@ RadioGroup class access in watir browser
 - if radio group does not exists it returns size 0 or name nil (or should it blow up? or respond to exists? method
 - groups contained by a form element
 
-checkbox_groups access for browser
-- browser responds to checkbox_group
-- returns group object and its values from the page
-- lenght returns integer count of groups
-- each iterator returns CheckboxGroup
-- each accesses the group and returns name
-- bracket access[] returns 1-based indexed group
-- if checkbox group does not exists it returns size 0 or name nil (or should it blow up? or respond to exists? method
-- return checkbox groups contained by the form element
+RadioGroup class access in watir browser
+- browser responds to radio_group
+- radio group needs :what value with implicit :how=name
 
-Mystery input element
-- the id is text_field
-- the label points to text_field
-- the id should return select_list
+RadioGroup class interface in watirloo
+- container radio_group method returns RadioGroup class
+- size or count returns how many radios in a group
+- values returns value attributes text items as an array
+- selected_value returns internal option value for selected radio item in a group
+- set selects radio by position in a group
+- set selects radio by value in a group. selected returns value
+- set position throws exception if number not within the range of group size
+- set value throws exception if value not found in options
+- set throws exception if sybmol is used. it should accept Fixnum or String element only
 
-Finished in 189.484 seconds
+SelectList selections
+- selected returns preselected item in single select
+- selected returns preselected value in single select
+- selected returns nil for none selected items in multi select
+- selected returns nil for none selected values in multi select
+- set item text and find selected item and text for multiselect
+- set value and find selected item and value for multiselect
+- set and query option by text for single select
+- set and query option by value for single select
+- set by text multple items for multiselect selects each item
+- set by value multple items for multiselect selects each item
+- set items array for single select selects each in turn. selected is the last item in array
+- set item after multiple items were set returns all values selected for multiselect
+- set using position for multiselect
+- set using position and item for multiselect
+- set using position for single select
+- clear removes selected attribute for all selected items in multiselect
+- clear removes selected attribute for item in single select list (FAILED - 1)
+- set_value selects value atribute text
+- set_value for multiselect returns selected and selected_values
 
-117 examples, 0 failures
+SelectList options as visible items and values as hidden to the user attributes
+- values of options by facename method
+- options with no value attribute
+- items method returns visible contents as array of text items
+- items returns visible text items as array
+
+add faces text fields page objects
+- face returns a watir element text_field
+- face name method and value returns current text
+- face name method and set enters value into field
+- spray method matches keys as facenames and sets values to fields
+- scrape keys updates keys with values and returns datamap
+
+1)
+'SelectList selections clear removes selected attribute for item in single select list' FAILED
+expected not: == "F",
+         got:    "F"
+./spec/select_lists_spec.rb:134:
+
+Finished in 480.021 seconds
+
+115 examples, 1 failure
