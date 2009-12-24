@@ -34,7 +34,7 @@ module Watirloo
       # Closes all the browsers on the desktop.
       # Creats a known clear slate where no browsers exist
       def clear
-        Watir::IE.each {|ie| ie.close}
+        browsers.each {|ie| ie.close; sleep 3}
         sleep 3
         raise Exception, "Failed to clear all the browsers from the desktop" unless browsers.empty?
       end
