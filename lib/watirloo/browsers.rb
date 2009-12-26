@@ -58,7 +58,7 @@ module Watirloo
       end
 
       def ff
-        require 'watirloo/firewatir_ducktape'
+        require 'watirloo/extension/firewatir_ducktape'
         # this is a cruch for quick work with pages.
         # in reality you want to create a browser and pass it as argument to initialize Page class
         begin
