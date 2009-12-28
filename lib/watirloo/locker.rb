@@ -1,5 +1,26 @@
+
 module Watirloo
 
+  require 'singleton'
+
+  class FireLocker
+    include Singleton
+    
+    def browser
+      @firefox ||= create_firefox
+    end
+    
+    def clear
+      @firefox = nil
+    end
+
+    private
+    def create_firefox
+      @firefox = FireWatir::Firefox.attach :url, /.*/
+    rescue #Watir::Exception::UnableToStartJSShException
+      @firefox = FireWatir::Firefox.new 'about:blank'
+    end
+  end
 
   # manages references to browsers we care about to run tests agains.
   # Saves references to window handles internall to yaml file so we can reuse the browser for tests by reattaching to it between tests.

@@ -53,7 +53,7 @@ module Watirloo
           ie = Watir::IE.start
           sleep 3
           Locker.add(ie, key)
-          ie #return newly created browser for the test session and store it for laterusage
+          ie #return newly created browser for the test session and store it for later usage
         end
       end
 
@@ -62,9 +62,11 @@ module Watirloo
         # this is a cruch for quick work with pages.
         # in reality you want to create a browser and pass it as argument to initialize Page class
         begin
-          FireWatir::Firefox.attach #this attach is a crutch
+          fflock = FireLocker.instance
+          fflock.browser
         rescue
           puts 'got to start browser ff dude'
+          nil
         end
 
       end
