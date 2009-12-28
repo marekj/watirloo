@@ -10,7 +10,6 @@ require 'watirloo/locker'
 require 'watirloo/page'
 
 module Watirloo
-  VERSION = '0.0.6' # Jul2009
-
+  VERSION = File.exist?('VERSION') ? (File.read('VERSION')).strip : "VERSION undefined"
 end
 
