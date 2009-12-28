@@ -1,0 +1,14 @@
+spec/checkboxes_value_spec.rb
+spec/checkbox_group_spec.rb
+spec/face_mixing_spec.rb
+spec/person_def_wrappers_spec.rb
+spec/radio_group_spec.rb
+spec/select_lists_spec.rb
+spec/select_list_options_spec.rb
+spec/text_fields_spec.rb
+--color
+--require spec/spec_helper_ff.rb
+--format specdoc
+--format specdoc:spec/firewatir/spec_results.txt
+--format failing_examples:spec/firewatir/spec_results_failed.txt
+--format html:spec/firewatir/spec_results.html

@@ -41,21 +41,6 @@ Spec::Rake::SpecTask.new do |spec|
   ]
 end
 
-# FIXME fix the spec FileList to only include those that execut for firefox. use taglog lib
-desc "spec with ff browser"
-Spec::Rake::SpecTask.new(:spec_ff) do |t|
-  t.spec_files = FileList['spec/*_spec.rb']
-  t.spec_opts = [
-    "--color",
-    "--require spec/spec_helper_ff.rb",
-    "--format specdoc",
-    "--format specdoc:spec/firewatir/spec_results.txt",
-    "--format failing_examples:spec/firewatir/spec_results_failed.txt",
-    "--format html:spec/firewatir/spec_results.html",
-    "--loadby mtime" ]
-end
-
-#task :default => :spec
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
@@ -65,4 +50,33 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "watirloo #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+# FireFox
+namespace :ff do
+ 
+  # FIXME fix the spec FileList to only include those that execut for firefox. use taglog lib
+  desc "spec with ff browser"
+  Spec::Rake::SpecTask.new do |spec|
+    spec.spec_files = ['spec/page_spec.rb']
+    #FIXME bug in SpecTask? when [] or spec_files omitted then it reads the default **/*_spec.rb list of files
+    #if I include at least one spec files above the rest of the files are added from spec.opts
+    spec.spec_opts = ["--options spec/firewatir/spec.opts"]
+  end
+
+  desc "tasklist firefox.exe"
+  task :tasklist do
+    sh "tasklist /FI \"IMAGENAME eq firefox.exe\""
+  end
+
+  desc "taskkill firefox.exe tree"
+  task :taskkill do
+    sh "taskkill /f /t /im firefox.exe"
+  end
+
+  desc "start firefox with jssh"
+  task :start do
+    require 'firewatir'
+    FireWatir::Firefox.new
+  end
 end
