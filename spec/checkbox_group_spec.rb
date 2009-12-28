@@ -3,14 +3,14 @@ require File.dirname(__FILE__) + '/spec_helper'
 describe 'browser checkbox_group accesses a group of checkboxes sharing the same name on a page' do
 
   before :each do
-    @browser = Watirloo::browser
+    @browser = Watirloo.browser
     @browser.goto testfile('checkbox_group1.html')
   end
-  
+
   it 'browser responds to checkbox_group' do
     @browser.should respond_to(:checkbox_group)
   end
-  
+
   it 'access by name as default returns CheckboxGroup' do
     if @browser.kind_of?(FireWatir::Firefox)
       @browser.checkbox_group('pets').should be_kind_of(FireWatir::CheckboxGroup)
@@ -20,9 +20,9 @@ describe 'browser checkbox_group accesses a group of checkboxes sharing the same
   end
 
   it 'size retuns checkboxes as items count in a group' do
-    @browser.checkbox_group(:name, 'pets').size.should == 5
+    @browser.checkbox_group('pets').size.should == 5
   end
-  
+
   it 'values returns array of value attributes for each checkbox in a group' do
     @browser.checkbox_group('pets').values.should == ["cat", "dog", "zook", "zebra", "wumpa"]
   end
@@ -32,7 +32,7 @@ end
 describe "checkbox_group values when no checkbox is checked in a group" do
 
   before :each do
-    @browser = Watirloo::browser
+    @browser = Watirloo.browser
     @browser.goto testfile('checkbox_group1.html')
   end
 
@@ -50,13 +50,13 @@ describe "checkbox_group values when no checkbox is checked in a group" do
   it "set? should return false when no checkbox is checked in a group" do
     @browser.checkbox_group("pets").should_not be_set
   end
-    
+
 end
 
 describe "checkbox_group values when set string selecs one item only" do
 
   before :each do
-    @browser = Watirloo::browser
+    @browser = Watirloo.browser
     @browser.goto testfile('checkbox_group1.html')
   end
 
@@ -87,7 +87,7 @@ end
 describe "checkbox_group set array of strings selects multiple values in a group" do
 
   before :each do
-    @browser = Watirloo::browser
+    @browser = Watirloo.browser
     @browser.goto testfile('checkbox_group1.html')
   end
 
