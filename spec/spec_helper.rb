@@ -18,3 +18,7 @@ end
 
 include WatirlooSpecHelper
 
+#Make it run on Firefox
+#Watir::Browser.default='firefox'
+#Watir::Browser.new
+#Watirloo::Browsers.target = :firefox
