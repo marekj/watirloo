@@ -1,80 +1,12 @@
-gem 'firewatir', '>=1.6.2' # dependency
 require 'firewatir'
 
 module FireWatir
-  
-  # duck punch and ducktape Firefox for Watirloo needs
-  # some of it is cosmetic surgery and some new methods with intention of
-  # sending a patch to Watir maintainers
-  class Firefox
     
-    # attach to the existing Firefox that was already started with JSSH option.
-    # this is a hack for Watirloo. it only attaches to the latest firefox.
-    # it assumes there is only one instance of FF window open on the desktop
-    def self.attach
-      Firefox.new :attach => true
-    end
-    
-    # add option key :attach as a hack
-    # :attach => true to attach to topmost window in getWindows().lenght-1
-    # split up initialize to conditionally start FireFox
-    def initialize(options = {})
-      _start_firefox(options) unless options[:attach]
-      set_defaults()
-      get_window_number()
-      set_browser_document()
-    end
-    
-    # refactor initialize method to move all starting of FF into its own method
-    def _start_firefox(options)
-      if(options.kind_of?(Integer))
-        options = {:waitTime => options}
-      end
-      
-      if(options[:profile])
-        profile_opt = "-no-remote -P #{options[:profile]}"
-      else
-        profile_opt = ""
-      end
-      
-      waitTime = options[:waitTime] || 2
-      
-      case RUBY_PLATFORM 
-      when /mswin/
-        # Get the path to Firefox.exe using Registry.
-        require 'win32/registry.rb'
-        path_to_bin = ""
-        Win32::Registry::HKEY_LOCAL_MACHINE.open('SOFTWARE\Mozilla\Mozilla Firefox') do |reg|
-          keys = reg.keys
-          reg1 = Win32::Registry::HKEY_LOCAL_MACHINE.open("SOFTWARE\\Mozilla\\Mozilla Firefox\\#{keys[0]}\\Main")
-          reg1.each do |subkey, type, data|
-            if(subkey =~ /pathtoexe/i)
-              path_to_bin = data
-            end
-          end
-        end
-        
-      when /linux/i
-        path_to_bin = `which firefox`.strip
-      when /darwin/i
-        path_to_bin = '/Applications/Firefox.app/Contents/MacOS/firefox'
-      when /java/
-        raise "Not implemented: Create a browser finder in JRuby"
-      end
-      
-      @t = Thread.new { system("#{path_to_bin} -jssh #{profile_opt}")}   
-      sleep waitTime
-      
-    end
-    private :_start_firefox
-
-  end
-
   class SelectList
     
     include Watir::SelectListCommonWatir
-    
-        # accepts one text item or array of text items. if array then sets one after another. 
+
+    # accepts one text item or array of text items. if array then sets one after another. 
     # For single select lists the last item in array wins
     # 
     # examples
@@ -83,15 +15,35 @@ module FireWatir
     #       this is a single select list box it will set each value in turn
     #   select_list set 1 # => set the first option in a list
     #   select_list.set [1,3,5] => set the first, third and fith options
-    def set(item)
+    def select( item )
       _set(:text, item)
     end
 
     # set item by the option value attribute. if array then set one after anohter.
     # see examples in set method
-    def set_value(value)
+    def select_value( value )
       _set(:value, value)
     end
+
+    # set :value or :text
+    def _set(how, what)
+      if what.kind_of? Array
+        what.each { |item| _set(how,item)} # call self with individual item
+      else
+        if what.kind_of? Fixnum # if by position then translate to set by text
+          if (0..items.size).member? what
+            _set :text, items[what-1] #call self with found item
+          else
+            raise ::Watir::Exception::WatirException, "number #{item} is out of range of item count"
+          end
+        else
+          select_items_in_select_list(how, what)  #finally as :value or :text
+        end
+      end
+
+    end
+    alias set select
+    alias set_value select_value
     
     # returns array of value attributes
     # each option usually has a value attribute 
@@ -146,7 +98,11 @@ module FireWatir
         end
       end
     end
-    
+
+    def name
+      @name
+    end
+
     # which values are selected?
     def selected_values
       values = []
@@ -156,7 +112,43 @@ module FireWatir
       return values
     end
   end
-  
+
+  class CheckboxGroups < ElementCollections
+    #   def element_class; CheckboxGroup; end
+
+    def initialize(container)
+      @container = container
+      elements = locate_elements
+      @element_objects = []
+      # for each unique name create a checkbox_group
+      elements.each do |name|
+        @element_objects << CheckboxGroup.new(container, name)
+      end
+    end
+
+    def length
+      @element_objects.size
+    end
+
+    # return array of unique names for checkboxes in container
+    def locate_elements
+      names = []
+      @container.checkboxes.each do |cb|
+        names << cb.name
+      end
+      names.uniq #non repeating names
+    end
+
+
+    # allows access to a specific item in the collection. 1-based index
+    def [](n)
+      raise "collection has 1- based index. can not use 0" if n == 0
+      raise "number #{n} out of bounds for #{length} elements collection" if n > length
+      @element_objects[n-1]
+    end
+    
+  end
+
   class RadioGroup
     
     include RadioCheckGroup
@@ -190,5 +182,6 @@ module FireWatir
     def checkbox_group(name)
       CheckboxGroup.new(self, name)
     end
+    
   end
 end

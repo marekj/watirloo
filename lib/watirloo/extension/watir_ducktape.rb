@@ -1,4 +1,3 @@
-gem 'watir', '>=1.6.2'
 require 'watir'
 require 'watir/ie'
 
