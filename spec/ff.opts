@@ -9,6 +9,6 @@ spec/text_fields_spec.rb
 --color
 --require spec/spec_helper_ff.rb
 --format specdoc
---format specdoc:spec/firewatir/spec_results.txt
---format failing_examples:spec/firewatir/spec_results_failed.txt
---format html:spec/firewatir/spec_results.html
+--format specdoc:spec/results/ff.txt
+--format failing_examples:spec/results/ff-failed.txt
+--format html:spec/results/ff.html

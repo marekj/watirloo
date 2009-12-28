@@ -1,3 +1,0 @@
-text field wrapped in label tag without for attribute defined parent of text_field should be Watir Element
-text field wrapped in label tag without for attribute defined parent tagName should be a LABEL
-text field wrapped in label tag without for attribute defined parent text returns text of label

@@ -31,9 +31,9 @@ Spec::Rake::SpecTask.new do |spec|
     "--color",
     "--require spec/spec_helper_runner.rb", # slow execution expected. closes all browsers on desktop before :all
     "--format specdoc",
-    "--format specdoc:spec/spec_results.txt",
-    "--format failing_examples:spec/spec_results_failed.txt",
-    "--format html:spec/spec_results.html",
+    "--format specdoc:spec/results/ie.txt",
+    "--format failing_examples:spec/results/ie-failed.txt",
+    "--format html:spec/results/ie.html",
     #"--diff",
     "--loadby mtime",
     #"--dry-run", # will overwrite any previous spec_results
@@ -61,7 +61,7 @@ namespace :ff do
     spec.spec_files = ['spec/page_spec.rb']
     #FIXME bug in SpecTask? when [] or spec_files omitted then it reads the default **/*_spec.rb list of files
     #if I include at least one spec files above the rest of the files are added from spec.opts
-    spec.spec_opts = ["--options spec/firewatir/spec.opts"]
+    spec.spec_opts = ["--options spec/ff.opts"]
   end
 
   desc "tasklist firefox.exe"
