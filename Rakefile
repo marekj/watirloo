@@ -80,3 +80,13 @@ namespace :ff do
     FireWatir::Firefox.new
   end
 end
+
+desc "start irb and load current lib/watirloo"
+task :console do
+  puts "START IRB for current project"
+  this_dir = File.expand_path(File.join(File.dirname(__FILE__)))
+  this_irbrc = File.join(this_dir, '_irbrc')
+  this_lib = File.join(this_dir, 'lib')
+  sh "set IRBRC=#{this_irbrc} && irb -I #{this_lib}" #read ~/.irbrc for other defaults
+  # require 'watirloo' once in irb session
+end

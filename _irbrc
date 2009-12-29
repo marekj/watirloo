@@ -1,0 +1,37 @@
+# WINDOWS XP
+puts "LOADING custom IRB console for current watirloo project"
+require 'irb/completion'
+require 'pp'
+require 'irb/ext/save-history'
+
+IRB.conf[:SAVE_HISTORY]=1000
+IRB.conf[:HISTORY_FILE]="./_irb_history"
+IRB.conf[:AUTO_INDENT]=true
+IRB.conf[:PROMPT_MODE]=:SIMPLE
+IRB.conf[:USE_READLINE]=true
+
+class Object
+  # Return a list of methods defined locally for a particular object.  Useful
+  # for seeing what it does whilst losing all the guff that's implemented
+  # by its parents (eg Object).
+  def local_methods(obj = self)
+    (obj.methods - obj.class.superclass.instance_methods).sort
+  end
+  def lm
+	local_methods
+  end
+end
+
+alias x exit
+
+require 'watirloo' #should load the one in lib in current project
+
+def _ie
+  Watirloo::Browsers.target=:ie
+  Watirloo::browser
+end
+
+def _ff
+  Watirloo::Browsers.target = :firefox
+  Watirloo::browser
+end
