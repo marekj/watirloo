@@ -61,14 +61,16 @@ module Watirloo
         require 'watirloo/extension/firewatir_ducktape'
         # this is a cruch for quick work with pages.
         # in reality you want to create a browser and pass it as argument to initialize Page class
+        floc = FireLocker.instance
         begin
-          fflock = FireLocker.instance
-          fflock.browser
+          floc.browser.url
+          floc.browser
         rescue
-          puts 'got to start browser ff dude'
-          nil
+          floc.clear
+          ::FireWatir::Firefox.new
+          sleep 2
+          floc.browser
         end
-
       end
     end
   end

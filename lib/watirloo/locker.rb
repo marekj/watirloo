@@ -5,20 +5,14 @@ module Watirloo
 
   class FireLocker
     include Singleton
-    
+    attr_accessor :browser
+    # reuse browser previously attached to.
+    # ISSUE: if browser is closed we are stuck holding reference to non existing browser
     def browser
-      @firefox ||= create_firefox
+      @firefox ||= ::FireWatir::Firefox.attach(:url, /.*/)
     end
-    
     def clear
       @firefox = nil
-    end
-
-    private
-    def create_firefox
-      @firefox = FireWatir::Firefox.attach :url, /.*/
-    rescue #Watir::Exception::UnableToStartJSShException
-      @firefox = FireWatir::Firefox.new 'about:blank'
     end
   end
 
