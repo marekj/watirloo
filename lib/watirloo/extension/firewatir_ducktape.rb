@@ -142,8 +142,6 @@ module FireWatir
 
     # allows access to a specific item in the collection. 1-based index
     def [](n)
-      raise "collection has 1- based index. can not use 0" if n == 0
-      raise "number #{n} out of bounds for #{length} elements collection" if n > length
       @element_objects[n-1]
     end
     

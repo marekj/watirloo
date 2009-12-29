@@ -42,14 +42,6 @@ describe 'browser checkbox_groups method' do
     @browser.checkbox_groups[3].name.should == 'petsa'
   end
 
-  it '[n] raise error when n greater than length' do
-    lambda {@browser.checkbox_groups[6]}.should raise_error
-  end
-
-  it '[0] raise error for this 1-index based collection' do
-    lambda {@browser.checkbox_groups[0]}.should raise_error
-  end
-
   it 'page should have 2 checkbox groups in form 2' do
     @browser.form(:index, 2).checkbox_groups.length.should == 2
     names =[]
