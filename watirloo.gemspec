@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{watirloo}
-  s.version = "0.0.7"
+  s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["marekj"]
-  s.date = %q{2009-12-24}
+  s.date = %q{2009-12-30}
   s.description = %q{Helps you write tests in the language of the customer's domain}
   s.email = %q{marekj.com@gmail.com}
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "_irbrc",
      "lib/watirloo.rb",
      "lib/watirloo/browsers.rb",
      "lib/watirloo/desktop.rb",
@@ -31,6 +32,7 @@ Gem::Specification.new do |s|
      "lib/watirloo/extension/watir_reflector.rb",
      "lib/watirloo/locker.rb",
      "lib/watirloo/page.rb",
+     "lib/watirloo/screenshot.rb",
      "spec/browser_spec.rb",
      "spec/browser_threads_spec.rb",
      "spec/checkbox_group_spec.rb",
@@ -40,10 +42,7 @@ Gem::Specification.new do |s|
      "spec/extra/browser_events_spec.rb",
      "spec/extra/page_objects_metrics.rb",
      "spec/face_mixing_spec.rb",
-     "spec/firewatir/attach_instance_test.rb",
-     "spec/firewatir/spec_results.html",
-     "spec/firewatir/spec_results.txt",
-     "spec/firewatir/spec_results_failed.txt",
+     "spec/ff.opts",
      "spec/html/census.html",
      "spec/html/checkbox_group1.html",
      "spec/html/frameset1.html",
@@ -53,21 +52,23 @@ Gem::Specification.new do |s|
      "spec/html/radio_group.html",
      "spec/html/select_lists.html",
      "spec/input_element_spec.rb",
-     "spec/label_spec.rb",
      "spec/locker_spec.rb",
      "spec/page_spec.rb",
      "spec/person_def_wrappers_spec.rb",
      "spec/radio_group_spec.rb",
      "spec/radio_groups_spec.rb",
      "spec/reflector_spec.rb",
+     "spec/results/ff-failed.txt",
+     "spec/results/ff.html",
+     "spec/results/ff.txt",
+     "spec/results/ie-failed.txt",
+     "spec/results/ie.html",
+     "spec/results/ie.txt",
      "spec/select_list_options_spec.rb",
      "spec/select_lists_spec.rb",
      "spec/spec_helper.rb",
      "spec/spec_helper_ff.rb",
      "spec/spec_helper_runner.rb",
-     "spec/spec_results.html",
-     "spec/spec_results.txt",
-     "spec/spec_results_failed.txt",
      "spec/text_fields_spec.rb",
      "watirloo.gemspec"
   ]
@@ -86,9 +87,7 @@ Gem::Specification.new do |s|
      "spec/extra/browser_events_spec.rb",
      "spec/extra/page_objects_metrics.rb",
      "spec/face_mixing_spec.rb",
-     "spec/firewatir/attach_instance_test.rb",
      "spec/input_element_spec.rb",
-     "spec/label_spec.rb",
      "spec/locker_spec.rb",
      "spec/page_spec.rb",
      "spec/person_def_wrappers_spec.rb",
