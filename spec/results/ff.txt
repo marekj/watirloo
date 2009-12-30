@@ -102,6 +102,6 @@ add faces text fields page objects
 - spray method matches keys as facenames and sets values to fields
 - scrape keys updates keys with values and returns datamap
 
-Finished in 10.375 seconds
+Finished in 12.219 seconds
 
 71 examples, 0 failures

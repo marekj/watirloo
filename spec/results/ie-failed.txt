@@ -1,3 +1,1 @@
 SelectList selections clear removes selected attribute for item in single select list
-browser checkbox_groups method [n] raise error when n greater than length
-browser checkbox_groups method [0] raise error for this 1-index based collection

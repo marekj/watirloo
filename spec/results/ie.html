@@ -181,42 +181,61 @@ a {
 <div class="results">
 <div class="example_group">
   <dl>
-  <dt id="example_group_1">SelectList selections</dt>
-    <script type="text/javascript">moveProgressBar('0.8');</script>
+  <dt id="example_group_1">browser checkbox_groups method</dt>
+    <script type="text/javascript">moveProgressBar('0.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">browser responds to checkbox_groups method</span></dd>
+    <script type="text/javascript">moveProgressBar('1.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">returns CheckboxGroups object</span></dd>
+    <script type="text/javascript">moveProgressBar('2.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">lenght returns integer count of groups</span></dd>
+    <script type="text/javascript">moveProgressBar('3.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">each iterator returns CheckboxGroup object 4 times</span></dd>
+    <script type="text/javascript">moveProgressBar('4.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">each accesses the group and returns name</span></dd>
+    <script type="text/javascript">moveProgressBar('5.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">bracket access[] returns 1-based indexed group</span></dd>
+    <script type="text/javascript">moveProgressBar('6.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">page should have 2 checkbox groups in form 2</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_2">SelectList selections</dt>
+    <script type="text/javascript">moveProgressBar('7.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected returns preselected item in single select</span></dd>
-    <script type="text/javascript">moveProgressBar('1.7');</script>
+    <script type="text/javascript">moveProgressBar('8.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected returns preselected value in single select</span></dd>
-    <script type="text/javascript">moveProgressBar('2.6');</script>
+    <script type="text/javascript">moveProgressBar('9.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected returns nil for none selected items in multi select</span></dd>
-    <script type="text/javascript">moveProgressBar('3.5');</script>
+    <script type="text/javascript">moveProgressBar('10.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected returns nil for none selected values in multi select</span></dd>
-    <script type="text/javascript">moveProgressBar('4.4');</script>
+    <script type="text/javascript">moveProgressBar('10.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">set item text and find selected item and text for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('5.3');</script>
+    <script type="text/javascript">moveProgressBar('11.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">set value and find selected item and value for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('6.2');</script>
+    <script type="text/javascript">moveProgressBar('12.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">set and query option by text for single select</span></dd>
-    <script type="text/javascript">moveProgressBar('7.1');</script>
+    <script type="text/javascript">moveProgressBar('13.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">set and query option by value for single select</span></dd>
-    <script type="text/javascript">moveProgressBar('8.0');</script>
+    <script type="text/javascript">moveProgressBar('14.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">set by text multple items for multiselect selects each item</span></dd>
-    <script type="text/javascript">moveProgressBar('8.9');</script>
+    <script type="text/javascript">moveProgressBar('15.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">set by value multple items for multiselect selects each item</span></dd>
-    <script type="text/javascript">moveProgressBar('9.8');</script>
+    <script type="text/javascript">moveProgressBar('16.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">set items array for single select selects each in turn. selected is the last item in array</span></dd>
-    <script type="text/javascript">moveProgressBar('10.7');</script>
+    <script type="text/javascript">moveProgressBar('17.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">set item after multiple items were set returns all values selected for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('11.6');</script>
+    <script type="text/javascript">moveProgressBar('18.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">set using position for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('12.5');</script>
+    <script type="text/javascript">moveProgressBar('19.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">set using position and item for multiselect</span></dd>
-    <script type="text/javascript">moveProgressBar('13.3');</script>
+    <script type="text/javascript">moveProgressBar('20.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">set using position for single select</span></dd>
-    <script type="text/javascript">moveProgressBar('14.2');</script>
+    <script type="text/javascript">moveProgressBar('20.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">clear removes selected attribute for all selected items in multiselect</span></dd>
     <script type="text/javascript">makeRed('rspec-header');</script>
-    <script type="text/javascript">makeRed('example_group_1');</script>
-    <script type="text/javascript">moveProgressBar('15.1');</script>
+    <script type="text/javascript">makeRed('example_group_2');</script>
+    <script type="text/javascript">moveProgressBar('21.8');</script>
     <dd class="spec failed">
       <span class="failed_spec_name">clear removes selected attribute for item in single select list</span>
       <div class="failure" id="failure_1">
@@ -230,331 +249,287 @@ a {
 <span class="linenum">136</span>  </code></pre>
       </div>
     </dd>
-    <script type="text/javascript">moveProgressBar('16.0');</script>
+    <script type="text/javascript">moveProgressBar('22.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">set_value selects value atribute text</span></dd>
-    <script type="text/javascript">moveProgressBar('16.9');</script>
+    <script type="text/javascript">moveProgressBar('23.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">set_value for multiselect returns selected and selected_values</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_2">browser checkbox_groups method</dt>
-    <script type="text/javascript">moveProgressBar('17.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">browser responds to checkbox_groups method</span></dd>
-    <script type="text/javascript">moveProgressBar('18.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">returns CheckboxGroups object</span></dd>
-    <script type="text/javascript">moveProgressBar('19.6');</script>
-    <dd class="spec passed"><span class="passed_spec_name">lenght returns integer count of groups</span></dd>
-    <script type="text/javascript">moveProgressBar('20.5');</script>
-    <dd class="spec passed"><span class="passed_spec_name">each iterator returns CheckboxGroup object 4 times</span></dd>
-    <script type="text/javascript">moveProgressBar('21.4');</script>
-    <dd class="spec passed"><span class="passed_spec_name">each accesses the group and returns name</span></dd>
-    <script type="text/javascript">moveProgressBar('22.3');</script>
-    <dd class="spec passed"><span class="passed_spec_name">bracket access[] returns 1-based indexed group</span></dd>
-    <script type="text/javascript">makeRed('example_group_2');</script>
-    <script type="text/javascript">moveProgressBar('23.2');</script>
-    <dd class="spec failed">
-      <span class="failed_spec_name">[n] raise error when n greater than length</span>
-      <div class="failure" id="failure_2">
-        <div class="message"><pre>expected Exception but nothing was raised</pre></div>
-        <div class="backtrace"><pre>./spec/checkbox_groups_spec.rb:46:</pre></div>
-    <pre class="ruby"><code><span class="linenum">44</span>
-<span class="linenum">45</span>  <span class="ident">it</span> <span class="punct">'</span><span class="string">[n] raise error when n greater than length</span><span class="punct">'</span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">46</span>    <span class="ident">lambda</span> <span class="punct">{</span><span class="attribute">@browser</span><span class="punct">.</span><span class="ident">checkbox_groups</span><span class="punct">[</span><span class="number">6</span><span class="punct">]}.</span><span class="ident">should</span> <span class="ident">raise_error</span></span>
-<span class="linenum">47</span>  <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
-    <script type="text/javascript">moveProgressBar('24.1');</script>
-    <dd class="spec failed">
-      <span class="failed_spec_name">[0] raise error for this 1-index based collection</span>
-      <div class="failure" id="failure_3">
-        <div class="message"><pre>expected Exception but nothing was raised</pre></div>
-        <div class="backtrace"><pre>./spec/checkbox_groups_spec.rb:50:</pre></div>
-    <pre class="ruby"><code><span class="linenum">48</span>
-<span class="linenum">49</span>  <span class="ident">it</span> <span class="punct">'</span><span class="string">[0] raise error for this 1-index based collection</span><span class="punct">'</span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">50</span>    <span class="ident">lambda</span> <span class="punct">{</span><span class="attribute">@browser</span><span class="punct">.</span><span class="ident">checkbox_groups</span><span class="punct">[</span><span class="number">0</span><span class="punct">]}.</span><span class="ident">should</span> <span class="ident">raise_error</span></span>
-<span class="linenum">51</span>  <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
-    <script type="text/javascript">moveProgressBar('25.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">page should have 2 checkbox groups in form 2</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
   <dt id="example_group_3">browser checkbox_group accesses a group of checkboxes sharing the same name on a page</dt>
-    <script type="text/javascript">moveProgressBar('25.8');</script>
+    <script type="text/javascript">moveProgressBar('24.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">browser responds to checkbox_group</span></dd>
-    <script type="text/javascript">moveProgressBar('26.7');</script>
+    <script type="text/javascript">moveProgressBar('25.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">access by name as default returns CheckboxGroup</span></dd>
-    <script type="text/javascript">moveProgressBar('27.6');</script>
+    <script type="text/javascript">moveProgressBar('26.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">size retuns checkboxes as items count in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('28.5');</script>
+    <script type="text/javascript">moveProgressBar('27.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">values returns array of value attributes for each checkbox in a group</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_4">checkbox_group values when no checkbox is checked in a group</dt>
-    <script type="text/javascript">moveProgressBar('29.4');</script>
+    <script type="text/javascript">moveProgressBar('28.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected should return nil</span></dd>
-    <script type="text/javascript">moveProgressBar('30.3');</script>
+    <script type="text/javascript">moveProgressBar('29.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected_value should return nil</span></dd>
-    <script type="text/javascript">moveProgressBar('31.2');</script>
+    <script type="text/javascript">moveProgressBar('30.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected_values should return empty array</span></dd>
-    <script type="text/javascript">moveProgressBar('32.1');</script>
+    <script type="text/javascript">moveProgressBar('30.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">set? should return false when no checkbox is checked in a group</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_5">checkbox_group values when set string selecs one item only</dt>
-    <script type="text/javascript">moveProgressBar('33.0');</script>
+    <script type="text/javascript">moveProgressBar('31.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected should return the string used to select it</span></dd>
-    <script type="text/javascript">moveProgressBar('33.9');</script>
+    <script type="text/javascript">moveProgressBar('32.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected_value should return the string when one item is selected</span></dd>
-    <script type="text/javascript">moveProgressBar('34.8');</script>
+    <script type="text/javascript">moveProgressBar('33.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected values returns array with one element</span></dd>
-    <script type="text/javascript">moveProgressBar('35.7');</script>
+    <script type="text/javascript">moveProgressBar('34.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">set? should return truee when 1 checkbox is checked in a group</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_6">checkbox_group set array of strings selects multiple values in a group</dt>
-    <script type="text/javascript">moveProgressBar('36.6');</script>
+    <script type="text/javascript">moveProgressBar('35.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected returns array of strings when multiple values are selected</span></dd>
-    <script type="text/javascript">moveProgressBar('37.5');</script>
+    <script type="text/javascript">moveProgressBar('36.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected_value returns the same array of strings by position in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('38.3');</script>
+    <script type="text/javascript">moveProgressBar('37.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected_values returns the same array of strings by position in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('39.2');</script>
+    <script type="text/javascript">moveProgressBar('38.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">set? should return truee when more than 1 checkbox is checked in a group</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_7">checkbox_group set by numberical position</dt>
-    <script type="text/javascript">moveProgressBar('40.1');</script>
+    <script type="text/javascript">moveProgressBar('39.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">set Fixnum checks checkbox by position in a group. Position is 1 based.</span></dd>
-    <script type="text/javascript">moveProgressBar('41.0');</script>
+    <script type="text/javascript">moveProgressBar('40.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">set array of Fixnums checks each checkbox by position</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_8">Page class with face definitions</dt>
-    <script type="text/javascript">moveProgressBar('41.9');</script>
+    <script type="text/javascript">moveProgressBar('40.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">has face method as singleton</span></dd>
-    <script type="text/javascript">moveProgressBar('42.8');</script>
+    <script type="text/javascript">moveProgressBar('41.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">face class method defines method</span></dd>
-    <script type="text/javascript">moveProgressBar('43.7');</script>
+    <script type="text/javascript">moveProgressBar('42.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">face accepts args used by method body</span></dd>
-    <script type="text/javascript">moveProgressBar('44.6');</script>
+    <script type="text/javascript">moveProgressBar('43.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">when optional args not supplied provide default arg in method</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_9">Page faces included in rspec</dt>
-    <script type="text/javascript">moveProgressBar('45.5');</script>
+    <script type="text/javascript">moveProgressBar('44.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">face defines a watir element access</span></dd>
-    <script type="text/javascript">moveProgressBar('46.4');</script>
+    <script type="text/javascript">moveProgressBar('45.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">faces with arguments</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_10">Page doc provides access to frame in frameset browser</dt>
-    <script type="text/javascript">moveProgressBar('47.3');</script>
+    <script type="text/javascript">moveProgressBar('46.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">face defines a watir element access</span></dd>
-    <script type="text/javascript">moveProgressBar('48.2');</script>
+    <script type="text/javascript">moveProgressBar('47.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">faces with arguments</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_11">Locker</dt>
-    <script type="text/javascript">moveProgressBar('49.1');</script>
+    <script type="text/javascript">moveProgressBar('48.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">locker file does not exist. create it. mapping should return empty hash</span></dd>
-    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <script type="text/javascript">moveProgressBar('49.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">clear should create locker file and save empty mapping</span></dd>
-    <script type="text/javascript">moveProgressBar('50.8');</script>
+    <script type="text/javascript">moveProgressBar('50.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">add stores ie.hwnd with friendly name and adds it to mapping</span></dd>
-    <script type="text/javascript">moveProgressBar('51.7');</script>
+    <script type="text/javascript">moveProgressBar('50.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">mapping holds what was added</span></dd>
-    <script type="text/javascript">moveProgressBar('52.6');</script>
+    <script type="text/javascript">moveProgressBar('51.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">remove deletes a key value record </span></dd>
-    <script type="text/javascript">moveProgressBar('53.5');</script>
+    <script type="text/javascript">moveProgressBar('52.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">browser reattaches to named browser based on windows handle</span></dd>
-    <script type="text/javascript">moveProgressBar('54.4');</script>
+    <script type="text/javascript">moveProgressBar('53.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">browser attach to nonexisting windows behaves like IE.attach, it raises error</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_12">Watirloo Desktop</dt>
-    <script type="text/javascript">moveProgressBar('55.3');</script>
+    <script type="text/javascript">moveProgressBar('54.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">clear closes all browsers on the desktop and browsers should be empty</span></dd>
-    <script type="text/javascript">moveProgressBar('56.2');</script>
+    <script type="text/javascript">moveProgressBar('55.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">adding first browser should report 1 addition and no deletions</span></dd>
-    <script type="text/javascript">moveProgressBar('57.1');</script>
+    <script type="text/javascript">moveProgressBar('56.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">while one browser on the desktop the additions and deletions should be false</span></dd>
-    <script type="text/javascript">moveProgressBar('58.0');</script>
+    <script type="text/javascript">moveProgressBar('57.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">adding second browser should report one addition and no deletions</span></dd>
-    <script type="text/javascript">moveProgressBar('58.9');</script>
+    <script type="text/javascript">moveProgressBar('58.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">close one should report 1 deletion and no additions, attempt to attach to deleted cause exception</span></dd>
-    <script type="text/javascript">moveProgressBar('59.8');</script>
+    <script type="text/javascript">moveProgressBar('59.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">close one and start new one should report one addition and one deletion</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_13">Class client mixing interfaces from other modules</dt>
-    <script type="text/javascript">moveProgressBar('60.7');</script>
+    <script type="text/javascript">moveProgressBar('60.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">spray and scrape example</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_14">Mystery input element</dt>
-    <script type="text/javascript">moveProgressBar('61.6');</script>
+    <script type="text/javascript">moveProgressBar('60.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">the id is text_field</span></dd>
-    <script type="text/javascript">moveProgressBar('62.5');</script>
+    <script type="text/javascript">moveProgressBar('61.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">the label points to text_field</span></dd>
-    <script type="text/javascript">moveProgressBar('63.3');</script>
+    <script type="text/javascript">moveProgressBar('62.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">the id should return select_list</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_15">Watirloo browser when no browsers on desktop nor in locker</dt>
-    <script type="text/javascript">moveProgressBar('64.2');</script>
+    <script type="text/javascript">moveProgressBar('63.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">should start a default new browser and load a testfile</span></dd>
-    <script type="text/javascript">moveProgressBar('65.1');</script>
+    <script type="text/javascript">moveProgressBar('64.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">should attach to a default browser with loaded testfile and return its title</span></dd>
-    <script type="text/javascript">moveProgressBar('66.0');</script>
+    <script type="text/javascript">moveProgressBar('65.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">should start second browser with a named keyword</span></dd>
-    <script type="text/javascript">moveProgressBar('66.9');</script>
+    <script type="text/javascript">moveProgressBar('66.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">should attach to second browser with keyword and navigate to a testfile</span></dd>
-    <script type="text/javascript">moveProgressBar('67.8');</script>
+    <script type="text/javascript">moveProgressBar('67.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">should attach to two distinct browsers by key values by kewords used to start them</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_16">setting and getting values for individual checkboxes with value attributes in face definitions</dt>
-    <script type="text/javascript">moveProgressBar('68.7');</script>
+    <script type="text/javascript">moveProgressBar('68.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">semantic name accesses individual CheckBox</span></dd>
-    <script type="text/javascript">moveProgressBar('69.6');</script>
+    <script type="text/javascript">moveProgressBar('69.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">set individual checkbox does not set other checkboxes sharing the same name</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_17">Person Page interfaces defined by def wrappers and class definitions</dt>
-    <script type="text/javascript">moveProgressBar('70.5');</script>
+    <script type="text/javascript">moveProgressBar('70.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">calling face when there is wrapper method</span></dd>
-    <script type="text/javascript">moveProgressBar('71.4');</script>
+    <script type="text/javascript">moveProgressBar('70.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">calling interface when there is definition and no method</span></dd>
-    <script type="text/javascript">moveProgressBar('72.3');</script>
+    <script type="text/javascript">moveProgressBar('71.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">spray method by convetion has keys correspondig to interface names for watir elements</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_18">RadioGroup class access in watir browser</dt>
-    <script type="text/javascript">moveProgressBar('73.2');</script>
+    <script type="text/javascript">moveProgressBar('72.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">browser responds to radio_group</span></dd>
-    <script type="text/javascript">moveProgressBar('74.1');</script>
+    <script type="text/javascript">moveProgressBar('73.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">returns RadioGroups class</span></dd>
-    <script type="text/javascript">moveProgressBar('75.0');</script>
+    <script type="text/javascript">moveProgressBar('74.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">lenght returns integer count of groups</span></dd>
-    <script type="text/javascript">moveProgressBar('75.8');</script>
+    <script type="text/javascript">moveProgressBar('75.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">each iterator returns RadioGroup</span></dd>
-    <script type="text/javascript">moveProgressBar('76.7');</script>
+    <script type="text/javascript">moveProgressBar('76.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">each accesses the group and returns name</span></dd>
-    <script type="text/javascript">moveProgressBar('77.6');</script>
+    <script type="text/javascript">moveProgressBar('77.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">bracket access[] returns 1-based indexed group</span></dd>
-    <script type="text/javascript">moveProgressBar('78.5');</script>
+    <script type="text/javascript">moveProgressBar('78.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">if radio group does not exists it returns size 0 or name nil (or should it blow up? or respond to exists? method</span></dd>
-    <script type="text/javascript">moveProgressBar('79.4');</script>
+    <script type="text/javascript">moveProgressBar('79.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">groups contained by a form element</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_19">RadioGroup class access in watir browser</dt>
-    <script type="text/javascript">moveProgressBar('80.3');</script>
+    <script type="text/javascript">moveProgressBar('80.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">browser responds to radio_group</span></dd>
-    <script type="text/javascript">moveProgressBar('81.2');</script>
+    <script type="text/javascript">moveProgressBar('80.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">radio group needs :what value with implicit :how=name</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_20">RadioGroup class interface in watirloo</dt>
-    <script type="text/javascript">moveProgressBar('82.1');</script>
+    <script type="text/javascript">moveProgressBar('81.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">container radio_group method returns RadioGroup class</span></dd>
-    <script type="text/javascript">moveProgressBar('83.0');</script>
+    <script type="text/javascript">moveProgressBar('82.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">size or count returns how many radios in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('83.9');</script>
+    <script type="text/javascript">moveProgressBar('83.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">values returns value attributes text items as an array</span></dd>
-    <script type="text/javascript">moveProgressBar('84.8');</script>
+    <script type="text/javascript">moveProgressBar('84.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">selected_value returns internal option value for selected radio item in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('85.7');</script>
+    <script type="text/javascript">moveProgressBar('85.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">set selects radio by position in a group</span></dd>
-    <script type="text/javascript">moveProgressBar('86.6');</script>
+    <script type="text/javascript">moveProgressBar('86.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">set selects radio by value in a group. selected returns value</span></dd>
-    <script type="text/javascript">moveProgressBar('87.5');</script>
+    <script type="text/javascript">moveProgressBar('87.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">set position throws exception if number not within the range of group size</span></dd>
-    <script type="text/javascript">moveProgressBar('88.3');</script>
+    <script type="text/javascript">moveProgressBar('88.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">set value throws exception if value not found in options</span></dd>
-    <script type="text/javascript">moveProgressBar('89.2');</script>
+    <script type="text/javascript">moveProgressBar('89.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">set throws exception if sybmol is used. it should accept Fixnum or String element only</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_21">Watirloo multiple browsers and threads</dt>
-    <script type="text/javascript">moveProgressBar('90.1');</script>
+    <script type="text/javascript">moveProgressBar('90.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">open 5 new browsers in threads and add them to locker</span></dd>
-    <script type="text/javascript">moveProgressBar('91.0');</script>
+    <script type="text/javascript">moveProgressBar('90.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">use locker to reattach to 5 browsers and load 5 diff pages at once</span></dd>
-    <script type="text/javascript">moveProgressBar('91.9');</script>
+    <script type="text/javascript">moveProgressBar('91.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">reattach and close all 5 browsers</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_22">SelectList options as visible items and values as hidden to the user attributes</dt>
-    <script type="text/javascript">moveProgressBar('92.8');</script>
+    <script type="text/javascript">moveProgressBar('92.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">values of options by facename method</span></dd>
-    <script type="text/javascript">moveProgressBar('93.7');</script>
+    <script type="text/javascript">moveProgressBar('93.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">options with no value attribute</span></dd>
-    <script type="text/javascript">moveProgressBar('94.6');</script>
+    <script type="text/javascript">moveProgressBar('94.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">items method returns visible contents as array of text items</span></dd>
-    <script type="text/javascript">moveProgressBar('95.5');</script>
+    <script type="text/javascript">moveProgressBar('95.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">items returns visible text items as array</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_23">add faces text fields page objects</dt>
-    <script type="text/javascript">moveProgressBar('96.4');</script>
+    <script type="text/javascript">moveProgressBar('96.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">face returns a watir element text_field</span></dd>
-    <script type="text/javascript">moveProgressBar('97.3');</script>
+    <script type="text/javascript">moveProgressBar('97.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">face name method and value returns current text</span></dd>
-    <script type="text/javascript">moveProgressBar('98.2');</script>
+    <script type="text/javascript">moveProgressBar('98.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">face name method and set enters value into field</span></dd>
-    <script type="text/javascript">moveProgressBar('99.1');</script>
+    <script type="text/javascript">moveProgressBar('99.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">spray method matches keys as facenames and sets values to fields</span></dd>
     <script type="text/javascript">moveProgressBar('100.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">scrape keys updates keys with values and returns datamap</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>453.944 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "112 examples, 3 failures";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>456.067 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "110 examples, 1 failure";</script>
 </div>
 </div>
 </body>

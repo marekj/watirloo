@@ -1,4 +1,13 @@
 
+browser checkbox_groups method
+- browser responds to checkbox_groups method
+- returns CheckboxGroups object
+- lenght returns integer count of groups
+- each iterator returns CheckboxGroup object 4 times
+- each accesses the group and returns name
+- bracket access[] returns 1-based indexed group
+- page should have 2 checkbox groups in form 2
+
 SelectList selections
 - selected returns preselected item in single select
 - selected returns preselected value in single select
@@ -19,17 +28,6 @@ SelectList selections
 - clear removes selected attribute for item in single select list (FAILED - 1)
 - set_value selects value atribute text
 - set_value for multiselect returns selected and selected_values
-
-browser checkbox_groups method
-- browser responds to checkbox_groups method
-- returns CheckboxGroups object
-- lenght returns integer count of groups
-- each iterator returns CheckboxGroup object 4 times
-- each accesses the group and returns name
-- bracket access[] returns 1-based indexed group
-- [n] raise error when n greater than length (FAILED - 2)
-- [0] raise error for this 1-index based collection (FAILED - 3)
-- page should have 2 checkbox groups in form 2
 
 browser checkbox_group accesses a group of checkboxes sharing the same name on a page
 - browser responds to checkbox_group
@@ -163,16 +161,6 @@ expected not: == "F",
          got:    "F"
 ./spec/select_lists_spec.rb:134:
 
-2)
-'browser checkbox_groups method [n] raise error when n greater than length' FAILED
-expected Exception but nothing was raised
-./spec/checkbox_groups_spec.rb:46:
+Finished in 456.067 seconds
 
-3)
-'browser checkbox_groups method [0] raise error for this 1-index based collection' FAILED
-expected Exception but nothing was raised
-./spec/checkbox_groups_spec.rb:50:
-
-Finished in 453.944 seconds
-
-112 examples, 3 failures
+110 examples, 1 failure
