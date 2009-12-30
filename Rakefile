@@ -87,6 +87,7 @@ task :console do
   this_dir = File.expand_path(File.join(File.dirname(__FILE__)))
   this_irbrc = File.join(this_dir, '_irbrc')
   this_lib = File.join(this_dir, 'lib')
-  sh "set IRBRC=#{this_irbrc} && irb -I #{this_lib}" #read ~/.irbrc for other defaults
-  # require 'watirloo' once in irb session
+  sh "set IRBRC=#{this_irbrc} && irb -I #{this_lib}"
+  # do not read ~/.irbrc for other defaults
+  # see ./_irbrc for what's loaded into irb and modify to your liking
 end
