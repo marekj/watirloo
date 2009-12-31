@@ -27,9 +27,11 @@ Spec::Rake::SpecTask.new do |spec|
   spec.spec_files = FileList['spec/*_spec.rb']
   spec.spec_files.exclude('spec/reflector*') #TODO fix reflector feature
   spec.fail_on_error = false
+  spec.rcov = true
+  spec.rcov_opts = ["--text-report", "--exclude spec"]
   spec.spec_opts = [
     "--color",
-    "--require spec/spec_helper_runner.rb", # slow execution expected. closes all browsers on desktop before :all
+    #"--require spec/spec_helper_runner.rb", # slow execution expected. closes all browsers on desktop before :all
     "--format specdoc",
     "--format specdoc:spec/results/ie.txt",
     "--format failing_examples:spec/results/ie-failed.txt",
@@ -62,6 +64,8 @@ namespace :ff do
     #FIXME bug in SpecTask? when [] or spec_files omitted then it reads the default **/*_spec.rb list of files
     #if I include at least one spec files above the rest of the files are added from spec.opts
     spec.spec_opts = ["--options spec/ff.opts"]
+    spec.rcov = true
+    spec.rcov_opts = ["--text-report", "--exclude spec"]
   end
 
   desc "tasklist firefox.exe"
