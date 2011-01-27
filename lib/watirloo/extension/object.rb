@@ -7,7 +7,7 @@
 # http://www.jroller.com/abstractScope/entry/passing_parameters_to_an_instance
 # instance_exec is used for face methods it allows you to pass args and block to be evaled.
 # it works like instance eval but instance eval does not accept arguments
-if VERSION <= '1.8.6'
+if RUBY_VERSION <= '1.8.6'
   class Object
     module InstanceExecHelper; end
     include InstanceExecHelper
