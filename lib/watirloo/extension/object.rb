@@ -5,7 +5,7 @@
 # http://eigenclass.org/hiki.rb?bounded+space+instance_exec # fix for mem leak final used here
 # http://eigenclass.org/hiki.rb?Changes+in+Ruby+1.9#l23
 # http://www.jroller.com/abstractScope/entry/passing_parameters_to_an_instance
-# instance_exec is used for face methods it allows you to pass args and block to be evaled.
+# instance_exec is used for field methods it allows you to pass args and block to be evaled.
 # it works like instance eval but instance eval does not accept arguments
 if RUBY_VERSION <= '1.8.6'
   class Object

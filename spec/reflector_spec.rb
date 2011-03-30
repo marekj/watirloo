@@ -11,13 +11,13 @@ describe 'reflext :text_fields' do
   end
   
   it 'text_fields.reflect each :text_field' do
-    expected = ["face(:last_nm) {text_field(:name, \"last_nm\")}",
+    expected = ["field(:last_nm) {text_field(:name, \"last_nm\")}",
       "last_nm.value.should == \"Begoodnuffski\"",
-      "face(:first_nm) {text_field(:name, \"first_nm\")}",
+      "field(:first_nm) {text_field(:name, \"first_nm\")}",
       "first_nm.value.should == \"Joanney\"",
-      "face(:dob) {text_field(:name, \"dob\")}",
+      "field(:dob) {text_field(:name, \"dob\")}",
       "dob.value.should == \"05/09/1964\"",
-      "face(:addr1) {text_field(:name, \"addr1\")}",
+      "field(:addr1) {text_field(:name, \"addr1\")}",
       "addr1.value.should == \"1600 Transylavnia Ave.\""]
 
     browser.text_fields.reflect.should == expected
@@ -36,10 +36,10 @@ describe 'reflect :radio_groups' do
   
   it 'reflects each radio group' do
 
-    expected = ["face(:food) {radio_group(\"food\")}",
+    expected = ["field(:food) {radio_group(\"food\")}",
       "food.values.should == [\"hotdog\", \"burger\", \"tofu\"]",
       "food.selected.should == \"burger\"",
-      "face(:fooda) {radio_group(\"fooda\")}",
+      "field(:fooda) {radio_group(\"fooda\")}",
       "fooda.values.should == [\"hotdoga\", \"burgera\", \"tofua\", \"hotdoga_t\", \"burgera_t\", \"tofua_t\"]",
       "fooda.selected.should == \"tofua\""]
 
@@ -63,16 +63,16 @@ describe 'reflect :checkbox_groups' do
   
   it 'reflects each checkbox_group' do
 
-    expected = ["face(:pets) {checkbox_group(\"pets\")}",
+    expected = ["field(:pets) {checkbox_group(\"pets\")}",
       "pets.values.should == [\"cat\", \"dog\", \"zook\", \"zebra\", \"wumpa\"]",
       "pets.selected.should == nil",
-      "face(:single_indicator) {checkbox_group(\"singleIndicator\")}",
+      "field(:single_indicator) {checkbox_group(\"singleIndicator\")}",
       "single_indicator.values.should == [\"on\"]",
       "single_indicator.selected.should == nil",
-      "face(:petsa) {checkbox_group(\"petsa\")}",
+      "field(:petsa) {checkbox_group(\"petsa\")}",
       "petsa.values.should == [\"cata\", \"doga\", \"zooka\", \"zebraa\", \"wumpaa\"]",
       "petsa.selected.should == nil",
-      "face(:single_indicatora) {checkbox_group(\"singleIndicatora\")}",
+      "field(:single_indicatora) {checkbox_group(\"singleIndicatora\")}",
       "single_indicatora.values.should == [\"on\"]",
       "single_indicatora.selected.should == nil"]
         

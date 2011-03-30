@@ -1,54 +1,60 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe "add faces text fields page objects" do
-  
+
   include Watirloo::Page
 
-  face :last do
+  field :lastname do
     text_field(:name, 'last_nm')
   end
 
-  face :first do
+  field :firstname do
     text_field(:name, 'first_nm')
   end
-    
+
   before do
     browser.goto testfile('person.html')
   end
-  
-  it 'face returns a watir element text_field' do
+
+  it 'field returns a watir element text_field' do
     if browser.kind_of? FireWatir::Firefox
-      first.should be_kind_of(FireWatir::TextField)
-      last.should be_kind_of(FireWatir::TextField)
+      firstname.should be_kind_of(FireWatir::TextField)
+      lastname.should be_kind_of(FireWatir::TextField)
     elsif browser.kind_of? Watir::IE
-      first.should be_kind_of(Watir::TextField)
-      last.should be_kind_of(Watir::TextField)
+      firstname.should be_kind_of(Watir::TextField)
+      lastname.should be_kind_of(Watir::TextField)
     end
   end
-  
-  it 'face name method and value returns current text' do
-    first.value.should == 'Joanney'
-    last.value.should == 'Begoodnuffski'
+
+  it 'field name method and value returns current text' do
+    firstname.value.should == 'Joanney'
+    lastname.value.should == 'Begoodnuffski'
   end
-  
-  it "face name method and set enters value into field" do
-    params = {:first => 'Grzegorz',:last => 'Brzeczyszczykiewicz'}
-    first.set params[:first]
-    last.set params[:last]
-    first.value.should == params[:first]
-    last.value.should == params[:last]
+
+  it 'scrape fieldname gets its value' do
+    scrape(:firstname).should == {:firstname => 'Joanney'}
+    data = scrape [:firstname, :lastname]
+    data.values.sort.should == ['Begoodnuffski', 'Joanney']
   end
-  
-  it 'spray method matches keys as facenames and sets values to fields' do
-    params = {:first => 'Grzegorz',:last => 'Brzeczyszczykiewicz'}
-    spray params
-    first.value.should == params[:first]
-    last.value.should == params[:last]
-    
+
+  it "field.set enters value into field" do
+    params = {:firstname => 'Grzegorz', :lastname => 'Brzeczyszczykiewicz'}
+    firstname.set params[:firstname]
+    lastname.set params[:lastname]
+    firstname.value.should == params[:firstname]
+    lastname.value.should == params[:lastname]
   end
+
+  it 'populate matches keys as fields and sets values to fields' do
+    params = {:firstname => 'Grzegorz', :lastname => 'Brzeczyszczykiewicz'}
+    populate params
+    firstname.value.should == params[:firstname]
+    lastname.value.should == params[:lastname]
+  end
+
   it 'scrape keys updates keys with values and returns datamap' do
-    datamap = {:first => 'Hermenegilda', :last => 'Kociubinska'}
-    spray datamap
+    datamap = {:firstname => 'Hermenegilda', :lastname => 'Kociubinska'}
+    populate datamap
     values = scrape datamap.keys
     values.should == datamap
   end

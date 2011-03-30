@@ -7,14 +7,14 @@ describe "Class client mixing interfaces from other modules" do
   # define interface to first and last name
   module FullName
     include Watirloo::Page
-    face(:first) {text_field(:name, 'first_nm')}
-    face(:last) {text_field(:name, 'last_nm')}
+    field(:first) { text_field(:name, 'first_nm') }
+    field(:last) { text_field(:name, 'last_nm') }
   end
 
   # this Address defines street name
   module Address
     include Watirloo::Page
-    face :street do
+    field :street do
       text_field(:name, 'addr1')
     end
   end
@@ -24,22 +24,22 @@ describe "Class client mixing interfaces from other modules" do
   # think of a Page as some container. It can be entire page or part of Page
   # This page is composed of interfaces that appear in Address, FullName
   # but become interface to PersonalInfo
-  # method face is shortcut for interface
+  # method field is shortcut for interface
   class PersonalInfo
     include Address
     include FullName
     include Watirloo::Page
-    face( :dob ) { text_field(:name, 'dob') }
-    face( :gender ) { select_list(:name, 'sex_cd') }
+    field(:dob) { text_field(:name, 'dob') }
+    field(:gender) { select_list(:name, 'sex_cd') }
   end
-  
+
 
   before :each do
     @page = PersonalInfo.new
     @page.browser.goto testfile('person.html')
   end
 
-  it 'spray and scrape example' do
+  it 'populate and scrape example' do
     data = {
       :first => 'Inzynier',
       :last => 'Maliniak',
@@ -47,7 +47,7 @@ describe "Class client mixing interfaces from other modules" do
       :dob => '03/25/1956',
       :street => '1313 Lucky Ave'
     }
-    @page.spray data # send params to the page to enter the data
+    @page.populate data # send params to the page to enter the data
     data_return = @page.scrape data.keys
     data_return.should == data
   end

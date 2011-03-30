@@ -184,7 +184,7 @@ module Watir
         facename = suggest_def_name what
         value = item.value
         # this approach relies on doc element
-        ret << "face(:#{facename}) {doc.text_field(:#{how}, #{what.inspect})}"
+        ret << "field(:#{facename}) {text_field(:#{how}, #{what.inspect})}"
         ret << "#{facename}.value.should == #{value.inspect}"
       end
       ret
@@ -210,7 +210,7 @@ module Watir
         facename = suggest_def_name name
         values = item.values
         selected = item.selected
-        ret << "face(:#{facename}) {doc.radio_group(#{name.inspect})}"
+        ret << "field(:#{facename}) {radio_group(#{name.inspect})}"
         ret << "#{facename}.values.should == #{values.inspect}"
         ret << "#{facename}.selected.should == #{selected.inspect}"
       end
@@ -326,7 +326,7 @@ module Watir
         facename = suggest_def_name(name)
         values = item.values
         selected = item.selected
-        ret << "face(:#{facename}) {doc.checkbox_group(#{name.inspect})}"
+        ret << "field(:#{facename}) {doc.checkbox_group(#{name.inspect})}"
         ret << "#{facename}.values.should == #{values.inspect}"
         ret << "#{facename}.selected.should == #{selected.inspect}"
       end
@@ -539,7 +539,7 @@ module Watir
         selected_item = item.selected_item
         selected_value = item.selected_value
 
-        ret << "face(:#{facename}) {doc.select_list(:name, #{name.inspect})}"
+        ret << "field(:#{facename}) {doc.select_list(:name, #{name.inspect})}"
         ret << "#{facename}.items.should == #{items.inspect}"
         ret << "#{facename}.values.should == #{values.inspect}"
         ret << "#{facename}.selected_item.should == #{selected_item.inspect}"

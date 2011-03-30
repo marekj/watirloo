@@ -4,10 +4,6 @@ require 'watirloo'
 require 'spec'
 require 'spec/autorun'
 
-Spec::Runner.configure do |config|
-
-end
-
 module WatirlooSpecHelper
   def testfile(filename)
     path = File.expand_path(File.dirname(__FILE__))
@@ -16,7 +12,9 @@ module WatirlooSpecHelper
   end
 end
 
-include WatirlooSpecHelper
+Spec::Runner.configure do |runner|
+  runner.include WatirlooSpecHelper
+end
 
 #Make it run on Firefox
 #Watir::Browser.default='firefox'

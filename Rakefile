@@ -27,8 +27,8 @@ Spec::Rake::SpecTask.new do |spec|
   spec.spec_files = FileList['spec/*_spec.rb']
   spec.spec_files.exclude('spec/reflector*') #TODO fix reflector feature
   spec.fail_on_error = false
-  spec.rcov = true
-  spec.rcov_opts = ["--text-report", "--exclude spec"]
+  #spec.rcov = true
+  #spec.rcov_opts = ["--text-report", "--exclude spec"]
   spec.spec_opts = [
     "--color",
     #"--require spec/spec_helper_runner.rb", # slow execution expected. closes all browsers on desktop before :all
@@ -38,8 +38,8 @@ Spec::Rake::SpecTask.new do |spec|
     "--format html:spec/results/ie.html",
     #"--diff",
     "--loadby mtime",
-    #"--dry-run", # will overwrite any previous spec_results
-    #"--generate-options spec/spec.opts",
+  #"--dry-run", # will overwrite any previous spec_results
+  #"--generate-options spec/spec.opts",
   ]
 end
 
@@ -56,7 +56,7 @@ end
 
 # FireFox
 namespace :ff do
- 
+
   # FIXME fix the spec FileList to only include those that execut for firefox. use taglog lib
   desc "spec with ff browser"
   Spec::Rake::SpecTask.new do |spec|

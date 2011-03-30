@@ -1,5 +1,5 @@
 # see this;http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html
-if VERSION <= '1.8.6'
+if RUBY_VERSION <= '1.8.6'
   class Object
     module InstanceExecHelper; end
     include InstanceExecHelper
@@ -54,7 +54,7 @@ result = Benchmark.bmbm do |test|
 
   test.report('class eval block') do
     class PageByClassEval
-      def self.face(name, *args, &definition)
+      def self.field(name, *args, &definition)
         class_eval do
           define_method(name) do |*args|
             instance_exec(*args, &definition)
@@ -64,8 +64,8 @@ result = Benchmark.bmbm do |test|
       def browser
         Watirloo.browser
       end
-      face(:last_0) { browser.text_field(:name, "last_name0") }
-      #face(:last_arg) { |i| browser.text_field(:name, "last_name#{i}") }
+      field(:last_0) { browser.text_field(:name, "last_name0") }
+      #field(:last_arg) { |i| browser.text_field(:name, "last_name#{i}") }
     end
     10000.times do
       page = PageByClassEval.new
@@ -79,14 +79,14 @@ result = Benchmark.bmbm do |test|
       def browser
         Watirloo.browser
       end
-      def last(cc="0")
+      def lastname(cc="0")
         browser.text_field(:name, "last_name#{cc}")
       end
     end
     10000.times do
       page = PageByDef.new
-      page.last.value
-      #page.last(0).value
+      page.lastname.value
+      #page.lastname(0).value
     end
   end
 

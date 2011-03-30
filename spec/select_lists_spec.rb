@@ -6,8 +6,8 @@ describe "SelectList selections" do
 
   include Watirloo::Page
 
-  face(:pets) {select_list(:name, 'animals')}
-  face(:gender) {select_list(:name, 'sex_cd')}
+  field(:pets) {select_list(:name, 'animals')}
+  field(:gender) {select_list(:name, 'sex_cd')}
 
 
   before do
