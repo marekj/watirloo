@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "add faces text fields page objects" do
+describe "text_field page objects" do
 
   include Watirloo::Page
 
@@ -21,12 +21,12 @@ describe "add faces text fields page objects" do
     end
   end
 
-  it 'field name method and value returns current text' do
+  it 'field.value returns current text' do
     firstname.value.should == 'Joanney'
     lastname.value.should == 'Begoodnuffski'
   end
 
-  it 'scrape fieldname gets its value' do
+  it 'scrape fieldname gets datamap' do
     scrape(:firstname).should == {:firstname => 'Joanney'}
   end
 

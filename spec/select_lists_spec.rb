@@ -1,14 +1,12 @@
 require 'spec_helper'
 
-
 # testing single select and multiselect controls
 describe "SelectList selections" do
 
   include Watirloo::Page
 
-  field(:pets) {select_list(:name, 'animals')}
-  field(:gender) {select_list(:name, 'sex_cd')}
-
+  field(:pets) {select_list(:name, 'animals')} #multiselect
+  field(:gender) {select_list(:name, 'sex_cd')} #single select
 
   before do
     browser.goto testfile('select_lists.html')
@@ -25,7 +23,6 @@ describe "SelectList selections" do
     gender.selected_values.should == ['']
   end
 
-  
   it 'selected returns nil for none selected items in multi select' do
     pets.selected.should == nil # in multiselect noting is selected
     pets.selected_item.should == nil
@@ -65,7 +62,6 @@ describe "SelectList selections" do
     gender.selected_values.should == ['f'] # single select one item
   end
 
-  
   it 'set by text multple items for multiselect selects each item' do
     pets.set ['cat', 'dog']
     pets.selected.should == ['cat','dog']

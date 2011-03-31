@@ -12,7 +12,7 @@ describe "SelectList options as visible items and values as hidden to the user a
     browser.goto testfile('select_lists.html')
   end
   
-  it 'values of options by facename method' do
+  it 'values returns option values not visible to user text' do
     gender.values.should == ['', 'm', 'f']
     pets.values.should == ['o1', 'o2', 'o3', 'o4', 'o5']
   end
@@ -27,7 +27,7 @@ describe "SelectList options as visible items and values as hidden to the user a
     end
   end
   
-  it 'items method returns visible contents as array of text items' do
+  it 'items returns visible contents as array of text items' do
     toys.items.should == ["", "foobel", "barbel", "bazbel", "chuchu"]
   end
   
@@ -35,6 +35,4 @@ describe "SelectList options as visible items and values as hidden to the user a
     pets.items.should == ['cat', 'dog', 'zook', 'zebra', 'wumpa']
     gender.items.should == ["", "M", "F"]
   end
-  
-  
 end
