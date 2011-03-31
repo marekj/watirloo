@@ -178,7 +178,9 @@ module Watir
 
     # in the absence of visible text like in select list we treat value
     # as a selected text invisible to the user
-    alias selected selected_value
+    def user_value
+      selected_value
+    end
 
   end
 

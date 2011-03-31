@@ -45,34 +45,24 @@ describe 'RadioGroup class interface in watirloo' do
     meals_to_go.values.should == ['hotdog', 'burger', 'tofu']
   end
 
-  it 'selected_value returns internal option value for selected radio item in a group' do
-    meals_to_go.selected.should == 'burger'
-    meals_to_go.selected_value.should == 'burger'
-    meals_to_go.selected_values.should == ['burger'] # matches select_list api
+  it 'user_value returns internal option value by default' do
+    meals_to_go.user_value.should == 'burger'
   end
 
   it 'set selects radio by position in a group' do
     meals_to_go.set 3
-    meals_to_go.selected.should == 'tofu'
-    meals_to_go.selected_value.should == 'tofu'
-    meals_to_go.selected_values.should == ['tofu']
-    meals_to_go.selected.should_not == 'hotdog'
+    meals_to_go.user_value.should == 'tofu'
 
     meals_to_go.set 1
-    meals_to_go.selected.should == 'hotdog'
-    meals_to_go.selected_value.should == 'hotdog'
-    meals_to_go.selected_values.should == ['hotdog']
-    meals_to_go.selected.should_not == 'tofu'
+    meals_to_go.user_value.should == 'hotdog'
   end
 
   it 'set selects radio by value in a group. selected returns value' do
     meals_to_go.set 'hotdog'
-    meals_to_go.selected.should == 'hotdog'
-    meals_to_go.selected.should_not == 'tofu'
+    meals_to_go.user_value.should == 'hotdog'
 
     meals_to_go.set 'tofu'
-    meals_to_go.selected_value.should == 'tofu'
-    meals_to_go.selected.should_not == 'hotdog'
+    meals_to_go.user_value.should == 'tofu'
   end
 
   it 'set position throws exception if number not within the range of group size' do
