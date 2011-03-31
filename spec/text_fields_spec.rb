@@ -21,9 +21,9 @@ describe "text_field page objects" do
     end
   end
 
-  it 'field.value returns current text' do
-    firstname.value.should == 'Joanney'
-    lastname.value.should == 'Begoodnuffski'
+  it 'user value returns current text' do
+    firstname.user_value.should == 'Joanney'
+    lastname.user_value.should == 'Begoodnuffski'
   end
 
   it 'scrape fieldname gets datamap' do
@@ -39,15 +39,15 @@ describe "text_field page objects" do
     params = {:firstname => 'Grzegorz', :lastname => 'Brzeczyszczykiewicz'}
     firstname.set params[:firstname]
     lastname.set params[:lastname]
-    firstname.value.should == params[:firstname]
-    lastname.value.should == params[:lastname]
+    firstname.user_value.should == params[:firstname]
+    lastname.user_value.should == params[:lastname]
   end
 
   it 'populate matches keys as fields and sets values to fields' do
     params = {:firstname => 'Grzegorz', :lastname => 'Brzeczyszczykiewicz'}
     populate params
-    firstname.value.should == params[:firstname]
-    lastname.value.should == params[:lastname]
+    firstname.user_value.should == params[:firstname]
+    lastname.user_value.should == params[:lastname]
   end
 
   it 'scrape keys updates keys with values and returns datamap' do

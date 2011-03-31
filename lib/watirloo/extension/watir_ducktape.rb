@@ -3,6 +3,11 @@ require 'watir/ie'
 
 module Watir
 
+  class TextField
+    def user_value
+      value
+    end
+  end
   # for firefox and ie
   module RadioCheckGroupCommonWatir
 
