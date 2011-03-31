@@ -247,10 +247,10 @@ module Watir
 
     # convenience method as a filter for selected_values
     # returns: 
-    #   nil => when no checkbox is set
+    #   false => when no checkbox is set
     #   'value' => if one checkbox is set
     #   or bypass filter and return selected_values array
-    def selected_value
+    def user_value
       arr = selected_values
       case arr.size
         when 0
@@ -261,13 +261,6 @@ module Watir
           arr
       end
     end
-
-    # in case of checkbox there are no visible text items. 
-    # We rely on value attributes that must be present 
-    # to differentiate the checkbox in a group
-    # compare to SelectList where selected returns selected_item
-    alias selected selected_value
-
 
     # if at least one checkbox is selected then the group is considered set
     def set?
