@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe 'browser checkbox_group accesses a group of checkboxes sharing the same name on a page' do
 

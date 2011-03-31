@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe "SelectList options as visible items and values as hidden to the user attributes" do
   

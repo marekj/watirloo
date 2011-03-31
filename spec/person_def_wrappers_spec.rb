@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe "Person Page interfaces defined by def wrappers and class definitions" do
 

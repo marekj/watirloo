@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe 'setting and getting values for individual checkboxes with value attributes in field definitions' do
 

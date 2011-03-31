@@ -1,16 +1,11 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe "add faces text fields page objects" do
 
   include Watirloo::Page
 
-  field :lastname do
-    text_field(:name, 'last_nm')
-  end
-
-  field :firstname do
-    text_field(:name, 'first_nm')
-  end
+  field(:lastname) { text_field(:name, 'last_nm') }
+  field(:firstname) { text_field(:name, 'first_nm') }
 
   before do
     browser.goto testfile('person.html')
@@ -33,6 +28,9 @@ describe "add faces text fields page objects" do
 
   it 'scrape fieldname gets its value' do
     scrape(:firstname).should == {:firstname => 'Joanney'}
+  end
+
+  it 'scrape fieldnames gets datamap' do
     data = scrape [:firstname, :lastname]
     data.values.sort.should == ['Begoodnuffski', 'Joanney']
   end

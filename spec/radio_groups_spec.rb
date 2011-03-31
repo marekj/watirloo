@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe 'RadioGroup class access in watir browser' do
   include Watirloo::Page

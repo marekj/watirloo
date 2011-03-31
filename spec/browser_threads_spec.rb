@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 require 'thread'
 
 # This is more of an example of using Watirloo::browser() and Watirloo::Locker with threads
