@@ -8,6 +8,16 @@ module Watir
       value
     end
   end
+  class Radio
+    def user_value
+      set?
+    end
+  end
+  class CheckBox
+    def user_value
+      checked?
+    end
+  end
   # for firefox and ie
   module RadioCheckGroupCommonWatir
 

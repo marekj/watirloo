@@ -32,4 +32,13 @@ describe 'setting and getting values for individual checkboxes with value attrib
     pets_cat.should_not be_checked
   end
 
+  it "user_value when unchecked" do
+    pets_dog.user_value.should be_false
+  end
+
+  it "user_value when checked" do
+    pets_dog.set true
+    pets_dog.user_value.should be_true
+  end
+
 end

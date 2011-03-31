@@ -22,6 +22,7 @@ describe 'RadioGroup class interface in watirloo' do
 
   include Watirloo::Page
   field(:meals_to_go) { radio_group('food') }
+  field(:radio_tofu) { radio(:name, 'food', 'tofu') }
 
   before do
     browser.goto testfile('radio_group.html')
@@ -63,6 +64,12 @@ describe 'RadioGroup class interface in watirloo' do
 
     meals_to_go.set 'tofu'
     meals_to_go.user_value.should == 'tofu'
+  end
+
+  it 'user_value for individual radio returns true or false however' do
+    radio_tofu.user_value.should == false
+    meals_to_go.set 'tofu'
+    radio_tofu.user_value.should == true
   end
 
   it 'set position throws exception if number not within the range of group size' do
