@@ -1,1 +1,4 @@
-SelectList selections clear removes selected attribute for item in single select list
+SelectList options as visible items and values as hidden to the user attributes values returns option values not visible to user text
+SelectList options as visible items and values as hidden to the user attributes options with no value attribute
+SelectList options as visible items and values as hidden to the user attributes items returns visible contents as array of text items
+SelectList options as visible items and values as hidden to the user attributes items returns visible text items as array

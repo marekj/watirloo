@@ -381,21 +381,13 @@ module Watir
   # these methods work for IE and for Firefox
   module SelectListCommonWatir
 
-    # selected_items examples
-    #   [] =>  nothing selected
-    #   ['item'] => if one selected
-    #   ['item1', 'item2', 'item3'] => several items selected
-    def selected_items
-      getSelectedItems
-    end
-
     # selected_item is a convenience filter for selected_items
     # returns
     #   nil if no options selected
     #   'text' string if one option selected.
     #   or selected_items if more than one option selected
-    def selected_item
-      arr = selected_items # limit to one mehtod call
+    def user_value
+      arr = selected_options # limit to one mehtod call
       case arr.size
         when 0
           false
@@ -406,19 +398,14 @@ module Watir
       end
     end
 
-    # for select lists by default we return the text of an option
-    # compare to selected in RadioGroup or Checkbox group which return the 
-    # value attributes since there is no visible text for the user
-    alias selected selected_item
-
     # set :value or :text
     def set_select_list(how, what)
       if what.kind_of? Array
         what.each { |item| set_select_list(how, item) } # call self with individual item
       else
         if what.kind_of? Fixnum # if by position then translate to set by text
-          if (0..items.size).member? what
-            set_select_list :text, items[what-1]
+          if (0..options.size).member? what
+            set_select_list :text, options[what-1]
           else
             raise ::Watir::Exception::WatirException, "number #{item} is out of range of item count"
           end
@@ -430,32 +417,6 @@ module Watir
     end
 
     private :set_select_list
-
-
-    # similar to selected_items but returns array of option value attributes
-    def selected_values
-      assert_exists
-      arr = []
-      @o.each { |i| arr << i.value if i.selected }
-      return arr
-    end
-
-    # convinience method as a filter for select_values
-    # returns: 
-    # nil for nothing selected. 
-    # single value if only once selected or just
-    # or returns selected_values
-    def selected_value
-      arr = selected_values
-      case arr.size
-        when 0
-          false
-        when 1
-          arr[0]
-        else
-          arr
-      end
-    end
   end
 
   # SelectList acts like RadioGroup or CheckboxGroup
@@ -520,23 +481,6 @@ module Watir
     def set_value(value)
       set_select_list(:value, value)
     end
-
-    # returns array of value attributes
-    # each option usually has a value attribute 
-    # which is hidden to the person viewing the page
-    def values
-      attribute_value('options').map { |i| i.value }
-    end
-
-    # domain specific value you care about
-    def user_value
-      selected_item
-    end
-
-    alias clear clearSelection
-
-    # alias, items or contents return the same visible text items
-    alias items getAllContents
 
     def reflect
       ret = []

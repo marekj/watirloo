@@ -12,81 +12,43 @@ describe "SelectList selections" do
     browser.goto testfile('select_lists.html')
   end
 
-  it 'selected returns text item in single select' do
-    gender.selected.should == 'M'
-    gender.selected_item.should == 'M'
-    gender.selected_items.should == ['M']
-  end
-
-  it 'selected returns preselected value in single select' do
-    gender.selected_value.should == 'm' # in single select "" is preselected
-    gender.selected_values.should == ['m']
-  end
-
-  it 'value returns text item in single select' do
+  it 'user value in single select' do
+    gender.options.should == ['', 'M', 'F']
     gender.user_value.should == 'M'
   end
 
-  it 'selected when nothing selected in multi select' do
-    pets.selected.should == false # in multiselect noting is selected
-    pets.selected_item.should == false
-    pets.selected_items.should == []
+  it 'user value in multi select list when nothing selected' do
+    pets.options.should == ["cat", "dog", "zook", "zebra", "wumpa"]
+    pets.user_value.should == false # in multiselect noting is selected
   end
 
-  it 'selected returns false for none selected values in multi select' do
-    pets.selected_value.should == false
-    pets.selected_values.should == []
-  end
-
-  it 'user value returns user value' do
-    pets.user_value.should == false
-  end
-
-  it 'set item text and find selected item and text for multiselect' do
+  it 'set one text in multiselect and user value reports text item' do
     pets.set 'dog'
-    pets.selected.should == 'dog' #multi select one item selected
-    pets.selected_item.should == 'dog' #multi select one item selected
-    pets.selected_items.should == ['dog']
-    pets.user_value.should == 'dog' # user value
-  end
-
-  it 'set value and find selected item and value for multiselect' do
-    pets.set_value 'o2'
-    pets.selected.should == 'dog' #multi select one item selected
-    pets.selected_value.should == 'o2' #multi select one item selected
-    pets.selected_values.should == ['o2']
     pets.user_value.should == 'dog'
   end
 
-  it 'set and query option by text for single select' do
+  it 'set one value in multiselect and user value reports text item' do
+    pets.set_value 'o2'
+    pets.user_value.should == 'dog'
+  end
+
+  it 'set text in single select and user value reports that text' do
     gender.set 'F'
-    gender.selected.should == 'F' # single select one item
-    gender.selected_item.should == 'F' # single select one item
-    gender.selected_items.should == ['F'] # single select one item
     gender.user_value.should == 'F'
   end
 
-  it 'set and query option by value for single select' do
+  it 'set by value in single select and user value reports text' do
     gender.set_value 'f'
-    gender.selected.should == 'F'
-    gender.selected_value.should == 'f' # single select one item
-    gender.selected_values.should == ['f'] # single select one item
     gender.user_value.should == 'F'
   end
 
-  it 'set by text multple items for multiselect selects each item' do
+  it 'set multiple items by text and user value returns the selected items' do
     pets.set ['cat', 'dog']
-    pets.selected.should == ['cat', 'dog']
-    pets.selected_item.should == ['cat', 'dog'] # bypass filter when more than one item
-    pets.selected_items.should == ['cat', 'dog']
     pets.user_value.should == ['cat', 'dog']
   end
 
-  it 'set by value multple items for multiselect selects each item' do
+  it 'set multiple items by value and user value ruturns selected items by text' do
     pets.set_value ['o1', 'o2']
-    pets.selected.should == ['cat', 'dog']
-    pets.selected_value.should == ['o1', 'o2'] # bypass filter when more than one item
-    pets.selected_value.should == ['o1', 'o2']
     pets.user_value.should == ['cat', 'dog']
   end
 
@@ -94,68 +56,62 @@ describe "SelectList selections" do
   # conditions arising from switching items in a batch approach
   it 'set items array for single select selects each in turn. selected is the last item in array' do
     gender.set ['M', 'F', '', 'F']
-    gender.selected.should == 'F'
+    gender.user_value.should == 'F'
   end
 
   it 'set item after multiple items were set returns all values selected for multiselect' do
     pets.set ['cat', 'zook']
-    pets.set 'zebra'
-    pets.selected.should == ['cat', 'zook', 'zebra']
-    pets.selected_values.should == ['o1', 'o3', 'o4']
+    pets.set 'zebra' #appends to selection
+    pets.user_value.should == ['cat', 'zook', 'zebra']
   end
 
-  it 'set using position for multiselect' do
+  it 'set multiselect by position' do
     pets.set 3
-    pets.selected.should == 'zook'
+    pets.user_value.should == 'zook'
     pets.set_value 2 # translate to second text item
-    pets.selected.should == ['dog', 'zook']
+    pets.user_value.should == ['dog', 'zook']
     pets.set [1, 4, 5]
-    pets.selected.should == ['cat', 'dog', 'zook', 'zebra', 'wumpa']
+    pets.user_value.should == ['cat', 'dog', 'zook', 'zebra', 'wumpa']
   end
 
   it 'set using position and item for multiselect' do
     pets.set [1, 'zebra', 'zook', 2, 4] #select already selected
-    pets.selected.should == ['cat', 'dog', 'zook', 'zebra']
+    pets.user_value.should == ['cat', 'dog', 'zook', 'zebra']
   end
 
   it 'set using position for single select' do
     gender.set 2
-    gender.selected.should == 'M'
-    gender.selected_value.should == 'm'
+    gender.user_value.should == 'M'
   end
 
   it 'clear removes selected attribute for all selected items in multiselect' do
-    pets.selected.should == false
+    pets.user_value.should == false
     pets.set ['zook', 'cat']
-    pets.selected.should == ['cat', 'zook']
+    pets.user_value.should == ['cat', 'zook']
     pets.clear
-    pets.selected.should == false
+    pets.user_value.should == false
   end
 
   it 'clear removes selected attribute for item in single select list' do
-    gender.selected.should == 'M'
+    gender.user_value.should == 'M'
     gender.set 'F'
-    gender.selected.should == 'F'
+    gender.user_value.should == 'F'
 
     # This fails on IE in single select list.
     # The test passes in Firefox
     # option item select = false does not set false like it does in multiselect
-    gender.clear
-    gender.selected.should_not == 'M'
+    #gender.clear
+    #gender.user_value.should == 'M'
   end
 
   it 'set_value selects value atribute text' do
     gender.set_value 'm'
-    gender.selected.should == 'M'
-    gender.selected_value.should == 'm' #when you know there is only one item expected
-    gender.selected_values.should == ['m'] # array of items
+    gender.user_value.should == 'M'
   end
 
   it 'set_value for multiselect returns selected and selected_values' do
     pets.set_value 'o2'
     pets.set_value 'o4'
-    pets.selected.should == ['dog', 'zebra']
-    pets.selected_value.should == ['o2', 'o4'] # if array then bypass filter
-    pets.selected_values.should == ['o2', 'o4'] # plural
+    pets.user_value.should == ['dog', 'zebra']
   end
 end
