@@ -2,21 +2,22 @@ require 'watir'
 require 'watir/ie'
 
 module Watir
-  
+
   # for firefox and ie
   module RadioCheckGroupCommonWatir
-    
+
     # size or count of controls in a group
     def size
       @o.size
     end
+
     alias count size
 
     # sets control in a group by either position in a group 
     # or by hidden value attribute 
     def set(what)
       if what.kind_of?(Array)
-        what.each {|thing| set thing } #calls itself with Fixnum or String
+        what.each { |thing| set thing } #calls itself with Fixnum or String
       else
         if what.kind_of?(Fixnum)
           get_by_position(what).set
@@ -38,7 +39,7 @@ module Watir
     def get_by_value value
       raise ::Watir::Exception::WatirException, "method should be implemented"
     end
-    
+
     # returns Radio||Checkbox from a group that
     # occupies specifi position in a group
     # WARNING: it is 1-based NOT 0-based
@@ -49,7 +50,7 @@ module Watir
         @o[position-1]
       else
         raise ::Watir::Exception::WatirException, "positon #{position} is out of range of size"
-      end 
+      end
     end
 
     # returns radio object in a group by position or by value
@@ -63,19 +64,19 @@ module Watir
     end
 
   end
-  
+
   # for IE only
   module RadioCheckGroup
-       
+
     def values
       opts = []
-      @o.each {|rc| opts << rc.ole_object.invoke('value')}
+      @o.each { |rc| opts << rc.ole_object.invoke('value') }
       return opts
     end
-    
+
     def get_by_value value
       if values.member? value
-        @o.find {|rc| rc.ole_object.invoke('value') == value}
+        @o.find { |rc| rc.ole_object.invoke('value') == value }
       else
         raise ::Watir::Exception::WatirException, "value #{value} not found in hidden_values"
       end
@@ -94,14 +95,13 @@ module Watir
     def selected_values
       selected_value.to_a
     end
-    
-    
+
     # returns radio that is selected.
     # there can only be one radio selected. 
     # in the event that none is selected it returns nil
     # see selected_value commentary
     def selected_radio
-      @o.find {|r| r.isSet?}
+      @o.find { |r| r.isSet? }
     end
 
     # if a radio button in a group is set then the group is set
@@ -131,38 +131,40 @@ module Watir
   #   @browser.radio_group('food') # => RadioGroup with :name, 'food'
   # 
   class RadioGroup
-    
+
     include RadioCheckGroupCommonWatir
     include RadioCheckGroup
     include RadioGroupCommonWatir
-    
+
     def initialize(container, how, what)
       @container = container
       @how = how
       @what = what
       @o = locate
     end
-    
+
     def name
       @name
     end
-    
+
     def locate
       @name = case @how
-      when :name then @what
-      when :index then
-        names = []
-        @container.radios.each do |r|
-          names << r.name
-        end
-        names.uniq.at(@what-1) # follow 1-based index addressing for Watir API 
-      end
-      @container.radios.find_all {|r| r.name == @name}
+                when :name
+                  @what
+                when :index
+                  names = []
+                  @container.radios.each do |r|
+                    names << r.name
+                  end
+                  names.uniq.at(@what-1) # follow 1-based index addressing for Watir API
+              end
+      @container.radios.find_all { |r| r.name == @name }
     end
+
     private :locate
-    
+
     # which value is selected?. returns value text as string
-    # So per HTML401 spec I am not sure if we should ever have empyt array returned here
+    # So per HTML401 spec I am not sure if we should ever have empty array returned here
     # if you do get empty array then I would speak with developers to fix this and explicity 
     # provide checked for one radio on page load.
     def selected_value
@@ -174,9 +176,9 @@ module Watir
     alias selected selected_value
 
   end
-  
+
   class TextFields < ElementCollections
-    
+
     def reflect
       ret = []
       self.each do |item|
@@ -189,12 +191,15 @@ module Watir
       end
       ret
     end
-    
+
   end
-  
+
   class RadioGroups < ElementCollections
-    
-    def element_class; RadioGroup; end
+
+    def element_class
+      RadioGroup
+    end
+
     def length
       names = []
       @container.radios.each do |r|
@@ -202,7 +207,7 @@ module Watir
       end
       names.uniq.size #non repeating names
     end
-    
+
     def reflect
       ret = []
       self.each do |item|
@@ -216,14 +221,13 @@ module Watir
       end
       ret
     end
-    
-    
+
     private
     def iterator_object(i)
       @container.radio_group(:index, i + 1)
     end
   end
-  
+
   module CheckboxGroupCommonWatir
 
     # returns selected checkboxes as array
@@ -231,9 +235,9 @@ module Watir
     # when [checkbox, checkbox] = array of checkboxes that are selected
     # that you can iterate over for tests.
     def selected_checkboxes
-      @o.select {|cb| cb.isSet?}
+      @o.select { |cb| cb.isSet? }
     end
-    
+
     # convenience method as a filter for selected_values
     # returns: 
     #   nil => when no checkbox is set
@@ -242,12 +246,15 @@ module Watir
     def selected_value
       arr = selected_values
       case arr.size
-      when 0 then nil
-      when 1 then arr[0]
-      else arr      
+        when 0
+          false
+        when 1
+          arr[0]
+        else
+          arr
       end
     end
-    
+
     # in case of checkbox there are no visible text items. 
     # We rely on value attributes that must be present 
     # to differentiate the checkbox in a group
@@ -261,43 +268,45 @@ module Watir
     end
 
     alias checked? set?
-    
+
   end
 
   # Checkbox group semantically behaves like multi select list box.
   # each checkbox is a menu item groupped by the common attribute :name
   # each checkbox can be off initially (a bit different semantics than RadioGroup)
   class CheckboxGroup
-    
+
     include RadioCheckGroupCommonWatir
     include RadioCheckGroup
     include CheckboxGroupCommonWatir
-    
+
     def initialize(container, how, what)
       @container = container
       @how = how
       @what = what
       @o = locate
     end
-    
+
     def name
       @name
     end
-    
+
     def locate
       @name = case @how
-      when :name then @what
-      when :index then
-        names = []
-        @container.checkboxes.each do |cb|
-          names << cb.name
-        end
-        names.uniq.at(@what-1) # follow 1-based index addressing for Watir API 
-      end
-      @container.checkboxes.find_all {|cb| cb.name == @name}
+                when :name
+                  @what
+                when :index
+                  names = []
+                  @container.checkboxes.each do |cb|
+                    names << cb.name
+                  end
+                  names.uniq.at(@what-1) # follow 1-based index addressing for Watir API
+              end
+      @container.checkboxes.find_all { |cb| cb.name == @name }
     end
+
     private :locate
-    
+
     # returns array of value attributes. Each Checkbox in a group 
     # has a value which is invisible to the user
     def selected_values
@@ -310,7 +319,10 @@ module Watir
   end
 
   class CheckboxGroups < ElementCollections
-    def element_class; CheckboxGroup; end
+    def element_class
+      CheckboxGroup
+    end
+
     def length
       names = []
       @container.checkboxes.each do |cb|
@@ -318,7 +330,7 @@ module Watir
       end
       names.uniq.size #non repeating names
     end
-    
+
     def reflect
       ret = []
       self.each do |item|
@@ -332,40 +344,40 @@ module Watir
       end
       ret
     end
-    
+
     private
     def iterator_object(i)
       @container.checkbox_group(:index, i + 1)
     end
   end
- 
-  
+
+
   module Container
-      
+
     def radio_group(how, what=nil)
       how, what = process_default :name, how, what
       RadioGroup.new(self, how, what)
     end
-      
+
     def radio_groups
       RadioGroups.new(self)
     end
-    
+
     def checkbox_group(how, what=nil)
       how, what = process_default :name, how, what
       CheckboxGroup.new(self, how, what)
     end
-    
+
     def checkbox_groups
       CheckboxGroups.new(self)
     end
-    
+
   end
-  
+
   class RadioCheckCommon
     alias set? isSet?
   end
-  
+
   # these methods work for IE and for Firefox
   module SelectListCommonWatir
 
@@ -373,10 +385,10 @@ module Watir
     #   [] =>  nothing selected
     #   ['item'] => if one selected
     #   ['item1', 'item2', 'item3'] => several items selected
-    def selected_items 
+    def selected_items
       getSelectedItems
     end
-    
+
     # selected_item is a convenience filter for selected_items
     # returns
     #   nil if no options selected
@@ -385,52 +397,49 @@ module Watir
     def selected_item
       arr = selected_items # limit to one mehtod call
       case arr.size
-      when 0 then nil
-      when 1 then arr[0]
-      else arr
+        when 0
+          false
+        when 1
+          arr[0]
+        else
+          arr
       end
     end
-    
-    
-    # for selecte lists by default we return the text of an option
+
+    # for select lists by default we return the text of an option
     # compare to selected in RadioGroup or Checkbox group which return the 
     # value attributes since there is no visible text for the user
     alias selected selected_item
-    
+
     # set :value or :text
-    def _set(how, what)
+    def set_select_list(how, what)
       if what.kind_of? Array
-        what.each { |item| _set(how,item)} # call self with individual item
+        what.each { |item| set_select_list(how, item) } # call self with individual item
       else
         if what.kind_of? Fixnum # if by position then translate to set by text
           if (0..items.size).member? what
-            _set :text, items[what-1]
+            set_select_list :text, items[what-1]
           else
             raise ::Watir::Exception::WatirException, "number #{item} is out of range of item count"
-          end 
+          end
         else
-          select_item_in_select_list(how, what)  #finally as :value or :text
+          select_item_in_select_list(how, what) #finally as :value or :text
         end
       end
-      
+
     end
-    private :_set
-    
+
+    private :set_select_list
 
 
-    
     # similar to selected_items but returns array of option value attributes
     def selected_values
       assert_exists
       arr = []
-      @o.each do |thisItem|
-        if thisItem.selected
-          arr << thisItem.value
-        end
-      end
+      @o.each { |i| arr << i.value if i.selected }
       return arr
     end
-    
+
     # convinience method as a filter for select_values
     # returns: 
     # nil for nothing selected. 
@@ -439,15 +448,16 @@ module Watir
     def selected_value
       arr = selected_values
       case arr.size
-      when 0 then nil
-      when 1 then arr[0]
-      else arr      
+        when 0
+          false
+        when 1
+          arr[0]
+        else
+          arr
       end
     end
-    
- 
   end
-  
+
   # SelectList acts like RadioGroup or CheckboxGroup
   # They all have options to select
   # There are two kinds of SelectLists. SingleSelect and MultiSelect
@@ -488,10 +498,10 @@ module Watir
   #   selected_values => ['o2', 'o3']
   # 
   class SelectList
-    
+
     include SelectListCommonWatir
 
-        
+
     # accepts one text item or array of text items. if array then sets one after another. 
     # For single select lists the last item in array wins
     # 
@@ -502,32 +512,31 @@ module Watir
     #   select_list set 1 # => set the first option in a list
     #   select_list.set [1,3,5] => set the first, third and fith options
     def set(item)
-      _set(:text, item)
+      set_select_list(:text, item)
     end
 
     # set item by the option value attribute. if array then set one after anohter.
     # see examples in set method
     def set_value(value)
-      _set(:value, value)
+      set_select_list(:value, value)
     end
-    
+
     # returns array of value attributes
     # each option usually has a value attribute 
     # which is hidden to the person viewing the page
     def values
-      a = []
-      attribute_value('options').each do |item|
-        a << item.value
-      end
-      return a
+      attribute_value('options').map { |i| i.value }
+    end
+
+    # domain specific value you care about
+    def user_value
+      selected_item
     end
 
     alias clear clearSelection
-    
+
     # alias, items or contents return the same visible text items
     alias items getAllContents
-
-
 
     def reflect
       ret = []

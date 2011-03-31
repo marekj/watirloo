@@ -5,7 +5,7 @@ module Watirloo
   # I save the current handle of the browser (ie.hwnd) to the storage yaml file so I can reattach to the same
   # browser later. Basically in exploratory testing I don't want to start and close browsers. I want to maintain
   # reference to one (or more) browsers and I have nicknames for them.
-  # on restart of tests useing Watirloo I reuse the browser. If the browser is not there I just start a new browser which
+  # on restart of tests I reuse the browser. If the browser is not there I just start a new browser which
   # will from now on become my new 'default' test session browser.
   # In Case of Firefox I attach to the 'one' existing firefox or a start a new one.
   # So this method either attaches to one that's there or it starts a new one and puts it in Browsers::Storage
