@@ -2,44 +2,39 @@ module Watirday
   module JustTextNotExecutableCode
 
 
-    # Move to later
-    # verification
-    page = PersonPage.new browser
-    page.firstname.value.should == 'Franz'
-    page.lastname.value.should == 'Ferdinand'
-    page.gender.selected_option.should == 'M'
-
-
-    # Domain Specific Page Object
-
-    # def user_value #secret decoder ring
-    # what's coming from Watir Object to your Domain Specific Language
-    # String, Boolean, Array
-
-
-# month, day, year selector
+    # month, day, year selector
     class DateSelector
 
-      def initialize(prefix, container)
-        @container = container
-        @month = @container.select_list(:id, prefix + '_MONTH')
-        @day = @container.select_list(:id, prefix + '_DAY')
-        @year = @container.select_list(:id, prefix + '_YEAR')
+      def initialize(prefix)
+        @month = Page.browser.select_list(:id, prefix + '_MONTH')
+        @day = Page.browser.select_list(:id, prefix + '_DAY')
+        @year = Page.browser.select_list(:id, prefix + '_YEAR')
       end
 
+      def value             #turns Apr to 04
+        sprintf("%s/%s/%s", month_to_int, @day.value, @year.value)
+      end
     end
 
-# hour, minute, ampm selector
+    class PublishPage < Page
+      def scheduledon
+        DateSelector.new 'publish'
+      end
+    end
+
+    page = PublishPage.new
+    page.set :scheduledon => '04/02/2011'
+
+    # hour, minute, ampm selector
     class TimeSelector
 
-      def initialize(prefix, container)
-        @container = container
-        @hour = @container.select_list(:id, prefix + '_HOUR12')
-        @minute = @container.select_list(:id, prefix + '_MINUTE')
-        @ampm = @container.select_list(:id, prefix + '_AMPM')
+      def initialize prefix
+        @hour = Page.browser.select_list(:id, prefix + '_HOUR12')
+        @minute = Page.browser.select_list(:id, prefix + '_MINUTE')
+        @ampm = Page.browser.select_list(:id, prefix + '_AMPM')
       end
 
-      def set value
+      def value=(x)
         str = value.respond_to?(:strftime) ? x.strftime("%I:%M %p") : value
         time, ampm = str.split(' ')
         hour, minute = time.split(':')
@@ -50,37 +45,66 @@ module Watirday
     end
 
 
-# DateSelector and TimeSelector
+    # DateSelector and TimeSelector as One
     class DateTimeSelector
 
-      def initialize(prefix, container)
-        @container = container
-        @date = DateSelector prefix, container
-        @time = TimeSelector prefix, container
-      end
-
-      def set value
-        @date.set value
-        @time.set value
+      def initialize(prefix)
+        @date = DateSelector.new prefix
+        @time = TimeSelector.new prefix
       end
 
     end
+
+    class PublishPage
+      def scheduler
+        DateTimeSelector.new 'publish'
+      end
+    end
+
+    page = PublishPage.new
+    # specific date and time publish
+    page.set :scheduler => '04/02/2011 11:30 am'
 
     class CheckboxDateTimeSelector
 
-      def initialize(checkbox, prefix, container)
+      def initialize(checkbox, prefix)
         @checkbox = checkbox
-        @selector = DateTimeSelector.new prefix, container
+        @selector = DateTimeSelector.new prefix
       end
 
-      def user_value
+      def value=(x)
+        if x == false
+          @checkbox.set false
+        elsif x == true
+          @checkbox.set
+        elsif x.kind_of?(String)
+          @checkbox.set
+          @selector.value = x
+        end
+      end
+
+      def value
         @checkbox.set? ? @selector.value : false
       end
+    end
 
-      def set?
-        @checkbox.set?
+    class PublishPage
+      def checkbox
+        browser.checkbox(:id, 'publish_enabler')
+      end
+
+      def scheduler
+        CheckboxDateTimeSelector.new checkbox, 'publish'
       end
     end
+
+    page = PublishPage.new
+    # turns off publish schedule
+    page.set :scheduler => false
+    # turns it on with default datetime
+    page.set :scheduler => true
+    # specific datetime
+    page.set :schduler => '04/02/2011 11:30 am'
 
   end
 end

@@ -44,20 +44,24 @@ context "I want my test case data to tell page to populate objects" do
 
   specify "example" do
 
-    # Given I have some data for my test case
-    # Last Name: 'Ferdinand'
-    # First Name: 'Franz'
-    # Gender: 'M'
-
-    page = PersonPage.new browser
-    page.set :firstname => 'Franz'
-    page.set :lastname => 'Ferdinand'
-    page.set :gender => 'M'
-
+    # This is how I think of my test data
     datamap = {:firstname => 'Franz',
                :lastname => 'Ferdinand',
                :gender => 'M'}
+
+    page = PersonPage.new browser
+
+    page.firstname.set datamap[:firstname]
+    page.lastname.set datamap[:lastname]
+    page.gender.set datamap[:gender]
+
+
+    # I want the page to know how to set it
     page.set datamap
+
+    # pass test data to the page to be set
+    page = PersonPage.new browser
+    page.set :firstname => 'Franz', :lastname => 'Ferdinand', :gender => 'M'
 
   end
 

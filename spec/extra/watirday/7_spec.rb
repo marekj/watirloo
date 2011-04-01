@@ -1,18 +1,17 @@
+=begin
 require 'spec_helper'
 
 context "Text Field enabled by Checkbox" do
 
   class RadioWithLabel
-    include Watirloo::Page
 
-    field(:label_for) { |value| label(:text, value) }
-    field(:radio_id) { |id| radio(:id, id) }
-    field(:radiogroup) { |name| radio_group(name) }
-
-    def set value
-      radio_id(label_for(value).for).set
+    def initialize
+      @page = PersonPage.new
     end
 
+    def set value
+      @page.radio_id(@page.label_for(value).for).set
+    end
   end
 
   def browser
@@ -25,6 +24,9 @@ context "Text Field enabled by Checkbox" do
 
   class PersonPage
     include Watirloo::Page
+
+    field(:label_for) { |value| label(:text, value) }
+    field(:radio_id) { |id| radio(:id, id) }
 
     field(:colorname) { RadioWithLabel.new }
   end
@@ -39,3 +41,4 @@ context "Text Field enabled by Checkbox" do
 
 
 end
+=end

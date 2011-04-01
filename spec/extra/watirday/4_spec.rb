@@ -1,3 +1,8 @@
+# abstraction requires encapsulation
+
+
+
+=begin
 require 'spec_helper'
 
 context "I want my test case data to tell page to populate objects" do
@@ -86,3 +91,4 @@ context "I want my test case data to tell page to populate objects" do
   end
 
 end
+=end

@@ -1,3 +1,4 @@
+=begin
 require 'spec_helper'
 
 context "Text Field enabled by Checkbox" do
@@ -18,7 +19,7 @@ context "Text Field enabled by Checkbox" do
       @group.find { |r| r.id == id }.set
     end
 
-    def user_value
+    def value
       label_name_for(@group.selected_radio.id).text
     end
 
@@ -35,7 +36,14 @@ context "Text Field enabled by Checkbox" do
   class PersonPage
     include Watirloo::Page
 
+
     field(:colorname) { RadioGroupWithLabel.new 'color_for' }
+
+    field :colorname
+    def colorname
+      RadioGroupWithLabel.new 'color_for'
+    end
+
   end
 
   specify "example" do
@@ -48,3 +56,5 @@ context "Text Field enabled by Checkbox" do
   end
 
 end
+
+=end

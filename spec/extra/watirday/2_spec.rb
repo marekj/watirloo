@@ -3,6 +3,7 @@ require 'spec_helper'
 context "Page class collection of objects" do
 
   # make a Page class as a collection of adapters
+
   class PersonPage
     attr_accessor :browser
 

@@ -13,13 +13,26 @@ context "start" do
   example "watir objects as method wrappers" do
 
     # Given I have some data for my test case
-    # :lastname => 'Franz'
-    # :firstname => 'Ferdinand'
-    # :gender => 'M'
 
-    # using watir api I would ned to do start like this
+    # :lastname 'Franz'
+    # :firstname 'Ferdinand'
+    # :gender 'M'
+    # :phone "(800)555-1212"
+
+    # using watir api I would start like this
+
     browser.text_field(:name, 'first_nm').set 'Franz'
     browser.text_field(:name, 'last_nm').set 'Ferdinand'
+    browser.select_list(:name, 'sex_cd').set 'M'
+    browser.text_field(:name, 'phone_1').set '800'
+    browser.text_field(:name, 'phone_2').set '555'
+    browser.text_field(:name, 'phone_1').set '1212'
+
+
+    # But I want to use my test vocabulary as identifiers
+    firstname.set 'Franz'
+    lastname.set 'Ferdinand'
+    gender.set 'M'
 
     # so I insert watir objects in a method
     # those are my watir object providers
@@ -31,9 +44,9 @@ context "start" do
       browser.text_field(:name, 'last_nm')
     end
 
-    # But I want to use my test vocabulary as identifiers
-    firstname.set 'Franz'
-    lastname.set 'Ferdinand'
+    def gender
+      browser.select_list(:name, 'sex_cd')
+    end
 
   end
 end
