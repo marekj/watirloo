@@ -1,0 +1,101 @@
+<!--
+    Document   : person used by watirday code
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Test PersonPage building</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div id="personPage">
+  <h2>PersonPage</h2>
+
+  <p id="tagline">Some info about a person</p>
+
+  <form id="person" name="person" action="person.fake.page" method="post">
+
+    <div> Last Name: <input size="20" name="last_nm" value="" /></div>
+    <div> First Name: <input size="10" name="first_nm" value="" /></div>
+
+    <div>
+      Gender: <select name="sex_cd">
+      <option value="" selected></option>
+      <option value="M">M</option>
+      <option value="F">F</option>
+    </select>
+    </div>
+
+    <div>Date Of Birth: <input maxLength="10" size="10" name="dob" value="05/09/1964" /></div>
+    <div> Has the following pets: <select name="pets" multiple size=3>
+      <option value="o1">cat
+      <option value="o2">dog
+      <option value="o3">zebra
+
+    </select>
+    </div>
+
+    <div> Phone: <input id="phone_n" value="(800)555-1212" /></div>
+    <div>
+      #implementation changes Phone: (<input id='phone_1' size='3' value='800' />)
+      <input id='phone_2' size='3' value='555' /> -<input
+    id='phone_3' size='4' value='1212' /> #new change adding extension <input id="phone_ext" value="1212" />
+    </div>
+
+    <div>
+      <input id='cbx' onclick=txt_enabler() type='checkbox'> <input id='txt' size='30' readOnly='readOnly' disabled>
+
+      <script type=text/javascript>
+        txt_enabler = function () {
+          var cbx = document.getElementById("cbx");
+          var txt = document.getElementById("txt");
+          if (cbx.checked == true) {
+            txt.readOnly = "";
+            txt.disabled = "";
+          }
+          else {
+            txt.readOnly = "readonly";
+            txt.disabled = "disabled";
+          }
+        }
+      </script>
+    </div>
+    <div>
+      <select id='publish_MONTH'>
+        <option value=1>Jan</option>
+        <option value=2>Feb</option>
+      </select>
+
+      <select id=publish_DAY>
+
+        <option value=1>1</option>
+        <option value=2>2</option>
+      </select>
+
+      <select id=publish_YEAR>
+        <option value=2011>2011</option>
+        <option value=2012>2012</option>
+
+      </select>
+    </div>
+    <div>
+      <input type="radio" name="color" value="r" />
+      <input type="radio" name="color" value="g" />
+      <input type="radio" name="color" value="b" checked />
+
+    </div>
+    <div>
+      <input type='radio' name="color_for" value="r" id="color_r" />
+      <label for="color_r">Red</label>
+      <input type='radio' name="color_for" value="g" id="color_g" />
+      <label for="color_g">Green</label>
+      <input type="radio" name="color_for" value="b" id="color_b" checked />
+      <label for="color_b">Blue</label>
+
+    </div>
+</div>
+
+
+</form></div>
+</body>
+</html>

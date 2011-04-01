@@ -119,6 +119,8 @@ module Watirloo
       end
     end
 
+    alias get scrape
+
     def scrape_field(fieldname)
       watir_control = self.send fieldname
       method_name = case watir_control.class.to_s.split("::").last
@@ -129,6 +131,7 @@ module Watirloo
                     end
       {fieldname => watir_control.send(method_name)}
     end
+
     private :scrape_field
 
 

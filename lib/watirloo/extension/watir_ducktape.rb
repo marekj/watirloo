@@ -89,6 +89,12 @@ module Watir
       return opts
     end
 
+    include Enumerable
+
+    def each
+      @o.each { |rc| yield rc }
+    end
+
     def get_by_value value
       if values.member? value
         @o.find { |rc| rc.ole_object.invoke('value') == value }
