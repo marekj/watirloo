@@ -10,8 +10,7 @@ module Watirloo
   # now the client MyFieldsPage can access browser and field elements defined
   # instead of including it directly in classes that you instantiate to keep track of state you can build modules of pages
   # that you can later include into your client
-  module Page
-
+  module PageContainer
     # provides browser for your page
     # defaults to Watirloo.browser
     def browser
@@ -39,6 +38,30 @@ module Watirloo
     def page=(watir_element)
       @page = watir_element
     end
+  end
+
+  class PageObject
+    attr_reader :name
+
+    include PageContainer
+
+    def initialize name, &definition
+      @name = name
+      @definition = definition
+    end
+
+    def page_object *args
+      page.instance_exec(*args, &@definition)
+    end
+
+    def set *args
+      page_object.set *args
+    end
+  end
+
+  module Page
+
+    include PageContainer
 
     module ClassMethods
 
@@ -70,11 +93,13 @@ module Watirloo
       #     where page is the root of HTML document
       #
       def field(name, *args, &definition)
+        #define_method(name) do |*args|
+        #  page.instance_exec(*args, &definition)
+        #end
         define_method(name) do |*args|
-          page.instance_exec(*args, &definition)
+          PageObject.new name, *args, &definition
         end
       end
-
     end
 
     # metahook by which ClassMethods become singleton methods of an including module
